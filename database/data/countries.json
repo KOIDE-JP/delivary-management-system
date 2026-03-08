@@ -1,0 +1,1654 @@
+[
+    {
+        "name_en": "Japan",
+        "name_jp": "日本",
+        "code": "JP",
+        "phone_code": "81",
+        "currency": "JPY"
+    },
+    {
+        "name_en": "India",
+        "name_jp": "インド",
+        "code": "IN",
+        "phone_code": "91",
+        "currency": "INR"
+    },
+    {
+        "name_en": "China",
+        "name_jp": "中国",
+        "code": "CN",
+        "phone_code": "86",
+        "currency": "CNY"
+    },
+    {
+        "name_en": "Bangladesh",
+        "name_jp": "バングラデシュ",
+        "code": "BD",
+        "phone_code": "880",
+        "currency": "BDT"
+    },
+    {
+        "name_en": "Afghanistan",
+        "name_jp": "アフガニスタン",
+        "code": "AF",
+        "phone_code": "93",
+        "currency": "AFN"
+    },
+    {
+        "name_en": "Åland Islands",
+        "name_jp": "オーランド諸島",
+        "code": "AX",
+        "phone_code": "358",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Albania",
+        "name_jp": "アルバニア",
+        "code": "AL",
+        "phone_code": "355",
+        "currency": "ALL"
+    },
+    {
+        "name_en": "Algeria",
+        "name_jp": "アルジェリア",
+        "code": "DZ",
+        "phone_code": "213",
+        "currency": "DZD"
+    },
+    {
+        "name_en": "American Samoa",
+        "name_jp": "アメリカ領サモア",
+        "code": "AS",
+        "phone_code": "1684",
+        "currency": "USD"
+    },
+    {
+        "name_en": "AndorrA",
+        "name_jp": "アンドラ",
+        "code": "AD",
+        "phone_code": "376",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Angola",
+        "name_jp": "アンゴラ",
+        "code": "AO",
+        "phone_code": "244",
+        "currency": "AOA"
+    },
+    {
+        "name_en": "Anguilla",
+        "name_jp": "アンギラ",
+        "code": "AI",
+        "phone_code": "1264",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Antigua and Barbuda",
+        "name_jp": "アンティグア・バーブーダ",
+        "code": "AG",
+        "phone_code": "1268",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Argentina",
+        "name_jp": "アルゼンチン",
+        "code": "AR",
+        "phone_code": "54",
+        "currency": "ARS"
+    },
+    {
+        "name_en": "Armenia",
+        "name_jp": "アルメニア",
+        "code": "AM",
+        "phone_code": "374",
+        "currency": "AMD"
+    },
+    {
+        "name_en": "Aruba",
+        "name_jp": "アルバ",
+        "code": "AW",
+        "phone_code": "297",
+        "currency": "AWG"
+    },
+    {
+        "name_en": "Australia",
+        "name_jp": "オーストラリア",
+        "code": "AU",
+        "phone_code": "61",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Austria",
+        "name_jp": "オーストリア",
+        "code": "AT",
+        "phone_code": "43",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Azerbaijan",
+        "name_jp": "アゼルバイジャン",
+        "code": "AZ",
+        "phone_code": "994",
+        "currency": "AZN"
+    },
+    {
+        "name_en": "Bahamas",
+        "name_jp": "バハマ",
+        "code": "BS",
+        "phone_code": "1-242",
+        "currency": "BSD"
+    },
+    {
+        "name_en": "Bahrain",
+        "name_jp": "バーレーン",
+        "code": "BH",
+        "phone_code": "973",
+        "currency": "BHD"
+    },
+    {
+        "name_en": "Barbados",
+        "name_jp": "バルバドス",
+        "code": "BB",
+        "phone_code": "1-246",
+        "currency": "BBD"
+    },
+    {
+        "name_en": "Belarus",
+        "name_jp": "ベラルーシ",
+        "code": "BY",
+        "phone_code": "375",
+        "currency": "BYN"
+    },
+    {
+        "name_en": "Belgium",
+        "name_jp": "ベルギー",
+        "code": "BE",
+        "phone_code": "32",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Belize",
+        "name_jp": "ベリーズ",
+        "code": "BZ",
+        "phone_code": "501",
+        "currency": "BZD"
+    },
+    {
+        "name_en": "Benin",
+        "name_jp": "ベナン",
+        "code": "BJ",
+        "phone_code": "229",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Bermuda",
+        "name_jp": "バミューダ",
+        "code": "BM",
+        "phone_code": "1-441",
+        "currency": "BMD"
+    },
+    {
+        "name_en": "Bhutan",
+        "name_jp": "ブータン",
+        "code": "BT",
+        "phone_code": "975",
+        "currency": "BTN"
+    },
+    {
+        "name_en": "Bolivia",
+        "name_jp": "ボリビア",
+        "code": "BO",
+        "phone_code": "591",
+        "currency": "BOB"
+    },
+    {
+        "name_en": "Bosnia and Herzegovina",
+        "name_jp": "ボスニア・ヘルツェゴビナ",
+        "code": "BA",
+        "phone_code": "387",
+        "currency": "BAM"
+    },
+    {
+        "name_en": "Botswana",
+        "name_jp": "ボツワナ",
+        "code": "BW",
+        "phone_code": "267",
+        "currency": "BWP"
+    },
+    {
+        "name_en": "Bouvet Island",
+        "name_jp": "ブーベ島",
+        "code": "BV",
+        "phone_code": "",
+        "currency": ""
+    },
+    {
+        "name_en": "Brazil",
+        "name_jp": "ブラジル",
+        "code": "BR",
+        "phone_code": "55",
+        "currency": "BRL"
+    },
+    {
+        "name_en": "British Indian Ocean Territory",
+        "name_jp": "イギリス領インド洋地域",
+        "code": "IO",
+        "phone_code": "246",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Brunei Darussalam",
+        "name_jp": "ブルネイ・ダルサラーム",
+        "code": "BN",
+        "phone_code": "673",
+        "currency": "BND"
+    },
+    {
+        "name_en": "Bulgaria",
+        "name_jp": "ブルガリア",
+        "code": "BG",
+        "phone_code": "359",
+        "currency": "BGN"
+    },
+    {
+        "name_en": "Burkina Faso",
+        "name_jp": "ブルキナファソ",
+        "code": "BF",
+        "phone_code": "226",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Burundi",
+        "name_jp": "ブルンジ",
+        "code": "BI",
+        "phone_code": "257",
+        "currency": "BIF"
+    },
+    {
+        "name_en": "Cambodia",
+        "name_jp": "カンボジア",
+        "code": "KH",
+        "phone_code": "855",
+        "currency": "KHR"
+    },
+    {
+        "name_en": "Cameroon",
+        "name_jp": "カメルーン",
+        "code": "CM",
+        "phone_code": "237",
+        "currency": "XAF"
+    },
+    {
+        "name_en": "Canada",
+        "name_jp": "カナダ",
+        "code": "CA",
+        "phone_code": "1",
+        "currency": "CAD"
+    },
+    {
+        "name_en": "Cape Verde",
+        "name_jp": "カーボベルデ",
+        "code": "CV",
+        "phone_code": "238",
+        "currency": "CVE"
+    },
+    {
+        "name_en": "Cayman Islands",
+        "name_jp": "ケイマン諸島",
+        "code": "KY",
+        "phone_code": "1-345",
+        "currency": "KYD"
+    },
+    {
+        "name_en": "Central African Republic",
+        "name_jp": "中央アフリカ共和国",
+        "code": "CF",
+        "phone_code": "236",
+        "currency": "XAF"
+    },
+    {
+        "name_en": "Chad",
+        "name_jp": "チャド",
+        "code": "TD",
+        "phone_code": "235",
+        "currency": "XAF"
+    },
+    {
+        "name_en": "Chile",
+        "name_jp": "チリ",
+        "code": "CL",
+        "phone_code": "56",
+        "currency": "CLP"
+    },
+    {
+        "name_en": "Cocos (Keeling) Islands",
+        "name_jp": "ココス（キーリング）諸島",
+        "code": "CC",
+        "phone_code": "61",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Colombia",
+        "name_jp": "コロンビア",
+        "code": "CO",
+        "phone_code": "57",
+        "currency": "COP"
+    },
+    {
+        "name_en": "Comoros",
+        "name_jp": "コモロ",
+        "code": "KM",
+        "phone_code": "269",
+        "currency": "KMF"
+    },
+    {
+        "name_en": "Congo",
+        "name_jp": "コンゴ共和国",
+        "code": "CG",
+        "phone_code": "242",
+        "currency": "XAF"
+    },
+    {
+        "name_en": "Congo, The Democratic Republic of the",
+        "name_jp": "コンゴ民主共和国",
+        "code": "CD",
+        "phone_code": "243",
+        "currency": "CDF"
+    },
+    {
+        "name_en": "Cook Islands",
+        "name_jp": "クック諸島",
+        "code": "CK",
+        "phone_code": "682",
+        "currency": "NZD"
+    },
+    {
+        "name_en": "Costa Rica",
+        "name_jp": "コスタリカ",
+        "code": "CR",
+        "phone_code": "506",
+        "currency": "CRC"
+    },
+    {
+        "name_en": "Cote D'Ivoire",
+        "name_jp": "コートジボワール",
+        "code": "CI",
+        "phone_code": "225",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Croatia",
+        "name_jp": "クロアチア",
+        "code": "HR",
+        "phone_code": "385",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Cuba",
+        "name_jp": "キューバ",
+        "code": "CU",
+        "phone_code": "53",
+        "currency": "CUP"
+    },
+    {
+        "name_en": "Cyprus",
+        "name_jp": "キプロス",
+        "code": "CY",
+        "phone_code": "357",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Czech Republic",
+        "name_jp": "チェコ共和国",
+        "code": "CZ",
+        "phone_code": "420",
+        "currency": "CZK"
+    },
+    {
+        "name_en": "Denmark",
+        "name_jp": "デンマーク",
+        "code": "DK",
+        "phone_code": "45",
+        "currency": "DKK"
+    },
+    {
+        "name_en": "Djibouti",
+        "name_jp": "ジブチ",
+        "code": "DJ",
+        "phone_code": "253",
+        "currency": "DJF"
+    },
+    {
+        "name_en": "Dominica",
+        "name_jp": "ドミニカ国",
+        "code": "DM",
+        "phone_code": "1-767",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Dominican Republic",
+        "name_jp": "ドミニカ共和国",
+        "code": "DO",
+        "phone_code": "1-809",
+        "currency": "DOP"
+    },
+    {
+        "name_en": "Ecuador",
+        "name_jp": "エクアドル",
+        "code": "EC",
+        "phone_code": "593",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Egypt",
+        "name_jp": "エジプト",
+        "code": "EG",
+        "phone_code": "20",
+        "currency": "EGP"
+    },
+    {
+        "name_en": "El Salvador",
+        "name_jp": "エルサルバドル",
+        "code": "SV",
+        "phone_code": "503",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Eritrea",
+        "name_jp": "エリトリア",
+        "code": "ER",
+        "phone_code": "291",
+        "currency": "ERN"
+    },
+    {
+        "name_en": "Estonia",
+        "name_jp": "エストニア",
+        "code": "EE",
+        "phone_code": "372",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Ethiopia",
+        "name_jp": "エチオピア",
+        "code": "ET",
+        "phone_code": "251",
+        "currency": "ETB"
+    },
+    {
+        "name_en": "Falkland Islands (Malvinas)",
+        "name_jp": "フォークランド（マルビナス）諸島",
+        "code": "FK",
+        "phone_code": "500",
+        "currency": "FKP"
+    },
+    {
+        "name_en": "Faroe Islands",
+        "name_jp": "フェロー諸島",
+        "code": "FO",
+        "phone_code": "298",
+        "currency": "DKK"
+    },
+    {
+        "name_en": "Fiji",
+        "name_jp": "フィジー",
+        "code": "FJ",
+        "phone_code": "679",
+        "currency": "FJD"
+    },
+    {
+        "name_en": "Finland",
+        "name_jp": "フィンランド",
+        "code": "FI",
+        "phone_code": "358",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "France",
+        "name_jp": "フランス",
+        "code": "FR",
+        "phone_code": "33",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "French Guiana",
+        "name_jp": "フランス領ギアナ",
+        "code": "GF",
+        "phone_code": "594",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "French Polynesia",
+        "name_jp": "フランス領ポリネシア",
+        "code": "PF",
+        "phone_code": "689",
+        "currency": "XPF"
+    },
+    {
+        "name_en": "French Southern Territories",
+        "name_jp": "フランス領南方・南極地域",
+        "code": "TF",
+        "phone_code": "",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Gabon",
+        "name_jp": "ガボン",
+        "code": "GA",
+        "phone_code": "241",
+        "currency": "XAF"
+    },
+    {
+        "name_en": "Gambia",
+        "name_jp": "ガンビア",
+        "code": "GM",
+        "phone_code": "220",
+        "currency": "GMD"
+    },
+    {
+        "name_en": "Georgia",
+        "name_jp": "ジョージア",
+        "code": "GE",
+        "phone_code": "995",
+        "currency": "GEL"
+    },
+    {
+        "name_en": "Germany",
+        "name_jp": "ドイツ",
+        "code": "DE",
+        "phone_code": "49",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Ghana",
+        "name_jp": "ガーナ",
+        "code": "GH",
+        "phone_code": "233",
+        "currency": "GHS"
+    },
+    {
+        "name_en": "Gibraltar",
+        "name_jp": "ジブラルタル",
+        "code": "GI",
+        "phone_code": "350",
+        "currency": "GIP"
+    },
+    {
+        "name_en": "Greece",
+        "name_jp": "ギリシャ",
+        "code": "GR",
+        "phone_code": "30",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Greenland",
+        "name_jp": "グリーンランド",
+        "code": "GL",
+        "phone_code": "299",
+        "currency": "DKK"
+    },
+    {
+        "name_en": "Guadeloupe",
+        "name_jp": "グアドループ",
+        "code": "GP",
+        "phone_code": "590",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Guam",
+        "name_jp": "グアム",
+        "code": "GU",
+        "phone_code": "1-671",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Guatemala",
+        "name_jp": "グアテマラ",
+        "code": "GT",
+        "phone_code": "502",
+        "currency": "GTQ"
+    },
+    {
+        "name_en": "Guernsey",
+        "name_jp": "ガーンジー",
+        "code": "GG",
+        "phone_code": "44",
+        "currency": "GBP"
+    },
+    {
+        "name_en": "Guinea",
+        "name_jp": "ギニア",
+        "code": "GN",
+        "phone_code": "224",
+        "currency": "GNF"
+    },
+    {
+        "name_en": "Guinea-Bissau",
+        "name_jp": "ギニアビサウ",
+        "code": "GW",
+        "phone_code": "245",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Guyana",
+        "name_jp": "ガイアナ",
+        "code": "GY",
+        "phone_code": "592",
+        "currency": "GYD"
+    },
+    {
+        "name_en": "Haiti",
+        "name_jp": "ハイチ",
+        "code": "HT",
+        "phone_code": "509",
+        "currency": "HTG"
+    },
+    {
+        "name_en": "Heard Island and Mcdonald Islands",
+        "name_jp": "ハード島とマクドナルド諸島",
+        "code": "HM",
+        "phone_code": "",
+        "currency": ""
+    },
+    {
+        "name_en": "Holy See (Vatican City State)",
+        "name_jp": "バチカン市国",
+        "code": "VA",
+        "phone_code": "379",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Honduras",
+        "name_jp": "ホンジュラス",
+        "code": "HN",
+        "phone_code": "504",
+        "currency": "HNL"
+    },
+    {
+        "name_en": "Hong Kong",
+        "name_jp": "香港",
+        "code": "HK",
+        "phone_code": "852",
+        "currency": "HKD"
+    },
+    {
+        "name_en": "Hungary",
+        "name_jp": "ハンガリー",
+        "code": "HU",
+        "phone_code": "36",
+        "currency": "HUF"
+    },
+    {
+        "name_en": "Iceland",
+        "name_jp": "アイスランド",
+        "code": "IS",
+        "phone_code": "354",
+        "currency": "ISK"
+    },
+    {
+        "name_en": "Indonesia",
+        "name_jp": "インドネシア",
+        "code": "ID",
+        "phone_code": "62",
+        "currency": "IDR"
+    },
+    {
+        "name_en": "Iran, Islamic Republic Of",
+        "name_jp": "イラン・イスラム共和国",
+        "code": "IR",
+        "phone_code": "98",
+        "currency": "IRR"
+    },
+    {
+        "name_en": "Iraq",
+        "name_jp": "イラク",
+        "code": "IQ",
+        "phone_code": "964",
+        "currency": "IQD"
+    },
+    {
+        "name_en": "Ireland",
+        "name_jp": "アイルランド",
+        "code": "IE",
+        "phone_code": "353",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Isle of Man",
+        "name_jp": "マン島",
+        "code": "IM",
+        "phone_code": "44",
+        "currency": "GBP"
+    },
+    {
+        "name_en": "Italy",
+        "name_jp": "イタリア",
+        "code": "IT",
+        "phone_code": "39",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Jamaica",
+        "name_jp": "ジャマイカ",
+        "code": "JM",
+        "phone_code": "1-876",
+        "currency": "JMD"
+    },
+    {
+        "name_en": "Jersey",
+        "name_jp": "ジャージー",
+        "code": "JE",
+        "phone_code": "44",
+        "currency": "GBP"
+    },
+    {
+        "name_en": "Jordan",
+        "name_jp": "ヨルダン",
+        "code": "JO",
+        "phone_code": "962",
+        "currency": "JOD"
+    },
+    {
+        "name_en": "Kazakhstan",
+        "name_jp": "カザフスタン",
+        "code": "KZ",
+        "phone_code": "7",
+        "currency": "KZT"
+    },
+    {
+        "name_en": "Kenya",
+        "name_jp": "ケニア",
+        "code": "KE",
+        "phone_code": "254",
+        "currency": "KES"
+    },
+    {
+        "name_en": "Kiribati",
+        "name_jp": "キリバス",
+        "code": "KI",
+        "phone_code": "686",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Korea, Democratic People's Republic of",
+        "name_jp": "朝鮮民主主義人民共和国",
+        "code": "KP",
+        "phone_code": "850",
+        "currency": "KPW"
+    },
+    {
+        "name_en": "Korea, Republic of",
+        "name_jp": "大韓民国",
+        "code": "KR",
+        "phone_code": "82",
+        "currency": "KRW"
+    },
+    {
+        "name_en": "Kuwait",
+        "name_jp": "クウェート",
+        "code": "KW",
+        "phone_code": "965",
+        "currency": "KWD"
+    },
+    {
+        "name_en": "Kyrgyzstan",
+        "name_jp": "キルギス",
+        "code": "KG",
+        "phone_code": "996",
+        "currency": "KGS"
+    },
+    {
+        "name_en": "Lao People's Democratic Republic",
+        "name_jp": "ラオス人民民主共和国",
+        "code": "LA",
+        "phone_code": "856",
+        "currency": "LAK"
+    },
+    {
+        "name_en": "Latvia",
+        "name_jp": "ラトビア",
+        "code": "LV",
+        "phone_code": "371",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Lebanon",
+        "name_jp": "レバノン",
+        "code": "LB",
+        "phone_code": "961",
+        "currency": "LBP"
+    },
+    {
+        "name_en": "Lesotho",
+        "name_jp": "レソト",
+        "code": "LS",
+        "phone_code": "266",
+        "currency": "LSL"
+    },
+    {
+        "name_en": "Liberia",
+        "name_jp": "リベリア",
+        "code": "LR",
+        "phone_code": "231",
+        "currency": "LRD"
+    },
+    {
+        "name_en": "Libyan Arab Jamahiriya",
+        "name_jp": "リビア",
+        "code": "LY",
+        "phone_code": "218",
+        "currency": "LYD"
+    },
+    {
+        "name_en": "Liechtenstein",
+        "name_jp": "リヒテンシュタイン",
+        "code": "LI",
+        "phone_code": "423",
+        "currency": "CHF"
+    },
+    {
+        "name_en": "Lithuania",
+        "name_jp": "リトアニア",
+        "code": "LT",
+        "phone_code": "370",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Luxembourg",
+        "name_jp": "ルクセンブルク",
+        "code": "LU",
+        "phone_code": "352",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Macao",
+        "name_jp": "マカオ",
+        "code": "MO",
+        "phone_code": "853",
+        "currency": "MOP"
+    },
+    {
+        "name_en": "Macedonia, The Former Yugoslav Republic of",
+        "name_jp": "マケドニア旧ユーゴスラビア共和国",
+        "code": "MK",
+        "phone_code": "389",
+        "currency": "MKD"
+    },
+    {
+        "name_en": "Madagascar",
+        "name_jp": "マダガスカル",
+        "code": "MG",
+        "phone_code": "261",
+        "currency": "MGA"
+    },
+    {
+        "name_en": "Malawi",
+        "name_jp": "マラウイ",
+        "code": "MW",
+        "phone_code": "265",
+        "currency": "MWK"
+    },
+    {
+        "name_en": "Malaysia",
+        "name_jp": "マレーシア",
+        "code": "MY",
+        "phone_code": "60",
+        "currency": "MYR"
+    },
+    {
+        "name_en": "Maldives",
+        "name_jp": "モルディブ",
+        "code": "MV",
+        "phone_code": "960",
+        "currency": "MVR"
+    },
+    {
+        "name_en": "Mali",
+        "name_jp": "マリ",
+        "code": "ML",
+        "phone_code": "223",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Malta",
+        "name_jp": "マルタ",
+        "code": "MT",
+        "phone_code": "356",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Marshall Islands",
+        "name_jp": "マーシャル諸島",
+        "code": "MH",
+        "phone_code": "692",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Martinique",
+        "name_jp": "マルティニーク",
+        "code": "MQ",
+        "phone_code": "596",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Mauritania",
+        "name_jp": "モーリタニア",
+        "code": "MR",
+        "phone_code": "222",
+        "currency": "MRU"
+    },
+    {
+        "name_en": "Mauritius",
+        "name_jp": "モーリシャス",
+        "code": "MU",
+        "phone_code": "230",
+        "currency": "MUR"
+    },
+    {
+        "name_en": "Mayotte",
+        "name_jp": "マヨット",
+        "code": "YT",
+        "phone_code": "262",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Mexico",
+        "name_jp": "メキシコ",
+        "code": "MX",
+        "phone_code": "52",
+        "currency": "MXN"
+    },
+    {
+        "name_en": "Micronesia, Federated States of",
+        "name_jp": "ミクロネシア連邦",
+        "code": "FM",
+        "phone_code": "691",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Moldova, Republic of",
+        "name_jp": "モルドバ共和国",
+        "code": "MD",
+        "phone_code": "373",
+        "currency": "MDL"
+    },
+    {
+        "name_en": "Monaco",
+        "name_jp": "モナコ",
+        "code": "MC",
+        "phone_code": "377",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Mongolia",
+        "name_jp": "モンゴル",
+        "code": "MN",
+        "phone_code": "976",
+        "currency": "MNT"
+    },
+    {
+        "name_en": "Morocco",
+        "name_jp": "モロッコ",
+        "code": "MA",
+        "phone_code": "212",
+        "currency": "MAD"
+    },
+    {
+        "name_en": "Mozambique",
+        "name_jp": "モザンビーク",
+        "code": "MZ",
+        "phone_code": "258",
+        "currency": "MZN"
+    },
+    {
+        "name_en": "Myanmar",
+        "name_jp": "ミャンマー",
+        "code": "MM",
+        "phone_code": "95",
+        "currency": "MMK"
+    },
+    {
+        "name_en": "Namibia",
+        "name_jp": "ナミビア",
+        "code": "NA",
+        "phone_code": "264",
+        "currency": "NAD"
+    },
+    {
+        "name_en": "Nauru",
+        "name_jp": "ナウル",
+        "code": "NR",
+        "phone_code": "674",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Nepal",
+        "name_jp": "ネパール",
+        "code": "NP",
+        "phone_code": "977",
+        "currency": "NPR"
+    },
+    {
+        "name_en": "Netherlands",
+        "name_jp": "オランダ",
+        "code": "NL",
+        "phone_code": "31",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Netherlands Antilles",
+        "name_jp": "オランダ領アンティル",
+        "code": "AN",
+        "phone_code": "599",
+        "currency": "ANG"
+    },
+    {
+        "name_en": "New Caledonia",
+        "name_jp": "ニューカレドニア",
+        "code": "NC",
+        "phone_code": "687",
+        "currency": "XPF"
+    },
+    {
+        "name_en": "New Zealand",
+        "name_jp": "ニュージーランド",
+        "code": "NZ",
+        "phone_code": "64",
+        "currency": "NZD"
+    },
+    {
+        "name_en": "Nicaragua",
+        "name_jp": "ニカラグア",
+        "code": "NI",
+        "phone_code": "505",
+        "currency": "NIO"
+    },
+    {
+        "name_en": "Niger",
+        "name_jp": "ニジェール",
+        "code": "NE",
+        "phone_code": "227",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Nigeria",
+        "name_jp": "ナイジェリア",
+        "code": "NG",
+        "phone_code": "234",
+        "currency": "NGN"
+    },
+    {
+        "name_en": "Niue",
+        "name_jp": "ニウエ",
+        "code": "NU",
+        "phone_code": "683",
+        "currency": "NZD"
+    },
+    {
+        "name_en": "Norfolk Island",
+        "name_jp": "ノーフォーク島",
+        "code": "NF",
+        "phone_code": "672",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Northern Mariana Islands",
+        "name_jp": "北マリアナ諸島",
+        "code": "MP",
+        "phone_code": "1-670",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Norway",
+        "name_jp": "ノルウェー",
+        "code": "NO",
+        "phone_code": "47",
+        "currency": "NOK"
+    },
+    {
+        "name_en": "Oman",
+        "name_jp": "オマーン",
+        "code": "OM",
+        "phone_code": "968",
+        "currency": "OMR"
+    },
+    {
+        "name_en": "Pakistan",
+        "name_jp": "パキスタン",
+        "code": "PK",
+        "phone_code": "92",
+        "currency": "PKR"
+    },
+    {
+        "name_en": "Palestinian Territory, Occupied",
+        "name_jp": "パレスチナ自治区",
+        "code": "PS",
+        "phone_code": "",
+        "currency": ""
+    },
+    {
+        "name_en": "Panama",
+        "name_jp": "パナマ",
+        "code": "PA",
+        "phone_code": "507",
+        "currency": "PAB"
+    },
+    {
+        "name_en": "Papua New Guinea",
+        "name_jp": "パプアニューギニア",
+        "code": "PG",
+        "phone_code": "675",
+        "currency": "PGK"
+    },
+    {
+        "name_en": "Paraguay",
+        "name_jp": "パラグアイ",
+        "code": "PY",
+        "phone_code": "595",
+        "currency": "PYG"
+    },
+    {
+        "name_en": "Peru",
+        "name_jp": "ペルー",
+        "code": "PE",
+        "phone_code": "51",
+        "currency": "PEN"
+    },
+    {
+        "name_en": "Philippines",
+        "name_jp": "フィリピン",
+        "code": "PH",
+        "phone_code": "63",
+        "currency": "PHP"
+    },
+    {
+        "name_en": "Pitcairn",
+        "name_jp": "ピトケアン諸島",
+        "code": "PN",
+        "phone_code": "64",
+        "currency": "NZD"
+    },
+    {
+        "name_en": "Poland",
+        "name_jp": "ポーランド",
+        "code": "PL",
+        "phone_code": "48",
+        "currency": "PLN"
+    },
+    {
+        "name_en": "Portugal",
+        "name_jp": "ポルトガル",
+        "code": "PT",
+        "phone_code": "351",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Puerto Rico",
+        "name_jp": "プエルトリコ",
+        "code": "PR",
+        "phone_code": "1-787",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Qatar",
+        "name_jp": "カタール",
+        "code": "QA",
+        "phone_code": "974",
+        "currency": "QAR"
+    },
+    {
+        "name_en": "Reunion",
+        "name_jp": "レユニオン",
+        "code": "RE",
+        "phone_code": "262",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Romania",
+        "name_jp": "ルーマニア",
+        "code": "RO",
+        "phone_code": "40",
+        "currency": "RON"
+    },
+    {
+        "name_en": "Russian Federation",
+        "name_jp": "ロシア連邦",
+        "code": "RU",
+        "phone_code": "7",
+        "currency": "RUB"
+    },
+    {
+        "name_en": "Rwanda",
+        "name_jp": "ルワンダ",
+        "code": "RW",
+        "phone_code": "250",
+        "currency": "RWF"
+    },
+    {
+        "name_en": "Saint Helena",
+        "name_jp": "セントヘレナ",
+        "code": "SH",
+        "phone_code": "290",
+        "currency": "SHP"
+    },
+    {
+        "name_en": "Saint Kitts and Nevis",
+        "name_jp": "セントクリストファー・ネイビス",
+        "code": "KN",
+        "phone_code": "1-869",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Saint Lucia",
+        "name_jp": "セントルシア",
+        "code": "LC",
+        "phone_code": "1-758",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Saint Pierre and Miquelon",
+        "name_jp": "サンピエール島・ミクロン島",
+        "code": "PM",
+        "phone_code": "508",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Saint Vincent and the Grenadines",
+        "name_jp": "セントビンセントおよびグレナディーン諸島",
+        "code": "VC",
+        "phone_code": "1-784",
+        "currency": "XCD"
+    },
+    {
+        "name_en": "Samoa",
+        "name_jp": "サモア",
+        "code": "WS",
+        "phone_code": "685",
+        "currency": "WST"
+    },
+    {
+        "name_en": "San Marino",
+        "name_jp": "サンマリノ",
+        "code": "SM",
+        "phone_code": "378",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Sao Tome and Principe",
+        "name_jp": "サントメ・プリンシペ",
+        "code": "ST",
+        "phone_code": "239",
+        "currency": "STN"
+    },
+    {
+        "name_en": "Saudi Arabia",
+        "name_jp": "サウジアラビア",
+        "code": "SA",
+        "phone_code": "966",
+        "currency": "SAR"
+    },
+    {
+        "name_en": "Senegal",
+        "name_jp": "セネガル",
+        "code": "SN",
+        "phone_code": "221",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Serbia and Montenegro",
+        "name_jp": "セルビア・モンテネグロ",
+        "code": "CS",
+        "phone_code": "",
+        "currency": ""
+    },
+    {
+        "name_en": "Seychelles",
+        "name_jp": "セーシェル",
+        "code": "SC",
+        "phone_code": "248",
+        "currency": "SCR"
+    },
+    {
+        "name_en": "Sierra Leone",
+        "name_jp": "シエラレオネ",
+        "code": "SL",
+        "phone_code": "232",
+        "currency": "SLL"
+    },
+    {
+        "name_en": "Singapore",
+        "name_jp": "シンガポール",
+        "code": "SG",
+        "phone_code": "65",
+        "currency": "SGD"
+    },
+    {
+        "name_en": "Slovakia",
+        "name_jp": "スロバキア",
+        "code": "SK",
+        "phone_code": "421",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Slovenia",
+        "name_jp": "スロベニア",
+        "code": "SI",
+        "phone_code": "386",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Solomon Islands",
+        "name_jp": "ソロモン諸島",
+        "code": "SB",
+        "phone_code": "677",
+        "currency": "SBD"
+    },
+    {
+        "name_en": "Somalia",
+        "name_jp": "ソマリア",
+        "code": "SO",
+        "phone_code": "252",
+        "currency": "SOS"
+    },
+    {
+        "name_en": "South Africa",
+        "name_jp": "南アフリカ",
+        "code": "ZA",
+        "phone_code": "27",
+        "currency": "ZAR"
+    },
+    {
+        "name_en": "South Georgia and the South Sandwich Islands",
+        "name_jp": "サウスジョージア・サウスサンドウィッチ諸島",
+        "code": "GS",
+        "phone_code": "",
+        "currency": "GBP"
+    },
+    {
+        "name_en": "Spain",
+        "name_jp": "スペイン",
+        "code": "ES",
+        "phone_code": "34",
+        "currency": "EUR"
+    },
+    {
+        "name_en": "Sri Lanka",
+        "name_jp": "スリランカ",
+        "code": "LK",
+        "phone_code": "94",
+        "currency": "LKR"
+    },
+    {
+        "name_en": "Sudan",
+        "name_jp": "スーダン",
+        "code": "SD",
+        "phone_code": "249",
+        "currency": "SDG"
+    },
+    {
+        "name_en": "Suriname",
+        "name_jp": "スリナム",
+        "code": "SR",
+        "phone_code": "597",
+        "currency": "SRD"
+    },
+    {
+        "name_en": "Svalbard and Jan Mayen",
+        "name_jp": "スヴァールバル諸島およびヤンマイエン島",
+        "code": "SJ",
+        "phone_code": "47",
+        "currency": "NOK"
+    },
+    {
+        "name_en": "Swaziland",
+        "name_jp": "スワジランド",
+        "code": "SZ",
+        "phone_code": "268",
+        "currency": "SZL"
+    },
+    {
+        "name_en": "Sweden",
+        "name_jp": "スウェーデン",
+        "code": "SE",
+        "phone_code": "46",
+        "currency": "SEK"
+    },
+    {
+        "name_en": "Switzerland",
+        "name_jp": "スイス",
+        "code": "CH",
+        "phone_code": "41",
+        "currency": "CHF"
+    },
+    {
+        "name_en": "Syrian Arab Republic",
+        "name_jp": "シリア・アラブ共和国",
+        "code": "SY",
+        "phone_code": "963",
+        "currency": "SYP"
+    },
+    {
+        "name_en": "Taiwan, Province of China",
+        "name_jp": "台湾",
+        "code": "TW",
+        "phone_code": "886",
+        "currency": "TWD"
+    },
+    {
+        "name_en": "Tajikistan",
+        "name_jp": "タジキスタン",
+        "code": "TJ",
+        "phone_code": "992",
+        "currency": "TJS"
+    },
+    {
+        "name_en": "Tanzania, United Republic of",
+        "name_jp": "タンザニア連合共和国",
+        "code": "TZ",
+        "phone_code": "255",
+        "currency": "TZS"
+    },
+    {
+        "name_en": "Thailand",
+        "name_jp": "タイ",
+        "code": "TH",
+        "phone_code": "66",
+        "currency": "THB"
+    },
+    {
+        "name_en": "Timor-Leste",
+        "name_jp": "東ティモール",
+        "code": "TL",
+        "phone_code": "670",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Togo",
+        "name_jp": "トーゴ",
+        "code": "TG",
+        "phone_code": "228",
+        "currency": "XOF"
+    },
+    {
+        "name_en": "Tokelau",
+        "name_jp": "トケラウ",
+        "code": "TK",
+        "phone_code": "690",
+        "currency": "NZD"
+    },
+    {
+        "name_en": "Tonga",
+        "name_jp": "トンガ",
+        "code": "TO",
+        "phone_code": "676",
+        "currency": "TOP"
+    },
+    {
+        "name_en": "Trinidad and Tobago",
+        "name_jp": "トリニダード・トバゴ",
+        "code": "TT",
+        "phone_code": "1-868",
+        "currency": "TTD"
+    },
+    {
+        "name_en": "Tunisia",
+        "name_jp": "チュニジア",
+        "code": "TN",
+        "phone_code": "216",
+        "currency": "TND"
+    },
+    {
+        "name_en": "Turkey",
+        "name_jp": "トルコ",
+        "code": "TR",
+        "phone_code": "90",
+        "currency": "TRY"
+    },
+    {
+        "name_en": "Turkmenistan",
+        "name_jp": "トルクメニスタン",
+        "code": "TM",
+        "phone_code": "993",
+        "currency": "TMT"
+    },
+    {
+        "name_en": "Turks and Caicos Islands",
+        "name_jp": "タークス・カイコス諸島",
+        "code": "TC",
+        "phone_code": "1-649",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Tuvalu",
+        "name_jp": "ツバル",
+        "code": "TV",
+        "phone_code": "688",
+        "currency": "AUD"
+    },
+    {
+        "name_en": "Uganda",
+        "name_jp": "ウガンダ",
+        "code": "UG",
+        "phone_code": "256",
+        "currency": "UGX"
+    },
+    {
+        "name_en": "Ukraine",
+        "name_jp": "ウクライナ",
+        "code": "UA",
+        "phone_code": "380",
+        "currency": "UAH"
+    },
+    {
+        "name_en": "United Arab Emirates",
+        "name_jp": "アラブ首長国連邦",
+        "code": "AE",
+        "phone_code": "971",
+        "currency": "AED"
+    },
+    {
+        "name_en": "United Kingdom",
+        "name_jp": "イギリス",
+        "code": "GB",
+        "phone_code": "44",
+        "currency": "GBP"
+    },
+    {
+        "name_en": "United States",
+        "name_jp": "アメリカ合衆国",
+        "code": "US",
+        "phone_code": "1",
+        "currency": "USD"
+    },
+    {
+        "name_en": "United States Minor Outlying Islands",
+        "name_jp": "合衆国領有小離島",
+        "code": "UM",
+        "phone_code": "",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Uruguay",
+        "name_jp": "ウルグアイ",
+        "code": "UY",
+        "phone_code": "598",
+        "currency": "UYU"
+    },
+    {
+        "name_en": "Uzbekistan",
+        "name_jp": "ウズベキスタン",
+        "code": "UZ",
+        "phone_code": "998",
+        "currency": "UZS"
+    },
+    {
+        "name_en": "Vanuatu",
+        "name_jp": "バヌアツ",
+        "code": "VU",
+        "phone_code": "678",
+        "currency": "VUV"
+    },
+    {
+        "name_en": "Venezuela",
+        "name_jp": "ベネズエラ",
+        "code": "VE",
+        "phone_code": "58",
+        "currency": "VES"
+    },
+    {
+        "name_en": "Viet Nam",
+        "name_jp": "ベトナム",
+        "code": "VN",
+        "phone_code": "84",
+        "currency": "VND"
+    },
+    {
+        "name_en": "Virgin Islands, British",
+        "name_jp": "イギリス領ヴァージン諸島",
+        "code": "VG",
+        "phone_code": "1-284",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Virgin Islands, U.S.",
+        "name_jp": "アメリカ領ヴァージン諸島",
+        "code": "VI",
+        "phone_code": "1-340",
+        "currency": "USD"
+    },
+    {
+        "name_en": "Wallis and Futuna",
+        "name_jp": "ワリス・フツナ",
+        "code": "WF",
+        "phone_code": "681",
+        "currency": "XPF"
+    },
+    {
+        "name_en": "Western Sahara",
+        "name_jp": "西サハラ",
+        "code": "EH",
+        "phone_code": "212",
+        "currency": "MAD"
+    },
+    {
+        "name_en": "Yemen",
+        "name_jp": "イエメン",
+        "code": "YE",
+        "phone_code": "967",
+        "currency": "YER"
+    },
+    {
+        "name_en": "Zambia",
+        "name_jp": "ザンビア",
+        "code": "ZM",
+        "phone_code": "260",
+        "currency": "ZMW"
+    },
+    {
+        "name_en": "Zimbabwe",
+        "name_jp": "ジンバブエ",
+        "code": "ZW",
+        "phone_code": "263",
+        "currency": "ZWL"
+    }
+]

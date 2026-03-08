@@ -1,0 +1,25 @@
+.dataTables_filter {
+    margin-bottom: 0.5rem !important;
+}
+
+table.dataTable thead>tr>th.text-center {
+    text-align: center
+}
+.select2-container--default .select2-selection--single {
+    padding-top: 8px;
+    padding-bottom: 10px;
+    padding-left: 6px;
+    height: fit-content;
+    border-radius: 12px;
+    border-color: #D1D5DB;
+    font-family: "Instrument-sans !important;
+}
+
+@media screen and (max-width: 640px) {
+    .dataTables_wrapper .dataTables_length{
+        text-align: start;
+    }
+    .dataTables_wrapper .dataTables_filter{
+        text-align: start;
+    }
+}
