@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\LoginAuthMiddleware;
 
 
@@ -69,6 +70,11 @@ Route::middleware([
         Route::get('/settings', [UserController::class, 'userSettings'])->name('settings');
         Route::get('change-password', [UserController::class, 'changePassword'])->name('changePassword');
         Route::post('change-password', [UserController::class, 'storeChangePassword'])->name('changePassword');
+    });
+
+    Route::group(['prefix' => 'orders', 'as' => 'order.'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/create', [OrderController::class, 'create'])->name('create');
     });
 
 });
