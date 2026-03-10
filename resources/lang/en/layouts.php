@@ -24,6 +24,7 @@ return [
         'Profile' => 'Profile',
         'Update'  => 'Update',
         'Delete-users' => 'Delete Users',
+        'Orders' => 'Orders',
     ],
 
     'something_went_wrong' => 'Something went wrong. Please try again.',
@@ -226,4 +227,10 @@ return [
     'filters' => 'Filters',
     'permitted_roles' => 'Permitted Roles',
     'reset_all' => 'Reset All',
+    'order' => [
+        'orders' => 'Orders',
+        'list' => 'Order List',
+        'create' => 'Create Order',
+        'view' => 'View Order'
+    ],
 ];
