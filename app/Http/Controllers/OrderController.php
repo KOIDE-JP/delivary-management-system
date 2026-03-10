@@ -15,4 +15,9 @@ class OrderController extends Controller
     {
         return view('orders.create');
     }
+
+    public function view($id)
+    {
+        return view('orders.view');
+    }
 }
