@@ -1,12 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrierController;
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\FreightRateController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TruckTypeController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\LoginAuthMiddleware;
+use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['web', 'setLocale'])->group(function () {
@@ -49,6 +53,52 @@ Route::middleware([
     Route::get('/notifications/latest', [AdminController::class, 'latestNotifications']);
     Route::post('/notifications/read/{id}', [AdminController::class, 'markAsRead']);
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // New Routes for Destinations, Carriers, Truck Types, and Freight Rates
+    // Route::resource('destinations', DestinationController::class);
+    // Route::resource('carriers', CarrierController::class);
+    // Route::resource('truck-types', TruckTypeController::class);
+    // Route::resource('freight-rates', FreightRateController::class);
+
+    Route::group(['prefix' => 'destinations', 'as' => 'destinations.'], function () {
+        Route::get('/',                [DestinationController::class, 'index'])  ->name('index');
+        Route::get('/create',          [DestinationController::class, 'create']) ->name('create');
+        Route::post('/',               [DestinationController::class, 'store'])  ->name('store');
+        Route::get('/{destination}/edit',    [DestinationController::class, 'edit'])   ->name('edit');
+        Route::put('/{destination}',         [DestinationController::class, 'update']) ->name('update');
+        Route::delete('/{destination}',      [DestinationController::class, 'destroy'])->name('destroy');
+        Route::post('/{destination}/toggle', [DestinationController::class, 'toggle']) ->name('toggle');
+    });
+
+    Route::group(['prefix' => 'carriers', 'as' => 'carriers.'], function () {
+        Route::get('/',              [CarrierController::class, 'index'])  ->name('index');
+        Route::get('/create',        [CarrierController::class, 'create']) ->name('create');
+        Route::post('/',             [CarrierController::class, 'store'])  ->name('store');
+        Route::get('/{carrier}/edit',    [CarrierController::class, 'edit'])   ->name('edit');
+        Route::put('/{carrier}',         [CarrierController::class, 'update']) ->name('update');
+        Route::delete('/{carrier}',      [CarrierController::class, 'destroy'])->name('destroy');
+        Route::post('/{carrier}/toggle', [CarrierController::class, 'toggle']) ->name('toggle');
+    });
+
+    Route::group(['prefix' => 'truck-types', 'as' => 'truck-types.'], function () {
+        Route::get('/',               [TruckTypeController::class, 'index'])  ->name('index');
+        Route::get('/create',         [TruckTypeController::class, 'create']) ->name('create');
+        Route::post('/',              [TruckTypeController::class, 'store'])  ->name('store');
+        Route::get('/{truckType}/edit',    [TruckTypeController::class, 'edit'])   ->name('edit');
+        Route::put('/{truckType}',         [TruckTypeController::class, 'update']) ->name('update');
+        Route::delete('/{truckType}',      [TruckTypeController::class, 'destroy'])->name('destroy');
+        Route::post('/{truckType}/toggle', [TruckTypeController::class, 'toggle']) ->name('toggle');
+    });
+
+    Route::group(['prefix' => 'freight-rates', 'as' => 'freight-rates.'], function () {
+        Route::get('/',                [FreightRateController::class, 'index'])  ->name('index');
+        Route::get('/create',          [FreightRateController::class, 'create']) ->name('create');
+        Route::post('/',               [FreightRateController::class, 'store'])  ->name('store');
+        Route::get('/{freightRate}/edit',    [FreightRateController::class, 'edit'])   ->name('edit');
+        Route::put('/{freightRate}',         [FreightRateController::class, 'update']) ->name('update');
+        Route::delete('/{freightRate}',      [FreightRateController::class, 'destroy'])->name('destroy');
+        Route::post('/{freightRate}/toggle', [FreightRateController::class, 'toggle']) ->name('toggle');
+    });
 
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {

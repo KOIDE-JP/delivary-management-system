@@ -24,6 +24,11 @@ return [
         'Profile' => 'プロフィール',
         'Update'  => '更新',
         'Delete-users' => 'ユーザー削除',
+        
+        'Destinations' => '目的地',
+        'Carriers' => '運送業者',
+        'Truck-types' => 'トラックの種類',
+        'Freight-rates' => '運賃',
     ],
 
     'something_went_wrong' => '問題が発生しました。もう一度お試しください。',
@@ -207,4 +212,33 @@ return [
     'filters' => 'フィルター',
     'permitted_roles' => '許可されたロール',
     'reset_all' => 'すべてリセット',
+
+
+
+    'destinations' => '目的地',
+    'all_destinations' => 'すべての目的地',
+    'add_destination' => '目的地を追加',
+    'carriers' => '運送業者',
+    'all_carriers' => 'すべての運送業者',
+    'add_carrier' => '運送業者を追加',
+    'truck_types' => 'トラックの種類',
+    'all_truck_types' => 'すべてのトラックの種類',
+    'add_truck_type' => 'トラックの種類を追加',
+    'freight_rates' => '運賃',
+    'all_freight_rates' => 'すべての運賃',
+    'add_freight_rate' => '運賃を追加',
+    'destination_list' => '目的地リスト',
+    'carrier_list' => '運送業者リスト',
+    'truck_type_list' => 'トラック種別リスト',
+    'freight_rate_list' => '運賃リスト',
+    'destination' => '目的地',
+    'carrier' => '運送業者',
+    'truck_type' => 'トラック種別',
+    'price' => '価格',
+    'tax_excluded' => '税抜価格',
+    'prefix' => '接頭辞',
+    'select_destination' => '目的地を選択',
+    'select_carrier' => '運送業者を選択',
+    'select_truck_type' => 'トラック種別を選択',
+
 ];

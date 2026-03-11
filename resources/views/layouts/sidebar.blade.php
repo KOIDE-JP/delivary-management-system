@@ -165,6 +165,198 @@
                     </li>
                 @endif --}}
 
+
+
+                <!-- Master Data Menu -->
+                <!-- Destinations Menu -->
+{{-- @if (auth()->user()->hasPermission('destinations.index') || auth()->user()->hasPermission('destinations.create')) --}}
+    <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('destinations.*') ? 'true' : 'false' }} }">
+        <a href="javascript:;" @click="open = !open"
+            class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
+            :class="{ 'text-white bg-white/10': open }">
+            <div class="flex items-center">
+                <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-lg shadow-lg mr-3 group-hover:shadow-amber-500/50 transition-shadow duration-200">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <span class="font-medium group-hover:translate-x-1 transition-transform duration-200">
+                    {{ __('layouts.destinations') }}
+                </span>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200"
+                :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <ul x-show="open" x-collapse class="ml-4 mt-2 space-y-1">
+            @if (auth()->user()->hasPermission('destinations.create'))
+                <li class="child-menu-list">
+                    <a href="{{ route('destinations.create') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('destinations.create') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-3 shadow-sm shadow-green-400/50"></div>
+                        {{ __('layouts.add_destination') }}
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('destinations.index'))
+                <li class="child-menu-list">
+                    <a href="{{ route('destinations.index') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('destinations.index') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 shadow-sm shadow-blue-400/50"></div>
+                        {{ __('layouts.all_destinations') }}
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
+{{-- @endif --}}
+
+
+<!-- Carriers Menu -->
+{{-- @if (auth()->user()->hasPermission('carriers.index') || auth()->user()->hasPermission('carriers.create')) --}}
+    <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('carriers.*') ? 'true' : 'false' }} }">
+        <a href="javascript:;" @click="open = !open"
+            class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
+            :class="{ 'text-white bg-white/10': open }">
+            <div class="flex items-center">
+                <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-sky-500 to-cyan-600 rounded-lg shadow-lg mr-3 group-hover:shadow-cyan-500/50 transition-shadow duration-200">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM3 4h2l2.5 10h9.5l2-7H6" />
+                    </svg>
+                </div>
+                <span class="font-medium group-hover:translate-x-1 transition-transform duration-200">
+                    {{ __('layouts.carriers') }}
+                </span>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200"
+                :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <ul x-show="open" x-collapse class="ml-4 mt-2 space-y-1">
+            @if (auth()->user()->hasPermission('carriers.create'))
+                <li class="child-menu-list">
+                    <a href="{{ route('carriers.create') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('carriers.create') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-3 shadow-sm shadow-green-400/50"></div>
+                        {{ __('layouts.add_carrier') }}
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('carriers.index'))
+                <li class="child-menu-list">
+                    <a href="{{ route('carriers.index') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('carriers.index') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 shadow-sm shadow-blue-400/50"></div>
+                        {{ __('layouts.all_carriers') }}
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
+{{-- @endif --}}
+
+
+<!-- Truck Types Menu -->
+{{-- @if (auth()->user()->hasPermission('truck-types.index') || auth()->user()->hasPermission('truck-types.create')) --}}
+    <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('truck-types.*') ? 'true' : 'false' }} }">
+        <a href="javascript:;" @click="open = !open"
+            class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
+            :class="{ 'text-white bg-white/10': open }">
+            <div class="flex items-center">
+                <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-lg mr-3 group-hover:shadow-emerald-500/50 transition-shadow duration-200">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m0 0h3l3 3v4h-6m0 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <span class="font-medium group-hover:translate-x-1 transition-transform duration-200">
+                    {{ __('layouts.truck_types') }}
+                </span>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200"
+                :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <ul x-show="open" x-collapse class="ml-4 mt-2 space-y-1">
+            @if (auth()->user()->hasPermission('truck-types.create'))
+                <li class="child-menu-list">
+                    <a href="{{ route('truck-types.create') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('truck-types.create') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-3 shadow-sm shadow-green-400/50"></div>
+                        {{ __('layouts.add_truck_type') }}
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('truck-types.index'))
+                <li class="child-menu-list">
+                    <a href="{{ route('truck-types.index') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('truck-types.index') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 shadow-sm shadow-blue-400/50"></div>
+                        {{ __('layouts.all_truck_types') }}
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
+{{-- @endif --}}
+
+
+<!-- Freight Rates Menu -->
+{{-- @if (auth()->user()->hasPermission('freight-rates.index') || auth()->user()->hasPermission('freight-rates.create')) --}}
+    <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('freight-rates.*') ? 'true' : 'false' }} }">
+        <a href="javascript:;" @click="open = !open"
+            class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
+            :class="{ 'text-white bg-white/10': open }">
+            <div class="flex items-center">
+                <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-lg shadow-lg mr-3 group-hover:shadow-yellow-500/50 transition-shadow duration-200">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <span class="font-medium group-hover:translate-x-1 transition-transform duration-200">
+                    {{ __('layouts.freight_rates') }}
+                </span>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 transition-transform duration-200"
+                :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <ul x-show="open" x-collapse class="ml-4 mt-2 space-y-1">
+            @if (auth()->user()->hasPermission('freight-rates.create'))
+                <li class="child-menu-list">
+                    <a href="{{ route('freight-rates.create') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('freight-rates.create') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-3 shadow-sm shadow-green-400/50"></div>
+                        {{ __('layouts.add_freight_rate') }}
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('freight-rates.index'))
+                <li class="child-menu-list">
+                    <a href="{{ route('freight-rates.index') }}"
+                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('freight-rates.index') ? 'active font-semibold text-white' : '' }}">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 shadow-sm shadow-blue-400/50"></div>
+                        {{ __('layouts.all_freight_rates') }}
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
+{{-- @endif --}}
+
                 <!-- Users Menu -->
                 @if (auth()->user()->hasPermission('users.index') || auth()->user()->hasPermission('users.create') || auth()->user()->hasPermission('role.list'))
 
