@@ -24,6 +24,8 @@ return [
         'Profile' => 'Profile',
         'Update'  => 'Update',
         'Delete-users' => 'Delete Users',
+        'Orders' => 'Orders',
+        'View' => 'View',
         'Destinations' => 'Destinations',
         'Carriers' => 'Carriers',
         'Truck-types' => 'Truck Types',
@@ -230,6 +232,12 @@ return [
     'filters' => 'Filters',
     'permitted_roles' => 'Permitted Roles',
     'reset_all' => 'Reset All',
+    'order' => [
+        'orders' => 'Orders',
+        'list' => 'Order List',
+        'create' => 'Create Order',
+        'view' => 'View Order'
+    ],
 
     //
     'destinations'      => 'Destinations',

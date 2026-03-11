@@ -125,6 +125,7 @@ Route::middleware([
     Route::group(['prefix' => 'orders', 'as' => 'order.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
+        Route::get('/view/{id}', [OrderController::class, 'view'])->name('view');
     });
 
 });
