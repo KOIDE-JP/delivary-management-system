@@ -104,7 +104,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50/80">
                             <tr class="text-xs font-bold tracking-wider text-left text-gray-500 uppercase">
-                                <th scope="col" class="px-6 py-4">Model Details</th>
+                                <th scope="col" class="px-6 py-4">Order Details</th>
                                 <th scope="col" class="px-6 py-4">Timeline</th>
                                 <th scope="col" class="px-6 py-4">Delivery Info</th>
                                 <th scope="col" class="px-6 py-4">Status</th>
@@ -119,8 +119,8 @@
 
                                 {{-- MODEL DETAILS (With Registered Date) --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="font-bold text-gray-900">MDL-10293</div>
-                                    <div class="text-xs text-gray-600 mt-0.5 mb-1.5 font-medium">Pump Model X-200
+                                    <div class="font-bold text-gray-900">Order Number: MDL-10293</div>
+                                    <div class="text-xs text-gray-600 mt-0.5 mb-1.5 font-medium">Order Name: Pump Model X-200
                                     </div>
                                     <div class="text-[11px] text-gray-400 flex items-center">
                                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -25,6 +25,7 @@ return [
         'Update'  => 'Update',
         'Delete-users' => 'Delete Users',
         'Orders' => 'Orders',
+        'View' => 'View',
     ],
 
     'something_went_wrong' => 'Something went wrong. Please try again.',
