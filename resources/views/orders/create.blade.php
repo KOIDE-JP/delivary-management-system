@@ -8,9 +8,16 @@
             <div class="p-8 pb-6 border-b border-gray-100 bg-white">
                 <h4 class="text-2xl font-bold text-gray-900">Create Order</h4>
                 <p class="mt-1 text-sm text-gray-500">Fill in the basic details to generate a new order. Proceed to the next steps for optional information.</p>
+                
+                {{-- Global Error Alert --}}
+                @if ($errors->any())
+                    <div class="mt-4 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-200" role="alert">
+                        <span class="font-medium">Please correct the errors below to proceed.</span>
+                    </div>
+                @endif
             </div>
 
-            <form action="#" method="POST" id="wizard-form">
+            <form action="{{ route('order.store') }}" method="POST" id="wizard-form">
                 @csrf
 
                 {{-- STEPPER NAVIGATION --}}
@@ -37,9 +44,7 @@
                                 </div>
                                 <div class="mt-2 text-xs font-medium text-center whitespace-nowrap {{ $index === 0 ? 'text-blue-600' : 'text-gray-500' }} step-label">
                                     {{ $step['label'] }}
-                                    @if($step['req'])
-                                        <span class="text-red-500">*</span>
-                                    @endif
+                                    @if($step['req']) <span class="text-red-500">*</span> @endif
                                 </div>
                             </div>
                         @endforeach
@@ -55,18 +60,21 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Order Number <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="e.g. ORD-10293" required
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="text" name="order_number" value="{{ old('order_number') }}" placeholder="e.g. ORD-10293" required
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_number') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('order_number') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Order Name <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Enter order name" required
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="text" name="order_name" value="{{ old('order_name') }}" placeholder="Enter order name" required
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_name') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('order_name') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Registered Date <span class="text-red-500">*</span></label>
-                                <input type="date" required
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="date" name="registered_date" value="{{ old('registered_date') }}" required
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('registered_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('registered_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>
@@ -79,26 +87,30 @@
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Due Date</label>
-                                    <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    <input type="date" name="due_date" value="{{ old('due_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('due_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    @error('due_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Due Confidence</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="" disabled selected>Select status</option>
-                                        <option value="confirmed">Confirmed</option>
-                                        <option value="unconfirmed">Unconfirmed</option>
+                                    <select name="due_confidence" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('due_confidence') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="" disabled {{ old('due_confidence') ? '' : 'selected' }}>Select status</option>
+                                        <option value="confirmed" {{ old('due_confidence') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                        <option value="unconfirmed" {{ old('due_confidence') == 'unconfirmed' ? 'selected' : '' }}>Unconfirmed</option>
                                     </select>
+                                    @error('due_confidence') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Inspection Date</label>
-                                    <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    <input type="date" name="inspection_date" value="{{ old('inspection_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    @error('inspection_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Priority</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="no">Normal</option>
-                                        <option value="yes">High Priority</option>
+                                    <select name="priority" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('priority') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="no" {{ old('priority', 'no') == 'no' ? 'selected' : '' }}>Normal</option>
+                                        <option value="yes" {{ old('priority') == 'yes' ? 'selected' : '' }}>High Priority</option>
                                     </select>
+                                    @error('priority') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                             </div>
                         </div>
@@ -108,18 +120,20 @@
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Shipping Date</label>
-                                    <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    <input type="date" name="shipping_date" value="{{ old('shipping_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    @error('shipping_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Shipping Status</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="" disabled selected>Select status</option>
-                                        <option value="unconfirmed">Unconfirmed</option>
-                                        <option value="unarranged">Unarranged</option>
-                                        <option value="arranged">Arranged</option>
-                                        <option value="direct_delivery">Direct Delivery</option>
-                                        <option value="courier">Courier</option>
+                                    <select name="shipping_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="" disabled {{ old('shipping_status') ? '' : 'selected' }}>Select status</option>
+                                        <option value="unconfirmed" {{ old('shipping_status') == 'unconfirmed' ? 'selected' : '' }}>Unconfirmed</option>
+                                        <option value="unarranged" {{ old('shipping_status') == 'unarranged' ? 'selected' : '' }}>Unarranged</option>
+                                        <option value="arranged" {{ old('shipping_status') == 'arranged' ? 'selected' : '' }}>Arranged</option>
+                                        <option value="direct_delivery" {{ old('shipping_status') == 'direct_delivery' ? 'selected' : '' }}>Direct Delivery</option>
+                                        <option value="courier" {{ old('shipping_status') == 'courier' ? 'selected' : '' }}>Courier</option>
                                     </select>
+                                    @error('shipping_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                             </div>
                         </div>
@@ -133,27 +147,30 @@
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">DW Status</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="undelivered">Undelivered</option>
-                                        <option value="delivered">Delivered</option>
-                                        <option value="not_required">Not Required</option>
+                                    <select name="dw_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('dw_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="undelivered" {{ old('dw_status', 'undelivered') == 'undelivered' ? 'selected' : '' }}>Undelivered</option>
+                                        <option value="delivered" {{ old('dw_status') == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                        <option value="not_required" {{ old('dw_status') == 'not_required' ? 'selected' : '' }}>Not Required</option>
                                     </select>
+                                    @error('dw_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Quotation Status</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="submitted">Submitted</option>
-                                        <option value="not_submitted">Not Submitted</option>
-                                        <option value="not_required">Not Required</option>
+                                    <select name="quotation_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('quotation_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="submitted" {{ old('quotation_status', 'submitted') == 'submitted' ? 'selected' : '' }}>Submitted</option>
+                                        <option value="not_submitted" {{ old('quotation_status') == 'not_submitted' ? 'selected' : '' }}>Not Submitted</option>
+                                        <option value="not_required" {{ old('quotation_status') == 'not_required' ? 'selected' : '' }}>Not Required</option>
                                     </select>
+                                    @error('quotation_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                                 <div>
                                     <label class="block mb-1.5 text-sm font-semibold text-gray-700">Order Status</label>
-                                    <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="received">Received</option>
-                                        <option value="not_received">Not Received</option>
-                                        <option value="not_required">Not Required</option>
+                                    <select name="order_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="received" {{ old('order_status', 'received') == 'received' ? 'selected' : '' }}>Received</option>
+                                        <option value="not_received" {{ old('order_status') == 'not_received' ? 'selected' : '' }}>Not Received</option>
+                                        <option value="not_required" {{ old('order_status') == 'not_required' ? 'selected' : '' }}>Not Required</option>
                                     </select>
+                                    @error('order_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                 </div>
                             </div>
                         </div>
@@ -164,7 +181,18 @@
                                 <div class="grid grid-cols-1 gap-6">
                                     <div>
                                         <label class="block mb-1.5 text-sm font-semibold text-gray-700">Material Pickup Date</label>
-                                        <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <input type="date" name="material_pickup_date" value="{{ old('material_pickup_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('material_pickup_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        @error('material_pickup_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">Inspection Due Date</label>
+                                        <input type="date" name="inspection_due_date" value="{{ old('inspection_due_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_due_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        @error('inspection_due_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">Parts Pickup Date</label>
+                                        <input type="date" name="parts_pickup_date" value="{{ old('parts_pickup_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('parts_pickup_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        @error('parts_pickup_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -172,13 +200,32 @@
                                 <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">Billing Information</h6>
                                 <div class="grid grid-cols-1 gap-6">
                                     <div>
+                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">Inspection Slip Status</label>
+                                        <select name="inspection_slip_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_slip_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                            <option value="received" {{ old('inspection_slip_status', 'received') == 'received' ? 'selected' : '' }}>Received</option>
+                                            <option value="not_received" {{ old('inspection_slip_status') == 'not_received' ? 'selected' : '' }}>Not Received</option>
+                                            <option value="not_required" {{ old('inspection_slip_status') == 'not_required' ? 'selected' : '' }}>Not Required</option>
+                                        </select>
+                                        @error('inspection_slip_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">Invoice Status</label>
+                                        <select name="invoice_status" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('invoice_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                            <option value="sent" {{ old('invoice_status', 'sent') == 'sent' ? 'selected' : '' }}>Sent</option>
+                                            <option value="not_sent" {{ old('invoice_status') == 'not_sent' ? 'selected' : '' }}>Not Sent</option>
+                                            <option value="not_required" {{ old('invoice_status') == 'not_required' ? 'selected' : '' }}>Not Required</option>
+                                        </select>
+                                        @error('invoice_status') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                                    </div>
+                                    <div>
                                         <label class="block mb-1.5 text-sm font-semibold text-gray-700">Order Amount</label>
                                         <div class="relative">
                                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                 <span class="text-gray-500 sm:text-sm">¥</span>
                                             </div>
-                                            <input type="number" placeholder="0" class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                            <input type="number" step="0.01" name="order_amount" value="{{ old('order_amount') }}" placeholder="0.00" class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('order_amount') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         </div>
+                                        @error('order_amount') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -191,19 +238,28 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Destination</label>
-                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                    <option value="" disabled selected>Select Prefecture</option>
-                                    <option value="tokyo">Tokyo</option>
-                                    <option value="osaka">Osaka</option>
-                                </select>
+                                <input type="text" name="destination" value="{{ old('destination') }}" placeholder="e.g. Tokyo" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('destination') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Carrier</label>
-                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                    <option value="" disabled selected>Select Carrier</option>
-                                    <option value="yamato">Yamato Transport</option>
-                                    <option value="sagawa">Sagawa Express</option>
-                                </select>
+                                <input type="text" name="carrier" value="{{ old('carrier') }}" placeholder="e.g. Yamato" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('carrier') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">Truck Type</label>
+                                <input type="text" name="truck_type" value="{{ old('truck_type') }}" placeholder="e.g. Flatbed" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('truck_type') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">Freight Price</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">¥</span>
+                                    </div>
+                                    <input type="number" step="0.01" name="freight_price" value="{{ old('freight_price') }}" placeholder="0.00" class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('freight_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                </div>
+                                @error('freight_price') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>
@@ -214,11 +270,18 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Pickup Transfer Date</label>
-                                <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="date" name="pickup_transfer_date" value="{{ old('pickup_transfer_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('pickup_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('pickup_transfer_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Sales Transfer Date</label>
-                                <input type="date" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="date" name="sales_transfer_date" value="{{ old('sales_transfer_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('sales_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('sales_transfer_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">Shipping Transfer Date</label>
+                                <input type="date" name="shipping_transfer_date" value="{{ old('shipping_transfer_date') }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('shipping_transfer_date') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                         </div>
                     </div>
@@ -241,7 +304,6 @@
                             <button type="button" id="btn-next" class="cursor-pointer px-8 py-2.5 font-semibold text-white transition-opacity bg-gray-800 hover:bg-gray-900 rounded-xl shadow-md flex items-center">
                                 Next Step →
                             </button>
-                            {{-- Save is always visible so they can submit early --}}
                             <button type="submit" id="btn-submit" class="cursor-pointer px-8 py-2.5 font-semibold text-white transition-opacity bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md">
                                 Save Order
                             </button>
@@ -267,35 +329,37 @@
             const totalSteps = 5;
             let currentStep = 0;
 
+            // --- SMART VALIDATION ROUTING ---
+            // Find if there is an error text on the page from Laravel backend validation
+            let firstErrorElement = $('.error-text').first();
+            if(firstErrorElement.length > 0) {
+                // Find which panel this error belongs to and set it as the starting step
+                let panelId = firstErrorElement.closest('.wizard-panel').attr('id');
+                if(panelId) {
+                    currentStep = parseInt(panelId.replace('panel-', ''));
+                }
+            }
+
             function updateUI() {
-                // 1. Show/Hide Panels
                 $('.wizard-panel').addClass('hidden').removeClass('block');
                 $('#panel-' + currentStep).removeClass('hidden').addClass('block');
 
-                // 2. Update Stepper UI
                 $('.step-indicator').each(function(index) {
                     let $circle = $(this).find('.step-circle');
                     let $label = $(this).find('.step-label');
 
                     if (index < currentStep) {
-                        // Completed Steps
-                        $circle.removeClass('border-gray-300 text-gray-400 border-blue-600 text-blue-600 bg-white')
-                               .addClass('bg-blue-600 border-blue-600 text-white');
+                        $circle.removeClass('border-gray-300 text-gray-400 border-blue-600 text-blue-600 bg-white').addClass('bg-blue-600 border-blue-600 text-white');
                         $label.removeClass('text-gray-500').addClass('text-blue-600');
                     } else if (index === currentStep) {
-                        // Current Step
-                        $circle.removeClass('border-gray-300 text-gray-400 bg-blue-600 text-white')
-                               .addClass('bg-white border-blue-600 text-blue-600');
+                        $circle.removeClass('border-gray-300 text-gray-400 bg-blue-600 text-white').addClass('bg-white border-blue-600 text-blue-600');
                         $label.removeClass('text-gray-500').addClass('text-blue-600');
                     } else {
-                        // Upcoming Steps
-                        $circle.removeClass('bg-blue-600 border-blue-600 text-white text-blue-600')
-                               .addClass('bg-white border-gray-300 text-gray-400');
+                        $circle.removeClass('bg-blue-600 border-blue-600 text-white text-blue-600').addClass('bg-white border-gray-300 text-gray-400');
                         $label.removeClass('text-blue-600').addClass('text-gray-500');
                     }
                 });
 
-                // 3. Handle Buttons
                 if (currentStep === 0) {
                     $('#btn-prev').addClass('hidden');
                 } else {
@@ -309,15 +373,13 @@
                 }
             }
 
-            // Next Button Logic
             $('#btn-next').on('click', function() {
-                // Validate current step required inputs before moving next
                 let isValid = true;
                 $('#panel-' + currentStep).find('input[required], select[required], textarea[required]').each(function() {
                     if (!this.checkValidity()) {
                         isValid = false;
-                        this.reportValidity(); // Triggers the default HTML5 popup
-                        return false; // Break the loop
+                        this.reportValidity(); 
+                        return false; 
                     }
                 });
 
@@ -327,7 +389,6 @@
                 }
             });
 
-            // Previous Button Logic
             $('#btn-prev').on('click', function() {
                 if (currentStep > 0) {
                     currentStep--;
@@ -335,7 +396,6 @@
                 }
             });
 
-            // Initialize UI
             updateUI();
         });
     </script>
