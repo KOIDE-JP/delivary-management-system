@@ -131,6 +131,9 @@ Route::middleware([
         Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::post('/store', [OrderController::class, 'store'])->name('store');
         Route::get('/view/{id}', [OrderController::class, 'view'])->name('view');
+        Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [OrderController::class, 'destroy'])->name('destroy');
     });
 
 });

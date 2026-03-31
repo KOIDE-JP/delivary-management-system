@@ -7,9 +7,8 @@
             {{-- HEADER & ACTIONS --}}
             <div class="flex flex-col items-start justify-between gap-4 mb-8 sm:flex-row sm:items-center">
                 <div>
-                    <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.order.view') }}</h4>
-                    <p class="mt-1 text-sm text-gray-500">Order details for <span
-                            class="font-semibold text-gray-700">ORD-10293</span></p>
+                    <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.order.view') ?? 'View Order' }}</h4>
+                    <p class="mt-1 text-sm text-gray-500">Order details for <span class="font-semibold text-gray-700">{{ $order->order_number }}</span></p>
                 </div>
 
                 <div class="flex gap-3">
@@ -17,7 +16,7 @@
                         class="min-w-[9rem] flex-1 px-2 py-2 font-semibold text-center text-gray-700 transition-colors bg-gray-200 hover:bg-gray-300 rounded-xl">
                         Back to List
                     </a>
-                    <a href="{{ route('order.view', 1) }}"
+                    <a href="{{ route('order.edit', $order->id) }}"
                         class="min-w-[9rem] cursor-pointer flex-1 px-2 py-2 font-semibold text-center text-white transition-opacity bg-gradient-to-r from-blue-600 to-cyan-400 hover:opacity-90 rounded-xl shadow-md">
                         Edit Order
                     </a>
@@ -28,9 +27,7 @@
             @if (session('success'))
                 <div class="flex items-start p-4 mb-6 text-green-700 border-l-4 border-green-500 rounded-lg bg-green-50">
                     <svg class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                     </svg>
                     <span>{{ session('success') }}</span>
                 </div>
@@ -38,17 +35,11 @@
             @if (session('error'))
                 <div class="flex items-start p-4 mb-6 text-red-700 border-l-4 border-red-500 rounded-lg bg-red-50">
                     <svg class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.707-9.293a1 1 0 011.414-1.414L10 8.586l1.707-1.707a1 1 0 011.414 1.414L11.414 10l1.707 1.707a1 1 0 01-1.414 1.414L10 11.414l-1.707 1.707a1 1 0 01-1.414-1.414L8.586 10l-1.707-1.707z"
-                            clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.707-9.293a1 1 0 011.414-1.414L10 8.586l1.707-1.707a1 1 0 011.414 1.414L11.414 10l1.707 1.707a1 1 0 01-1.414 1.414L10 11.414l-1.707 1.707a1 1 0 01-1.414-1.414L8.586 10l-1.707-1.707z" clip-rule="evenodd"></path>
                     </svg>
                     <span>{{ session('error') }}</span>
                 </div>
             @endif
-            <div id="ajax-success-message"
-                class="hidden p-4 mb-6 text-green-700 bg-green-100 border border-green-400 rounded-lg"></div>
-            <div id="ajax-error-message" class="hidden p-4 mb-6 text-red-700 bg-red-100 border border-red-400 rounded-lg">
-            </div>
 
             {{-- ORDER DETAILS GRID --}}
             <div class="space-y-6">
@@ -62,15 +53,17 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Order Number</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">ORD-10293</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->order_number }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Order Name</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Industrial Valve Supply Q3</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->order_name }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Registered Date</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Oct 24, 2023</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">
+                                {{ $order->registered_date ? \Carbon\Carbon::parse($order->registered_date)->format('M d, Y') : 'N/A' }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -84,25 +77,36 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Due Date</p>
-                            <p class="mt-1 text-base font-semibold text-red-600">March 15, 2026</p>
+                            <p class="mt-1 text-base font-semibold text-red-600">
+                                {{ $order->due_date ? \Carbon\Carbon::parse($order->due_date)->format('M d, Y') : 'Pending' }}
+                            </p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Due Confidence</p>
                             <div class="mt-1">
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+                                @if($order->due_confidence == 'confirmed')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+                                @elseif($order->due_confidence == 'unconfirmed')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unconfirmed</span>
+                                @else
+                                    <span class="text-gray-500 text-sm">N/A</span>
+                                @endif
                             </div>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Inspection Date</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Nov 10, 2023</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">
+                                {{ $order->inspection_date ? \Carbon\Carbon::parse($order->inspection_date)->format('M d, Y') : 'N/A' }}
+                            </p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Priority</p>
                             <div class="mt-1">
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">High
-                                    (Yes)</span>
+                                @if($order->priority == 'yes')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">High</span>
+                                @else
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Normal</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -117,19 +121,33 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Shipping Date</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Nov 12, 2023</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">
+                                {{ $order->shipping_date ? \Carbon\Carbon::parse($order->shipping_date)->format('M d, Y') : 'N/A' }}
+                            </p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Shipping Status</p>
                             <div class="mt-1">
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Arranged</span>
+                                @php
+                                    $statusColors = [
+                                        'arranged' => 'bg-blue-100 text-blue-800',
+                                        'unarranged' => 'bg-yellow-100 text-yellow-800',
+                                        'direct_delivery' => 'bg-green-100 text-green-800',
+                                        'courier' => 'bg-purple-100 text-purple-800',
+                                        'unconfirmed' => 'bg-gray-100 text-gray-800',
+                                    ];
+                                    $colorClass = $statusColors[$order->shipping_status] ?? 'bg-gray-100 text-gray-800';
+                                    $displayText = $order->shipping_status ? ucwords(str_replace('_', ' ', $order->shipping_status)) : 'N/A';
+                                @endphp
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $colorClass }}">
+                                    {{ $displayText }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- DOCUMENT SUBMISSION & BILLING (Grouped for grid balance) --}}
+                {{-- DOCUMENT SUBMISSION & BILLING --}}
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
                     <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
@@ -140,15 +158,15 @@
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">DW Status</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">Delivered</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->dw_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Quotation Status</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">Submitted</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->quotation_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Order Status</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">Received</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->order_status ?? 'N/A')) }}</p>
                             </div>
                         </div>
                     </div>
@@ -161,15 +179,17 @@
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Inspection Slip Status</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">Received</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->inspection_slip_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Invoice Status</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">Not Sent</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->invoice_status ?? 'N/A')) }}</p>
                             </div>
                             <div class="sm:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">Order Amount</p>
-                                <p class="mt-1 text-xl font-bold text-blue-600">¥12,450.00</p>
+                                <p class="mt-1 text-xl font-bold text-blue-600">
+                                    {{ $order->order_amount ? '¥' . number_format($order->order_amount, 2) : 'N/A' }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -184,19 +204,21 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Destination</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Houston, TX</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->destination ?? 'N/A' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Carrier</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">FedEx Freight</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->carrier ?? 'N/A' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Truck Type</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">Flatbed</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->truck_type ?? 'N/A' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Freight Price</p>
-                            <p class="mt-1 text-lg font-bold text-gray-900">¥850.00</p>
+                            <p class="mt-1 text-lg font-bold text-gray-900">
+                                {{ $order->freight_price ? '¥' . number_format($order->freight_price, 2) : 'N/A' }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -212,15 +234,21 @@
                         <div class="grid grid-cols-1 gap-4">
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Material Pickup Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Oct 28, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->material_pickup_date ? \Carbon\Carbon::parse($order->material_pickup_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Inspection Due Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Nov 10, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->inspection_due_date ? \Carbon\Carbon::parse($order->inspection_due_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Parts Pickup Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Nov 12, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->parts_pickup_date ? \Carbon\Carbon::parse($order->parts_pickup_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -233,15 +261,21 @@
                         <div class="grid grid-cols-1 gap-4">
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Pickup Transfer Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Oct 29, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->pickup_transfer_date ? \Carbon\Carbon::parse($order->pickup_transfer_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Sales Transfer Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Oct 30, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->sales_transfer_date ? \Carbon\Carbon::parse($order->sales_transfer_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">Shipping Transfer Date</p>
-                                <p class="text-sm font-semibold text-gray-900">Nov 13, 2023</p>
+                                <p class="text-sm font-semibold text-gray-900">
+                                    {{ $order->shipping_transfer_date ? \Carbon\Carbon::parse($order->shipping_transfer_date)->format('M d, Y') : 'N/A' }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -256,12 +290,3 @@
         </div>
     </div>
 @endsection
-
-@push('styles')
-    <style>
-    </style>
-@endpush
-
-@push('scripts')
-    <script></script>
-@endpush
