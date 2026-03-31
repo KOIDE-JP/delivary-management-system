@@ -142,7 +142,7 @@ class TruckTypeController extends Controller
     {
         if ($truckType->freightRates()->exists()) {
             return redirect()->route('truck-types.index')
-                ->with('error', __('layouts.cannot_delete_linked'));
+                ->with('error', __('layouts.cannot_delete_truck_type_linked'));
         }
 
         $truckType->delete();

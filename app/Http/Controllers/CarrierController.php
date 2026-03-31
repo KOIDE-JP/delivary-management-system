@@ -142,7 +142,7 @@ class CarrierController extends Controller
     {
         if ($carrier->freightRates()->exists()) {
             return redirect()->route('carriers.index')
-                ->with('error', __('layouts.cannot_delete_linked'));
+                ->with('error', __('layouts.cannot_delete_carrier_linked'));
         }
 
         $carrier->delete();

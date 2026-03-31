@@ -40,7 +40,9 @@ class FreightRate extends Model
         return $this->morphMany(ActivityLog::class, 'loggable');
     }
 
-    // Fetch
-    // $freightRate->activityLogs()->latest()->get();
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
 }

@@ -190,6 +190,10 @@ class FreightRateController extends Controller
 
     public function destroy(FreightRate $freightRate)
     {
+        if ($freightRate->orders()->exists()) {
+            return redirect()->route('freight-rates.index')
+                ->with('error', __('layouts.cannot_delete_freight_rate_linked'));
+        }
         $freightRate->delete();
 
         logActivity(

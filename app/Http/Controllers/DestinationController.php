@@ -144,7 +144,7 @@ class DestinationController extends Controller
     {
         if ($destination->freightRates()->exists()) {
             return redirect()->route('destinations.index')
-                ->with('error', __('layouts.cannot_delete_linked'));
+                ->with('error', __('layouts.cannot_delete_destination_linked'));
         }
 
         $destination->delete();

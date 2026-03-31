@@ -300,12 +300,15 @@ return [
     'status_warning'        => '警告',
 
     // Activity log messages
+
+    //Freight Rate
     'freight_rate_created'              => '運賃が正常に作成されました',
     'freight_rate_updated'              => '運賃が正常に更新されました',
     'freight_rate_deleted'              => '運賃が削除されました',
     'freight_rate_status_active'        => '運賃のステータスが有効に変更されました',
     'freight_rate_status_inactive'      => '運賃のステータスが無効に変更されました',
     'freight_rate_status_updated' => '運賃のステータスが :from から :to に変更されました',
+    'cannot_delete_freight_rate_linked' => 'このフレートレートは注文に関連付けられているため、削除できません。',
 
     //Destination
     'destination_details' => '目的地の詳細',
@@ -314,7 +317,7 @@ return [
     'destination_updated' => '目的地が正常に更新されました',
     'destination_deleted' => '目的地が削除されました',
     'destination_status_updated' => '目的地のステータスが :from から :to に変更されました',
-    'cannot_delete_destination_linked' => 'この目的地は運賃にリンクされているため、削除できません',
+    'cannot_delete_destination_linked' => 'この宛先はフレートレートに関連付けられているため、削除できません。',
 
     //Carrier
     'carrier_details' => '運送業者の詳細',
@@ -323,7 +326,7 @@ return [
     'carrier_updated' => '運送業者が正常に更新されました',
     'carrier_deleted' => '運送業者が削除されました',
     'carrier_status_updated' => '運送業者のステータスが :from から :to に変更されました',
-    'cannot_delete_carrier_linked' => 'この運送業者は運賃にリンクされているため、削除できません',
+    'cannot_delete_carrier_linked' => 'このキャリアはフレートレートに関連付けられているため、削除できません。',
 
     //Truck Type
     'truck_type_details' => 'トラック種別の詳細',
@@ -332,7 +335,7 @@ return [
     'truck_type_updated' => 'トラック種別が正常に更新されました',
     'truck_type_deleted' => 'トラック種別が削除されました',
     'truck_type_status_updated' => 'トラック種別のステータスが :from から :to に変更されました',
-    'cannot_delete_truck_type_linked' => 'このトラック種別は運賃にリンクされているため、削除できません',
+    'cannot_delete_truck_type_linked' => ' このトラックタイプはフレートレートに関連付けられているため、削除できません。',
 
 
 

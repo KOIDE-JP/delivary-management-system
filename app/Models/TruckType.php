@@ -23,4 +23,9 @@ class TruckType extends Model
         return $this->morphMany(ActivityLog::class, 'loggable');
     }
 
+    public function freightRates()
+    {
+        return $this->hasMany(FreightRate::class);
+    }
+
 }

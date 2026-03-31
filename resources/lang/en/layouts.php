@@ -247,7 +247,7 @@ return [
     'total_freight_rates' => 'Total Freight Rates',
     'total_orders'        => 'Total Orders',
 
-    
+
     'destinations'      => 'Destinations',
     'all_destinations'  => 'All Destinations',
     'add_destination'   => 'Add Destination',
@@ -303,6 +303,7 @@ return [
     'freight_rate_status_active'        => 'Freight rate status changed to Active',
     'freight_rate_status_inactive'      => 'Freight rate status changed to Inactive',
     'freight_rate_status_updated' => 'Freight rate status changed from :from to :to',
+    'cannot_delete_freight_rate_linked' => 'This freight rate cannot be deleted because it is associated with order.',
 
     //Destination
     'destination_details'     => 'Destination Details',
@@ -311,7 +312,7 @@ return [
     'destination_updated' => 'Destination updated successfully',
     'destination_deleted' => 'Destination deleted successfully',
     'destination_status_updated' => 'Destination status changed from :from to :to',
-    'cannot_delete_destination_linked' => 'Cannot delete destination linked to freight rates.',
+    'cannot_delete_destination_linked' => 'This destination cannot be deleted because it is associated with Freight Rate.',
 
     //Carrier
     'carrier_details'     => 'Carrier Details',
@@ -320,7 +321,7 @@ return [
     'carrier_updated' => 'Carrier updated successfully',
     'carrier_deleted' => 'Carrier deleted successfully',
     'carrier_status_updated' => 'Carrier status changed from :from to :to',
-    'cannot_delete_carrier_linked' => 'Cannot delete carrier linked to freight rates.',
+    'cannot_delete_carrier_linked' => 'This carrier cannot be deleted because it is associated with freight rates.',
 
     //Truck Type    
     'truck_type_details'     => 'Truck Type Details',
@@ -329,7 +330,7 @@ return [
     'truck_type_updated' => 'Truck type updated successfully',
     'truck_type_deleted' => 'Truck type deleted successfully',
     'truck_type_status_updated' => 'Truck type status changed from :from to :to',
-    'cannot_delete_truck_type_linked' => 'Cannot delete truck type linked to freight rates.'
+    'cannot_delete_truck_type_linked' => 'This truck type cannot be deleted because it is associated with freight rates.'
 
 
 
