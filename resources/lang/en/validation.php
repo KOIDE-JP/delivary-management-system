@@ -74,7 +74,7 @@ return [
     'custom_edit.role_id.required' => 'The role field is required',
     'custom_edit.department_id.required' => 'The department field is required',
 
-
+    'destination_id.unique' => 'This combination of destination, carrier and truck type already exists.',
 
 
 ];

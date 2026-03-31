@@ -17,7 +17,7 @@
                             </label>
                             <select name="destination_id" required
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
-                                <option value="">-- {{ __('layouts.select') }} --</option>
+                                <option value="">-- {{ __('layouts.select_destination') }} --</option>
                                 @foreach($destinations as $destination)
                                     <option value="{{ $destination->id }}"
                                         {{ old('destination_id', $freightRate->destination_id) == $destination->id ? 'selected' : '' }}>
@@ -37,7 +37,7 @@
                             </label>
                             <select name="carrier_id" required
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
-                                <option value="">-- {{ __('layouts.select') }} --</option>
+                                <option value="">-- {{ __('layouts.select_carrier') }} --</option>
                                 @foreach($carriers as $carrier)
                                     <option value="{{ $carrier->id }}"
                                         {{ old('carrier_id', $freightRate->carrier_id) == $carrier->id ? 'selected' : '' }}>
@@ -57,7 +57,7 @@
                             </label>
                             <select name="truck_type_id" required
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
-                                <option value="">-- {{ __('layouts.select') }} --</option>
+                                <option value="">-- {{ __('layouts.select_truck_type') }} --</option>
                                 @foreach($truckTypes as $truckType)
                                     <option value="{{ $truckType->id }}"
                                         {{ old('truck_type_id', $freightRate->truck_type_id) == $truckType->id ? 'selected' : '' }}>

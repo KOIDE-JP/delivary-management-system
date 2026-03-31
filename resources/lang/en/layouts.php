@@ -240,6 +240,14 @@ return [
     ],
 
     //
+
+    'total_destinations'  => 'Total Destinations',
+    'total_carriers'      => 'Total Carriers',
+    'total_truck_types'   => 'Total Truck Types',
+    'total_freight_rates' => 'Total Freight Rates',
+    'total_orders'        => 'Total Orders',
+
+    
     'destinations'      => 'Destinations',
     'all_destinations'  => 'All Destinations',
     'add_destination'   => 'Add Destination',
@@ -265,4 +273,66 @@ return [
     'select_destination' => 'Select Destination',
     'select_carrier' => 'Select Carrier',
     'select_truck_type' => 'Select Truck Type',
+    'edit_freight_rate' => 'Edit Freight Rate',
+    'already_exists_freight_rates' => 'This combination of destination, carrier and truck type already exists.',
+    'freight_rate_details' => 'Freight Rate Details',
+    'freight_rate_information' => 'Freight Rate Information',
+    'activity_logs' => 'Activity Logs',
+    'activity_log' => 'Activity Log',
+    'records' => 'Records',
+    'no_activity_logs' => 'No activity logs found.',
+    'back' => 'Back',
+
+    // Activity log actions
+    'action_created'        => 'Created',
+    'action_updated'        => 'Updated',
+    'action_deleted'        => 'Deleted',
+    'action_status_updated' => 'Status Updated',
+
+    // Activity log statuses
+    'status_success'        => 'Success',
+    'status_failed'         => 'Failed',
+    'status_warning'        => 'Warning',
+
+    // Activity log messages:
+
+    // Freight Rate
+    'freight_rate_created'              => 'Freight rate created successfully',
+    'freight_rate_updated'              => 'Freight rate updated successfully',
+    'freight_rate_deleted'              => 'Freight rate deleted successfully',
+    'freight_rate_status_active'        => 'Freight rate status changed to Active',
+    'freight_rate_status_inactive'      => 'Freight rate status changed to Inactive',
+    'freight_rate_status_updated' => 'Freight rate status changed from :from to :to',
+
+    //Destination
+    'destination_details'     => 'Destination Details',
+    'destination_information' => 'Destination Information',
+    'destination_created' => 'Destination created successfully',
+    'destination_updated' => 'Destination updated successfully',
+    'destination_deleted' => 'Destination deleted successfully',
+    'destination_status_updated' => 'Destination status changed from :from to :to',
+    'cannot_delete_destination_linked' => 'Cannot delete destination linked to freight rates.',
+
+    //Carrier
+    'carrier_details'     => 'Carrier Details',
+    'carrier_information' => 'Carrier Information',
+    'carrier_created' => 'Carrier created successfully',
+    'carrier_updated' => 'Carrier updated successfully',
+    'carrier_deleted' => 'Carrier deleted successfully',
+    'carrier_status_updated' => 'Carrier status changed from :from to :to',
+    'cannot_delete_carrier_linked' => 'Cannot delete carrier linked to freight rates.',
+
+    //Truck Type    
+    'truck_type_details'     => 'Truck Type Details',
+    'truck_type_information' => 'Truck Type Information',
+    'truck_type_created' => 'Truck type created successfully',
+    'truck_type_updated' => 'Truck type updated successfully',
+    'truck_type_deleted' => 'Truck type deleted successfully',
+    'truck_type_status_updated' => 'Truck type status changed from :from to :to',
+    'cannot_delete_truck_type_linked' => 'Cannot delete truck type linked to freight rates.'
+
+
+
+
+
 ];

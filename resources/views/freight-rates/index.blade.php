@@ -43,7 +43,7 @@
                             <th class="px-4 py-2 text-left">{{ __('layouts.destination') }}</th>
                             <th class="px-4 py-2 text-left">{{ __('layouts.carrier') }}</th>
                             <th class="px-4 py-2 text-left">{{ __('layouts.truck_type') }}</th>
-                            <th class="px-4 py-2 text-right">{{ __('layouts.price') }}</th>
+                            <th class="px-4 py-2 text-left">{{ __('layouts.price') }}</th>
                             <th class="px-4 py-2 text-center">{{ __('layouts.status') }}</th>
                             <th class="px-4 py-2 text-center">{{ __('layouts.action') }}</th>
                         </tr>
@@ -68,7 +68,7 @@
                     { data: 'destination_name',  name: 'destination_name', className: 'text-left' },
                     { data: 'carrier_name',      name: 'carrier_name',  className: 'text-left' },
                     { data: 'truck_type_name',   name: 'truck_type_name', className: 'text-left' },
-                    { data: 'price',             name: 'price',         className: 'text-right' },
+                    { data: 'price',             name: 'price',         className: 'text-left' },
                     { data: 'status',            name: 'status',        orderable: false, searchable: false },
                     { data: 'action',            name: 'action',        orderable: false, searchable: false },
                 ],

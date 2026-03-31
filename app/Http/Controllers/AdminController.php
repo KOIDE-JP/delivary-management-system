@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Carrier;
+use App\Models\Destination;
+use App\Models\FreightRate;
 use App\Models\Notification;
+use App\Models\Order;
+use App\Models\TruckType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -34,13 +39,32 @@ class AdminController extends Controller
         return response()->json(['success' => true]);
     }
 
+    // public function dashboard(Request $request)
+    // {
+    //     $filter = $request->get('filter', 'month'); 
+
+    //     $user_count = User::count();
+
+    //     return view('admin.dashboard', compact('user_count'));
+    // }
+
     public function dashboard(Request $request)
     {
-        $filter = $request->get('filter', 'month'); 
+        $user_count         = User::count();
+        $destination_count  = Destination::count();
+        $carrier_count      = Carrier::count();
+        $truck_type_count   = TruckType::count();
+        $freight_rate_count = FreightRate::count();
+        $order_count        = Order::count();
 
-        $user_count = User::count();
-
-        return view('admin.dashboard', compact('user_count'));
+        return view('admin.dashboard', compact(
+            'user_count',
+            'destination_count',
+            'carrier_count',
+            'truck_type_count',
+            'freight_rate_count',
+            'order_count'
+        ));
     }
 
 }

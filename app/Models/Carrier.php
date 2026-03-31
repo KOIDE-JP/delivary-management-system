@@ -17,4 +17,10 @@ class Carrier extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function activityLogs()
+    {
+        return $this->morphMany(ActivityLog::class, 'loggable');
+    }
+    
 }

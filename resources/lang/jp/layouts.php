@@ -235,6 +235,12 @@ return [
     'reset_all' => 'すべてをリセット',
 
 
+    'total_destinations' => '総目的地数',
+    'total_carriers' => '総運送業者数',
+    'total_truck_types' => '総トラック種別数',
+    'total_freight_rates' => '総運賃数',
+    'total_orders' => '総注文数', 
+
 
     'destinations' => '目的地',
     'all_destinations' => 'すべての目的地',
@@ -261,6 +267,7 @@ return [
     'select_destination' => '目的地を選択',
     'select_carrier' => '運送業者を選択',
     'select_truck_type' => 'トラック種別を選択',
+    'edit_freight_rate' => '運賃を編集',
 
     'order' => [
         'orders' => '注文',
@@ -268,4 +275,66 @@ return [
         'create' => '注文を作成',
         'view' => '注文を表示'
     ],
+
+
+    'already_exists_freight_rates' => 'この目的地、運送業者、トラック種別の組み合わせはすでに存在しています。',
+    'freight_rate_details' => '運賃詳細',
+    'freight_rate_information' => '運賃情報',
+    'activity_logs' => 'アクティビティログ',
+    'activity_log' => 'アクティビティログ',
+    'records' => '記録',
+    'no_activity_logs' => 'アクティビティログが見つかりません。',
+    'back' => '戻る',
+
+
+
+    // Activity log actions
+    'action_created'        => '作成',
+    'action_updated'        => '更新',
+    'action_deleted'        => '削除',
+    'action_status_updated' => 'ステータス更新',
+
+    // Activity log statuses
+    'status_success'        => '成功',
+    'status_failed'         => '失敗',
+    'status_warning'        => '警告',
+
+    // Activity log messages
+    'freight_rate_created'              => '運賃が正常に作成されました',
+    'freight_rate_updated'              => '運賃が正常に更新されました',
+    'freight_rate_deleted'              => '運賃が削除されました',
+    'freight_rate_status_active'        => '運賃のステータスが有効に変更されました',
+    'freight_rate_status_inactive'      => '運賃のステータスが無効に変更されました',
+    'freight_rate_status_updated' => '運賃のステータスが :from から :to に変更されました',
+
+    //Destination
+    'destination_details' => '目的地の詳細',
+    'destination_information' => '目的地の情報',
+    'destination_created' => '目的地が正常に作成されました',
+    'destination_updated' => '目的地が正常に更新されました',
+    'destination_deleted' => '目的地が削除されました',
+    'destination_status_updated' => '目的地のステータスが :from から :to に変更されました',
+    'cannot_delete_destination_linked' => 'この目的地は運賃にリンクされているため、削除できません',
+
+    //Carrier
+    'carrier_details' => '運送業者の詳細',
+    'carrier_information' => '運送業者の情報',
+    'carrier_created' => '運送業者が正常に作成されました',
+    'carrier_updated' => '運送業者が正常に更新されました',
+    'carrier_deleted' => '運送業者が削除されました',
+    'carrier_status_updated' => '運送業者のステータスが :from から :to に変更されました',
+    'cannot_delete_carrier_linked' => 'この運送業者は運賃にリンクされているため、削除できません',
+
+    //Truck Type
+    'truck_type_details' => 'トラック種別の詳細',
+    'truck_type_information' => 'トラック種別の情報',
+    'truck_type_created' => 'トラック種別が正常に作成されました',
+    'truck_type_updated' => 'トラック種別が正常に更新されました',
+    'truck_type_deleted' => 'トラック種別が削除されました',
+    'truck_type_status_updated' => 'トラック種別のステータスが :from から :to に変更されました',
+    'cannot_delete_truck_type_linked' => 'このトラック種別は運賃にリンクされているため、削除できません',
+
+
+
+
 ];

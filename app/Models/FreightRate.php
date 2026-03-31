@@ -34,4 +34,13 @@ class FreightRate extends Model
         return $this->belongsTo(TruckType::class);
     }
 
+    // FreightRate, Order, Destination, Carrier, TruckType — সব model এ
+    public function activityLogs()
+    {
+        return $this->morphMany(ActivityLog::class, 'loggable');
+    }
+
+    // Fetch
+    // $freightRate->activityLogs()->latest()->get();
+
 }

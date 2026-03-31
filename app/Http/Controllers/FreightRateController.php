@@ -7,6 +7,7 @@ use App\Models\Destination;
 use App\Models\FreightRate;
 use App\Models\TruckType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,7 +16,7 @@ class FreightRateController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $freightRates = FreightRate::with(['destination', 'carrier', 'truckType']);
+            $freightRates = FreightRate::with(['destination', 'carrier', 'truckType'])->latest();
 
             return DataTables::of($freightRates)
                 ->addIndexColumn()
@@ -37,9 +38,20 @@ class FreightRateController extends Controller
                         </label>';
                 })
                 ->addColumn('action', function ($row) {
+                    $viewUrl   = route('freight-rates.show', $row->id);
                     $editUrl   = route('freight-rates.edit', $row->id);
                     $deleteUrl = route('freight-rates.destroy', $row->id);
                     $actions   = '<div class="text-center space-x-2">';
+
+                    // if (auth()->user()->hasPermission('freight-rates.view')) {
+                        $actions .= '
+                            <a title="' . __('layouts.view') . '" href="' . $viewUrl . '"
+                                class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium
+                                rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2
+                                focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
+                                <i class="fa-solid fa-eye w-3 h-3"></i>
+                            </a>';
+                    // }
 
                     if (auth()->user()->hasPermission('freight-rates.edit')) {
                         $actions .= '
@@ -85,23 +97,38 @@ class FreightRateController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'destination_id' => ['required', 'exists:destinations,id'],
             'carrier_id'     => ['required', 'exists:carriers,id'],
             'truck_type_id'  => ['required', 'exists:truck_types,id'],
             'price'          => ['required', 'numeric', 'min:0'],
-            'combination'    => Rule::unique('freight_rates')->where(fn($q) =>
-                $q->where('destination_id', $request->destination_id)
-                  ->where('carrier_id', $request->carrier_id)
-                  ->where('truck_type_id', $request->truck_type_id)
-            ),
+            'destination_id' => [
+                Rule::unique('freight_rates')->where(fn($q) =>
+                    $q->where('destination_id', $request->destination_id)
+                    ->where('carrier_id', $request->carrier_id)
+                    ->where('truck_type_id', $request->truck_type_id)
+                ),
+            ],
+        ], [
+            'destination_id.unique' => __('layouts.already_exists_freight_rates'),
         ]);
 
-        $validated['status']     = 1;
-        $validated['created_by'] = auth()->id();
-        $validated['updated_by'] = auth()->id();
+        $freightRate = FreightRate::create([
+            'destination_id' => $request->destination_id,
+            'carrier_id'     => $request->carrier_id,
+            'truck_type_id'  => $request->truck_type_id,
+            'price'          => $request->price,
+            'status'         => 1,
+            'created_by'     => auth()->id(),
+            'updated_by'     => auth()->id(),
+        ]);
 
-        FreightRate::create($validated);
+        logActivity(
+            $freightRate,
+            __('layouts.action_created'),
+            __('layouts.freight_rate_created'),
+            __('layouts.status_success')
+        );
 
         return redirect()->route('freight-rates.index')
             ->with('success', __('layouts.created_successfully'));
@@ -118,29 +145,59 @@ class FreightRateController extends Controller
 
     public function update(Request $request, FreightRate $freightRate)
     {
-        $validated = $request->validate([
+        $request->validate([
             'destination_id' => ['required', 'exists:destinations,id'],
             'carrier_id'     => ['required', 'exists:carriers,id'],
             'truck_type_id'  => ['required', 'exists:truck_types,id'],
             'price'          => ['required', 'numeric', 'min:0'],
             'status'         => ['required', 'in:0,1'],
-            'combination'    => Rule::unique('freight_rates')->where(fn($q) =>
-                $q->where('destination_id', $request->destination_id)
-                  ->where('carrier_id', $request->carrier_id)
-                  ->where('truck_type_id', $request->truck_type_id)
-            )->ignore($freightRate->id),
+            'destination_id' => [
+                Rule::unique('freight_rates')->where(fn($q) =>
+                    $q->where('destination_id', $request->destination_id)
+                    ->where('carrier_id', $request->carrier_id)
+                    ->where('truck_type_id', $request->truck_type_id)
+                )->ignore($freightRate->id),
+            ],
+        ], [
+            'destination_id.unique' => __('layouts.already_exists_freight_rates'),
         ]);
 
-        $validated['updated_by'] = auth()->id();
-        $freightRate->update($validated);
+        $freightRate->update([
+            'destination_id' => $request->destination_id,
+            'carrier_id'     => $request->carrier_id,
+            'truck_type_id'  => $request->truck_type_id,
+            'price'          => $request->price,
+            'status'         => $request->status,
+            'updated_by'     => auth()->id(),
+        ]);
+
+        logActivity(
+            $freightRate,
+            __('layouts.action_updated'),
+            __('layouts.freight_rate_updated'),
+            __('layouts.status_success')
+        );
 
         return redirect()->route('freight-rates.index')
             ->with('success', __('layouts.updated_successfully'));
     }
 
+    public function show(FreightRate $freightRate)
+    {
+        $activityLogs = $freightRate->activityLogs()->latest()->get();
+        return view('freight-rates.show', compact('freightRate', 'activityLogs'));
+    }
+
     public function destroy(FreightRate $freightRate)
     {
         $freightRate->delete();
+
+        logActivity(
+            $freightRate,
+            __('layouts.action_deleted'),
+            __('layouts.freight_rate_deleted', ['id' => $freightRate->id]),
+            __('layouts.status_success')
+        );
 
         return redirect()->route('freight-rates.index')
             ->with('success', __('layouts.deleted_successfully'));
@@ -152,6 +209,16 @@ class FreightRateController extends Controller
             'status'     => ! $freightRate->status,
             'updated_by' => auth()->id(),
         ]);
+
+        logActivity(
+            $freightRate,
+            __('layouts.action_status_updated'),
+            __('layouts.freight_rate_status_updated', [
+                'from' => $freightRate->status ? __('layouts.inactive') : __('layouts.active'),
+                'to'   => $freightRate->status ? __('layouts.active') : __('layouts.inactive'),
+            ]),
+            __('layouts.status_success')
+        );
 
         return response()->json(['success' => true, 'status' => $freightRate->status]);
     }

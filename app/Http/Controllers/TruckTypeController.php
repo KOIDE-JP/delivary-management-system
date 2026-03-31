@@ -11,7 +11,7 @@ class TruckTypeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $truckTypes = TruckType::query();
+            $truckTypes = TruckType::query()->orderBy('created_at', 'desc');
 
             return DataTables::of($truckTypes)
                 ->addIndexColumn()
@@ -30,9 +30,20 @@ class TruckTypeController extends Controller
                         </label>';
                 })
                 ->addColumn('action', function ($row) {
+                    $viewUrl   = route('truck-types.show', $row->id);
                     $editUrl   = route('truck-types.edit', $row->id);
                     $deleteUrl = route('truck-types.destroy', $row->id);
                     $actions   = '<div class="text-center space-x-2">';
+
+                    // if (auth()->user()->hasPermission('truck-types.show')) {
+                        $actions .= '
+                            <a title="' . __('layouts.view') . '" href="' . $viewUrl . '"
+                                class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium
+                                rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2
+                                focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
+                                <i class="fa-solid fa-eye w-3 h-3"></i>
+                            </a>';
+                    // }
 
                     if (auth()->user()->hasPermission('truck-types.edit')) {
                         $actions .= '
@@ -82,7 +93,14 @@ class TruckTypeController extends Controller
         $validated['created_by'] = auth()->id();
         $validated['updated_by'] = auth()->id();
 
-        TruckType::create($validated);
+        $truckType = TruckType::create($validated);
+
+        logActivity(
+            $truckType,
+            __('layouts.action_created'),
+            __('layouts.truck_type_created'),
+            __('layouts.status_success')
+        );
 
         return redirect()->route('truck-types.index')
             ->with('success', __('layouts.created_successfully'));
@@ -103,8 +121,21 @@ class TruckTypeController extends Controller
         $validated['updated_by'] = auth()->id();
         $truckType->update($validated);
 
+        logActivity(
+            $truckType,
+            __('layouts.action_updated'),
+            __('layouts.truck_type_updated'),
+            __('layouts.status_success')
+        );
+
         return redirect()->route('truck-types.index')
             ->with('success', __('layouts.updated_successfully'));
+    }
+
+    public function show(TruckType $truckType)
+    {
+        $activityLogs = $truckType->activityLogs()->latest()->get();
+        return view('truck-types.show', compact('truckType', 'activityLogs'));
     }
 
     public function destroy(TruckType $truckType)
@@ -116,6 +147,13 @@ class TruckTypeController extends Controller
 
         $truckType->delete();
 
+        logActivity(
+            $truckType,
+            __('layouts.action_deleted'),
+            __('layouts.truck_type_deleted', ['id' => $truckType->id]),
+            __('layouts.status_success')
+        );
+
         return redirect()->route('truck-types.index')
             ->with('success', __('layouts.deleted_successfully'));
     }
@@ -126,6 +164,16 @@ class TruckTypeController extends Controller
             'status'     => ! $truckType->status,
             'updated_by' => auth()->id(),
         ]);
+
+        logActivity(
+            $truckType,
+            __('layouts.action_status_updated'),
+            __('layouts.truck_type_status_updated', [
+                'from' => $truckType->status ? __('layouts.inactive') : __('layouts.active'),
+                'to'   => $truckType->status ? __('layouts.active') : __('layouts.inactive'),
+            ]),
+            __('layouts.status_success')
+        );
 
         return response()->json(['success' => true, 'status' => $truckType->status]);
     }

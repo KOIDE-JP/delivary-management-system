@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ActivityLog;
 use App\Models\Status;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,30 @@ if (!function_exists('hasStatusPermission')) {
         } catch (\Exception $e) {
             Log::error('Error in hasStatusPermission: ' . $e->getMessage());
             return false;
+        }
+    }
+}
+
+if (!function_exists('logActivity')) {
+    function logActivity(
+        $model,
+        string $action,          // lang key  e.g. 'layouts.action_created'
+        string $message = '',    // lang key  e.g. 'layouts.freight_rate_created'
+        string $status = 'success' // lang key e.g. 'layouts.status_success'
+    ): void {
+        try {
+            ActivityLog::create([
+                'user_id'       => auth()->id(),
+                'loggable_type' => get_class($model),
+                'loggable_id'   => $model->getKey(),
+                'action'        => $action,
+                'log_status'    => $status,
+                'log_message'   => $message
+                                    ? $message
+                                    : $action . ' ' . class_basename($model) . ' #' . $model->getKey(),
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Activity log failed: ' . $e->getMessage());
         }
     }
 }

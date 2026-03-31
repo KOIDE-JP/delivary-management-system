@@ -11,7 +11,7 @@ class DestinationController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $destinations = Destination::query();
+            $destinations = Destination::query()->orderBy('created_at', 'desc');
 
             return DataTables::of($destinations)
                 ->addIndexColumn()
@@ -30,9 +30,20 @@ class DestinationController extends Controller
                         </label>';
                 })
                 ->addColumn('action', function ($row) {
+                    $viewUrl   = route('destinations.show', $row->id);
                     $editUrl   = route('destinations.edit', $row->id);
                     $deleteUrl = route('destinations.destroy', $row->id);
                     $actions   = '<div class="text-center space-x-2">';
+
+                    // if (auth()->user()->hasPermission('destinations.show')) {
+                        $actions .= '
+                            <a title="' . __('layouts.view') . '" href="' . $viewUrl . '"
+                                class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium
+                                rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2
+                                focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
+                                <i class="fa-solid fa-eye w-3 h-3"></i>
+                            </a>';
+                    // }
 
                     if (auth()->user()->hasPermission('destinations.edit')) {
                         $actions .= '
@@ -83,7 +94,14 @@ class DestinationController extends Controller
         $validated['created_by'] = auth()->id();
         $validated['updated_by'] = auth()->id();
 
-        Destination::create($validated);
+        $destination = Destination::create($validated);
+
+        logActivity(
+            $destination,
+            __('layouts.action_created'),
+            __('layouts.destination_created'),
+            __('layouts.status_success')
+        );
 
         return redirect()->route('destinations.index')
             ->with('success', __('layouts.created_successfully'));
@@ -105,8 +123,21 @@ class DestinationController extends Controller
         $validated['updated_by'] = auth()->id();
         $destination->update($validated);
 
+        logActivity(
+            $destination,
+            __('layouts.action_updated'),
+            __('layouts.destination_updated'),
+            __('layouts.status_success')
+        );
+
         return redirect()->route('destinations.index')
             ->with('success', __('layouts.updated_successfully'));
+    }
+
+    public function show(Destination $destination)
+    {
+        $activityLogs = $destination->activityLogs()->latest()->get();
+        return view('destinations.show', compact('destination', 'activityLogs'));
     }
 
     public function destroy(Destination $destination)
@@ -118,6 +149,13 @@ class DestinationController extends Controller
 
         $destination->delete();
 
+        logActivity(
+            $destination,
+            __('layouts.action_deleted'),
+            __('layouts.destination_deleted', ['id' => $destination->id]),
+            __('layouts.status_success')
+        );
+
         return redirect()->route('destinations.index')
             ->with('success', __('layouts.deleted_successfully'));
     }
@@ -128,6 +166,16 @@ class DestinationController extends Controller
             'status'     => ! $destination->status,
             'updated_by' => auth()->id(),
         ]);
+
+        logActivity(
+            $destination,
+            __('layouts.action_status_updated'),
+            __('layouts.destination_status_updated', [
+                'from' => $destination->status ? __('layouts.inactive') : __('layouts.active'),
+                'to'   => $destination->status ? __('layouts.active') : __('layouts.inactive'),
+            ]),
+            __('layouts.status_success')
+        );
 
         return response()->json(['success' => true, 'status' => $destination->status]);
     }
