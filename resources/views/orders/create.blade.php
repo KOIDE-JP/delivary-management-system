@@ -392,27 +392,39 @@
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Destination</label>
-                                <input type="text" name="destination" value="{{ old('destination') }}"
-                                    placeholder="e.g. Tokyo"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="destination">
+                                    @foreach ($destinations as $item)
+                                        <option value="{{ $item->id }}" {{ old('destination') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('destination')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Carrier</label>
-                                <input type="text" name="carrier" value="{{ old('carrier') }}"
-                                    placeholder="e.g. Yamato"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="carrier">
+                                    @foreach ($carriers as $item)
+                                        <option value="{{ $item->id }}" {{ old('carrier') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('carrier')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">Truck Type</label>
-                                <input type="text" name="truck_type" value="{{ old('truck_type') }}"
-                                    placeholder="e.g. Flatbed"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="truck_type">
+                                    @foreach ($truckTypes as $item)
+                                        <option value="{{ $item->id }}" {{ old('truck_type') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('truck_type')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror

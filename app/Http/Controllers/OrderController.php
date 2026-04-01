@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrier;
+use App\Models\Destination;
+use App\Models\FreightRate;
 use App\Models\Order;
+use App\Models\TruckType;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -133,7 +137,13 @@ class OrderController extends Controller
 
     public function create(Request $request)
     {
-        return view('orders.create');
+        $destinations = Destination::select('name', 'id')->get();
+        $carriers = Carrier::select('name', 'id')->get();
+        $truckTypes = TruckType::select('name', 'id')->get();
+        $freightRates = FreightRate::all();
+        // dump($destinations, $carriers, $truckTypes, $freightRates);
+        // dd('Debugging: Check if data is loaded correctly');
+        return view('orders.create', compact('destinations', 'carriers', 'truckTypes', 'freightRates'));
     }
 
     public function view($id)
