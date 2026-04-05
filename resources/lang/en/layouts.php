@@ -118,7 +118,7 @@ return [
     'this_year' => 'This Year',
 
     //Sidebar
-    'projectName' => 'DMS - Delivery Management System',
+    'projectName' => 'DMS - Delivery Deadline Management System',
     'dashboard' => 'Dashboard',
     'users' => 'Users',
     'code' => 'Code',

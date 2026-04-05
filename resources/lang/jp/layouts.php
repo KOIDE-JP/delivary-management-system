@@ -118,7 +118,7 @@ return [
     'this_year' => '今年',
 
     //Sidebar
-    'projectName' => 'DMS - 配送管理システム',
+    'projectName' => 'DMS - 納期管理システム',
     'dashboard' => 'ダッシュボード',
     'users' => 'ユーザー',
     'code' => 'コード',
