@@ -106,7 +106,7 @@
                     DMS
                 </h1>
                 <p class="text-blue-200 text-sm font-medium mb-1">
-                    Delivery Deadline Management System
+                    {{ __('layouts.Delivery_Deadline_Management_System') }}
                 </p>
             </div>
 
@@ -144,8 +144,8 @@
                 <div class="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-tr from-indigo-400 to-purple-600 rounded-full opacity-10 transform -translate-x-12 sm:-translate-x-16 translate-y-12 sm:translate-y-16"></div>
 
                 <div class="relative z-10">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">Welcome Back</h3>
-                    <p class="text-blue-100 text-xs sm:text-sm mb-6 sm:mb-8">Sign in to access your dashboard</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">{{ __('layouts.welcome_back') }} </h3>
+                    <p class="text-blue-100 text-xs sm:text-sm mb-6 sm:mb-8">{{ __('layouts.sign_in') }} </p>
 
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
@@ -243,7 +243,7 @@
             <!-- Footer Info -->
             <div class="mt-6 text-center px-4">
                 <p class="text-xs sm:text-sm text-slate-300">
-                    © 2025 Defect Management System. All rights reserved.
+                    {{ __('layouts.copyright') }}
                 </p>
             </div>
         </div>

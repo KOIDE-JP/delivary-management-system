@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'siteTitle' => 'DMS - Delivery Management System',
+    'siteTitle' => 'DMS - Delivery Deadline Management System',
     'add_user' => 'Add User',
     'all_users' => 'All Users',
     'total_users' => 'Total Users',
@@ -31,6 +31,11 @@ return [
         'Truck-types' => 'Truck Types',
         'Freight-rates' => 'Freight Rates',
     ],
+
+    'Delivery_Deadline_Management_System' => 'Delivery Deadline Management System',
+    'sign_in' => 'Sign in to access your dashboard',
+    'welcome_back' => 'Welcome Back',
+    'copyright' => '© 2026 DMS Management System. All rights reserved.',
 
     'something_went_wrong' => 'Something went wrong. Please try again.',
     'deleted_users' => 'Deleted Users',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'siteTitle' => 'DMS - 配送管理システム',
+    'siteTitle' => 'DMS - 納期管理システム',
     'add_user' => 'ユーザーを追加',
     'all_users' => 'すべてのユーザー',
     'total_users' => '総ユーザー数',
@@ -33,6 +33,10 @@ return [
         'View' => '表示',
     ],
 
+    'Delivery_Deadline_Management_System' => 'DMS - 納期管理システム',
+    'sign_in' => 'ダッシュボードにアクセスするにはサインインしてください',
+    'welcome_back' => 'おかえりなさい',
+    'copyright' => '© 2026 DMS - 納期管理システム. 無断転載を禁じます。',
     'something_went_wrong' => '何か問題が発生しました。もう一度お試しください。',
     'deleted_users' => '削除されたユーザー',
     'restore' => '復元',

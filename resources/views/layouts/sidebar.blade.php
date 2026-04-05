@@ -49,6 +49,9 @@
         background: rgba(59, 130, 246, 0.1);
         border-left: 2px solid #3b82f6;
     }
+    .sidebar-subtitle{
+        font-size: 0.7rem;
+    }
 </style>
 
 <div class="max-w-62.5 ease-nav-brand z-990 fixed">
@@ -77,8 +80,8 @@
                     <span class="text-lg font-bold text-white block leading-tight">
                         DMS
                     </span>
-                    <span class="text-xs text-blue-300">
-                        Delivery Management System
+                    <span class="text-xs text-blue-300 sidebar-subtitle">
+                        {{ __('layouts.Delivery_Deadline_Management_System') }}
                     </span>
                 </div>
             </a>
