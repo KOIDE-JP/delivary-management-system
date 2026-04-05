@@ -103,10 +103,10 @@
 
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-white mb-2 tracking-tight">
-                    FabTrace
+                    DMS
                 </h1>
                 <p class="text-blue-200 text-sm font-medium mb-1">
-                    Defect Management System
+                    Delivery Deadline Management System
                 </p>
             </div>
 
