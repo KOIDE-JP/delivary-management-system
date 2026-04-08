@@ -125,9 +125,9 @@ class DestinationController extends Controller
 
         logActivity(
             $destination,
-            __('layouts.action_updated'),
-            __('layouts.destination_updated'),
-            __('layouts.status_success')
+            'action_updated',
+            'destination_updated',
+            'status_success'
         );
 
         return redirect()->route('destinations.index')
@@ -136,7 +136,7 @@ class DestinationController extends Controller
 
     public function show(Destination $destination)
     {
-        $activityLogs = $destination->activityLogs()->latest()->get();
+        $activityLogs = $destination->activityLogs()->latest()->paginate(5);
         return view('destinations.show', compact('destination', 'activityLogs'));
     }
 
@@ -151,9 +151,9 @@ class DestinationController extends Controller
 
         logActivity(
             $destination,
-            __('layouts.action_deleted'),
-            __('layouts.destination_deleted', ['id' => $destination->id]),
-            __('layouts.status_success')
+            'action_deleted',
+            'id:' . $destination->id,
+            'status_success'
         );
 
         return redirect()->route('destinations.index')

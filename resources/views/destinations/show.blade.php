@@ -1,5 +1,16 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    .navigator {
+        margin-top: 2rem;   
+    }
+    span[aria-current="page"] > span {
+        background-color: #2563eb; /* blue */
+        color: #fff;
+        border-color: #2563eb;
+        font-weight: 600;
+    }
+</style>
 <div class="min-h-screen py-8 sm:py-12 px-4 sm:px-6">
     <div class="max-w-4xl mx-auto space-y-6">
 
@@ -193,7 +204,9 @@
                                                 ]) }}
                                             </p>
                                         @else
-                                            <p class="text-sm text-gray-600 mt-1">{{ $log->log_message }}</p>
+                                            <p class="text-sm text-gray-600 mt-1">
+                                                {{ __('layouts.' . $log->log_message) }}
+                                            </p>
                                         @endif
                                     @endif
 
@@ -210,6 +223,11 @@
                                 </div>
                             </div>
                         @endforeach
+                    </div>
+                    <div class="navigator">
+                        <span class="text-xs text-gray-400 padding-top-navigator">
+                            {{ $activityLogs->links() }}
+                        </span>
                     </div>
                 </div>
             @endif
