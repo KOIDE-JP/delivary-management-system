@@ -341,7 +341,222 @@ return [
     'truck_type_status_updated' => 'トラック種別のステータスが :from から :to に変更されました',
     'cannot_delete_truck_type_linked' => ' このトラックタイプはフレートレートに関連付けられているため、削除できません。',
 
+    /////////////////////////////////Orders/////////////////////////////////
+
+    'reg' => '登録',
+    'pending_carrier' => '保留中',
+    'tbd' => '未定',
+    'pending' => '保留中',
+    'due' => '納期',
+
+    'basic_info' => '基本情報',
+    'delivery' => '配送',
+    'billing' => '請求',
+    'freight' => '運賃',
+    'dates' => '日付',
+
+    'e_g_ord_10200' => '例：ORD-10200',
 
 
+    // Order - General
+    'create_order' => '注文作成',
+    'fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information' => '新しい注文を作成するための基本情報を入力してください。必要に応じて次のステップに進んでください。',
+    'please_correct_the_errors_below_toProceed' => '続行するには、以下のエラーを修正してください。',
+    'cancel' => 'キャンセル',
+    'previous' => '前へ',
+    'next_step' => '次へ',
+    'save_order' => '注文を保存',
+
+    // Steps
+    'basic_information' => '基本情報',
+    'delivery_shipping' => '配送と出荷',
+    'documents_&_billing' => '書類と請求',
+    'freight_info' => '運賃情報',
+    'internal_dates' => '内部日付',
+    'optional' => '任意',
+
+    // Basic Info
+    'order_number' => '注文番号',
+    'order_name' => '注文名',
+    'registered_date' => '登録日',
+
+    // Delivery
+    'due_date' => '納期',
+    'due_confidence' => '納期確定度',
+    'confirmed' => '確定',
+    'unconfirmed' => '未確定',
+    'inspection_date' => '検査日',
+    'priority' => '優先度',
+    'normal' => '通常',
+    'high_priority' => '高優先度',
+
+    // Shipping
+    'shipping_date' => '出荷日',
+    'shipping_status' => '出荷状況',
+    'select_status' => 'ステータスを選択',
+    'unarranged' => '未手配',
+    'arranged' => '手配済み',
+    'direct_delivery' => '直送',
+    'courier' => '宅配便',
+
+    // Documents
+    'document_submission' => '書類提出',
+    'dw_status' => 'DWステータス',
+    'delivered' => '提出済み',
+    'undelivered' => '未提出',
+    'not_required' => '不要',
+
+    'quotation_status' => '見積状況',
+    'submitted' => '提出済み',
+    'not_submitted' => '未提出',
+
+    'order_status' => '注文状況',
+    'received' => '受領済み',
+    'not_received' => '未受領',
+
+    // Client Schedule
+    'client_schedule' => '顧客スケジュール',
+    'material_pickup_date' => '材料引取日',
+    'inspection_due_date' => '検査期限日',
+    'parts_pickup_date' => '部品引取日',
+
+    // Billing
+    'billing_information' => '請求情報',
+    'inspection_slip_status' => '検査伝票状況',
+    'invoice_status' => '請求書状況',
+    'sent' => '送信済み',
+    'not_sent' => '未送信',
+    'order_amount' => '注文金額',
+
+    // Freight
+    'destination' => '目的地',
+    'carrier' => '運送業者',
+    'truck_type' => 'トラック種別',
+    'freight_price' => '運賃',
+
+    // Internal Dates
+    'pickup_transfer_date' => '引取移動日',
+    'sales_transfer_date' => '販売移動日',
+    'shipping_transfer_date' => '出荷移動日',
+
+
+    //////// Edit Order //////////
+    // Edit Order
+    'edit_order' => '注文編集',
+    'update_order' => '注文を更新',
+    'back_to_orders' => '注文一覧へ戻る',
+    'update_the_details_for_this_order_navigate_through_the_steps_to_modify_optional_information' => 'この注文の詳細を更新してください。必要に応じて各ステップで情報を修正できます。',
+
+    // Stepper Labels
+    'delivery' => '配送',
+    'billing' => '請求',
+    'freight' => '運賃',
+    'dates' => '日付',
+
+    // Section Titles
+    'delivery_and_shipping' => '配送と出荷',
+    'delivery_details' => '配送詳細',
+    'shipping_details' => '出荷詳細',
+
+    // Fix duplicate key
+    'please_correct_the_errors_below_to_proceed' => '続行するには、以下のエラーを修正してください。',
+
+    // Docs & Billing
+    'docs_&_billing' => '書類と請求',
+
+    //////// Orders Index Page //////////
+    // Order List Page
+    'order.list' => '注文一覧',
+    'order.create' => '注文作成',
+
+    'manage_and_track_all_active_order_and_deliveries' => 'すべての注文と配送状況を管理・追跡します',
+
+    // Filters
+    'search' => '検索',
+    'search_placeholder' => 'モデル番号または名前...',
+    'remaining_days' => '残り日数',
+    'all_timelines' => 'すべての期間',
+    'overdue' => '期限切れ',
+    '0_3_days' => '0〜3日',
+    '4_7_days' => '4〜7日',
+    '8_15_days' => '8〜15日',
+    '15_plus_days' => '15日以上',
+
+    'delivery_status' => '配送状況',
+    'all_statuses' => 'すべてのステータス',
+
+    'clear_filters' => 'フィルターをクリア',
+    'apply_filters' => 'フィルターを適用',
+
+    // Table
+    'order_details' => '注文詳細',
+    'timeline' => 'タイムライン',
+    'delivery_info' => '配送情報',
+    'status' => 'ステータス',
+    'actions' => '操作',
+
+
+
+
+    //////////// Order View Page ////////////
+    // View Order Page
+    'order.view' => '注文詳細',
+    'order_details_for' => '注文詳細：',
+
+    'back_to_list' => '一覧に戻る',
+    'edit_order' => '注文編集',
+
+    // General
+    'na' => '該当なし',
+    'pending' => '未定',
+
+    // Sections
+    'basic_information' => '基本情報',
+    'delivery_information' => '配送情報',
+    'shipping_information' => '出荷情報',
+    'document_submission' => '書類提出',
+    'billing_information' => '請求情報',
+    'freight_information' => '運送情報',
+    'client_schedule' => '顧客スケジュール',
+    'internal_dates' => '社内日程',
+
+    // Fields
+    'order_number' => '注文番号',
+    'order_name' => '注文名',
+    'registered_date' => '登録日',
+
+    'due_date' => '納期',
+    'due_confidence' => '納期確定',
+    'confirmed' => '確定',
+    'unconfirmed' => '未確定',
+
+    'inspection_date' => '検査日',
+    'priority' => '優先度',
+    'high' => '高',
+    'normal' => '通常',
+
+    'shipping_date' => '出荷日',
+    'shipping_status' => '出荷ステータス',
+
+    'dw_status' => 'DWステータス',
+    'quotation_status' => '見積ステータス',
+    'order_status' => '注文ステータス',
+
+    'inspection_slip_status' => '検査票ステータス',
+    'invoice_status' => '請求書ステータス',
+    'order_amount' => '注文金額',
+
+    'destination' => '配送先',
+    'carrier' => '運送業者',
+    'truck_type' => 'トラック種類',
+    'freight_price' => '運賃',
+
+    'material_pickup_date' => '材料引取日',
+    'inspection_due_date' => '検査期限',
+    'parts_pickup_date' => '部品引取日',
+
+    'pickup_transfer_date' => '引取移管日',
+    'sales_transfer_date' => '営業移管日',
+    'shipping_transfer_date' => '出荷移管日',
 
 ];

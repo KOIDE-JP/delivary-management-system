@@ -98,10 +98,11 @@ class DestinationController extends Controller
 
         logActivity(
             $destination,
-            __('layouts.action_created'),
-            __('layouts.destination_created'),
-            __('layouts.status_success')
+            'action_created',
+            'destination_created',
+            'status_success'
         );
+
 
         return redirect()->route('destinations.index')
             ->with('success', __('layouts.created_successfully'));

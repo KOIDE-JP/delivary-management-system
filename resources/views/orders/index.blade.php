@@ -8,7 +8,10 @@
             <div class="flex flex-col items-start justify-between gap-4 mb-6 sm:flex-row sm:items-center">
                 <div>
                     <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.order.list') ?? 'Orders' }}</h4>
-                    <p class="mt-1 text-sm text-gray-500">Manage and track all active order and deliveries.</p>
+                    <p class="mt-1 text-sm text-gray-500">
+                        {{ __('layouts.manage_and_track_all_active_order_and_deliveries') }}
+
+                    </p>
                 </div>
                 <a href="{{ route('order.create') }}"
                     class="inline-flex items-center justify-center w-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 hover:shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
@@ -25,7 +28,7 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
                         <div class="lg:col-span-2">
                             <label
-                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">Search</label>
+                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">{{ __('layouts.search') }}</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
@@ -35,45 +38,42 @@
                                     </svg>
                                 </div>
                                 <input type="text" name="search" id="filter-search"
-                                    placeholder="Model number or name..."
+                                    placeholder="{{ __('layouts.search_placeholder') }}"
                                     class="block w-full py-2.5 pl-9 pr-3 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                             </div>
                         </div>
 
                         <div>
                             <label
-                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">Registered
-                                Date</label>
+                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">{{ __('layouts.registered_date') }}</label>
                             <input type="date" name="registered_date" id="filter-date"
                                 class="block w-full py-2.5 px-3 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                         </div>
 
                         <div>
                             <label
-                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">Remaining
-                                Days</label>
+                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">{{ __('layouts.remaining_days') }}</label>
                             <select name="remaining_days" id="filter-days"
                                 class="block w-full py-2.5 px-3 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                <option value="">All Timelines</option>
-                                <option value="overdue">Overdue</option>
-                                <option value="0_3">0 - 3 Days</option>
-                                <option value="4_7">4 - 7 Days</option>
-                                <option value="8_15">8 - 15 Days</option>
-                                <option value="15_plus">15+ Days</option>
+                                <option value="">{{ __('layouts.all_timelines') }}</option>
+                                <option value="overdue">{{ __('layouts.overdue') }}</option>
+                                <option value="0_3">{{ __('layouts.0_3_days') }}</option>
+                                <option value="4_7">{{ __('layouts.4_7_days') }}</option>
+                                <option value="8_15">{{ __('layouts.8_15_days') }}</option>
+                                <option value="15_plus">{{ __('layouts.15_plus_days') }}</option>
                             </select>
                         </div>
 
                         <div>
                             <label
-                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">Delivery
-                                Status</label>
+                                class="block mb-1.5 text-xs font-semibold text-gray-600 uppercase tracking-wider">{{ __('layouts.delivery_status') }}</label>
                             <select name="status" id="filter-status"
                                 class="block w-full py-2.5 px-3 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                <option value="">All Statuses</option>
-                                <option value="arranged">Arranged</option>
-                                <option value="unarranged">Unarranged</option>
-                                <option value="direct_delivery">Direct Delivery</option>
-                                <option value="courier">Courier</option>
+                                <option value="">{{ __('layouts.all_statuses') }}</option>
+                                <option value="arranged">{{ __('layouts.arranged') }}</option>
+                                <option value="unarranged">{{ __('layouts.unarranged') }}</option>
+                                <option value="direct_delivery">{{ __('layouts.direct_delivery') }}</option>
+                                <option value="courier">{{ __('layouts.courier') }}</option>
                             </select>
                         </div>
                     </div>
@@ -81,11 +81,11 @@
                     <div class="flex items-center justify-end mt-4 space-x-3">
                         <button type="button" id="btn-clear-filters"
                             class="px-4 py-2 text-sm font-medium text-gray-600 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 transition-colors cursor-pointer">
-                            Clear Filters
+                            {{ __('layouts.clear_filters') }}
                         </button>
                         <button type="submit"
                             class="px-5 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-900 transition-colors cursor-pointer">
-                            Apply Filters
+                            {{ __('layouts.apply_filters') }}
                         </button>
                     </div>
                 </form>
@@ -98,11 +98,11 @@
                     <table id="orders-table" class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50/80">
                             <tr class="text-xs font-bold tracking-wider text-left text-gray-500 uppercase">
-                                <th scope="col" class="px-6 py-4">Order Details</th>
-                                <th scope="col" class="px-6 py-4">Timeline</th>
-                                <th scope="col" class="px-6 py-4">Delivery Info</th>
-                                <th scope="col" class="px-6 py-4">Status</th>
-                                <th scope="col" class="px-6 py-4 text-center">Actions</th>
+                                <th scope="col" class="px-6 py-4">{{ __('layouts.order_details') }}</th>
+                                <th scope="col" class="px-6 py-4">{{ __('layouts.timeline') }}</th>
+                                <th scope="col" class="px-6 py-4">{{ __('layouts.delivery_info') }}</th>
+                                <th scope="col" class="px-6 py-4">{{ __('layouts.status') }}</th>
+                                <th scope="col" class="px-6 py-4 text-center">{{ __('layouts.actions') }}</th>
                             </tr>
                         </thead>
                     </table>

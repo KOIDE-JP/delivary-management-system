@@ -7,18 +7,18 @@
             {{-- HEADER & ACTIONS --}}
             <div class="flex flex-col items-start justify-between gap-4 mb-8 sm:flex-row sm:items-center">
                 <div>
-                    <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.order.view') ?? 'View Order' }}</h4>
-                    <p class="mt-1 text-sm text-gray-500">Order details for <span class="font-semibold text-gray-700">{{ $order->order_number }}</span></p>
+                    <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.order.view') }}</h4>
+                    <p class="mt-1 text-sm text-gray-500">{{ __('layouts.order_details_for') }} <span class="font-semibold text-gray-700">{{ $order->order_number }}</span></p>
                 </div>
 
                 <div class="flex gap-3">
                     <a href="{{ route('order.index') }}"
                         class="min-w-[9rem] flex-1 px-2 py-2 font-semibold text-center text-gray-700 transition-colors bg-gray-200 hover:bg-gray-300 rounded-xl">
-                        Back to List
+                        {{ __('layouts.back_to_list') }}
                     </a>
                     <a href="{{ route('order.edit', $order->id) }}"
                         class="min-w-[9rem] cursor-pointer flex-1 px-2 py-2 font-semibold text-center text-white transition-opacity bg-gradient-to-r from-blue-600 to-cyan-400 hover:opacity-90 rounded-xl shadow-md">
-                        Edit Order
+                        {{ __('layouts.edit_order') }}
                     </a>
                 </div>
             </div>
@@ -48,19 +48,19 @@
                 <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                     <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                         <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Basic Information
+                        {{ __('layouts.basic_information') }}
                     </h5>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Order Number</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_number') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->order_number }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Order Name</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_name') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->order_name }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Registered Date</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.registered_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
                                 {{ $order->registered_date ? \Carbon\Carbon::parse($order->registered_date)->format('M d, Y') : 'N/A' }}
                             </p>
@@ -72,40 +72,40 @@
                 <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                     <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                         <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Delivery Information
+                        {{ __('layouts.delivery_information') }}
                     </h5>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Due Date</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.due_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-red-600">
                                 {{ $order->due_date ? \Carbon\Carbon::parse($order->due_date)->format('M d, Y') : 'Pending' }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Due Confidence</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.due_confidence') }}</p>
                             <div class="mt-1">
                                 @if($order->due_confidence == 'confirmed')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ __('layouts.confirmed') }}</span>
                                 @elseif($order->due_confidence == 'unconfirmed')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Unconfirmed</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">{{ __('layouts.unconfirmed') }}</span>
                                 @else
                                     <span class="text-gray-500 text-sm">N/A</span>
                                 @endif
                             </div>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Inspection Date</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
                                 {{ $order->inspection_date ? \Carbon\Carbon::parse($order->inspection_date)->format('M d, Y') : 'N/A' }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Priority</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.priority') }}</p>
                             <div class="mt-1">
                                 @if($order->priority == 'yes')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">High</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">{{ __('layouts.high') }}</span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Normal</span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ __('layouts.normal') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -116,17 +116,17 @@
                 <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                     <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                         <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                        Shipping Information
+                        {{ __('layouts.shipping_information') }}
                     </h5>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Shipping Date</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
                                 {{ $order->shipping_date ? \Carbon\Carbon::parse($order->shipping_date)->format('M d, Y') : 'N/A' }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Shipping Status</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_status') }}</p>
                             <div class="mt-1">
                                 @php
                                     $statusColors = [
@@ -153,19 +153,19 @@
                     <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                         <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                            Document Submission
+                            {{ __('layouts.document_submission') }}
                         </h5>
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
-                                <p class="text-sm font-medium text-gray-500">DW Status</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.dw_status') }}</p>
                                 <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->dw_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Quotation Status</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.quotation_status') }}</p>
                                 <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->quotation_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Order Status</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_status') }}</p>
                                 <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->order_status ?? 'N/A')) }}</p>
                             </div>
                         </div>
@@ -174,19 +174,19 @@
                     <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                         <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Billing Information
+                            {{ __('layouts.billing_information') }}
                         </h5>
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Inspection Slip Status</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_slip_status') }}</p>
                                 <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->inspection_slip_status ?? 'N/A')) }}</p>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Invoice Status</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.invoice_status') }}</p>
                                 <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->invoice_status ?? 'N/A')) }}</p>
                             </div>
                             <div class="sm:col-span-2">
-                                <p class="text-sm font-medium text-gray-500">Order Amount</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_amount') }}</p>
                                 <p class="mt-1 text-xl font-bold text-blue-600">
                                     {{ $order->order_amount ? '¥' . number_format($order->order_amount, 2) : 'N/A' }}
                                 </p>
@@ -199,23 +199,23 @@
                 <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                     <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                         <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                        Freight Information
+                        {{ __('layouts.freight_information') }}
                     </h5>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Destination</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.destination') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->destination ?? 'N/A' }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Carrier</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.carrier') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->carrier ?? 'N/A' }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Truck Type</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.truck_type') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->truck_type ?? 'N/A' }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Freight Price</p>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.freight_price') }}</p>
                             <p class="mt-1 text-lg font-bold text-gray-900">
                                 {{ $order->freight_price ? '¥' . number_format($order->freight_price, 2) : 'N/A' }}
                             </p>
@@ -229,23 +229,23 @@
                     <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                         <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Client Schedule
+                            {{ __('layouts.client_schedule') }}
                         </h5>
                         <div class="grid grid-cols-1 gap-4">
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Material Pickup Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.material_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->material_pickup_date ? \Carbon\Carbon::parse($order->material_pickup_date)->format('M d, Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Inspection Due Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_due_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->inspection_due_date ? \Carbon\Carbon::parse($order->inspection_due_date)->format('M d, Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Parts Pickup Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.parts_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->parts_pickup_date ? \Carbon\Carbon::parse($order->parts_pickup_date)->format('M d, Y') : 'N/A' }}
                                 </p>
@@ -256,23 +256,23 @@
                     <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
                         <h5 class="flex items-center gap-2 mb-4 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
                             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
-                            Internal Dates
+                            {{ __('layouts.internal_dates') }}
                         </h5>
                         <div class="grid grid-cols-1 gap-4">
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Pickup Transfer Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.pickup_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->pickup_transfer_date ? \Carbon\Carbon::parse($order->pickup_transfer_date)->format('M d, Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Sales Transfer Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.sales_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->sales_transfer_date ? \Carbon\Carbon::parse($order->sales_transfer_date)->format('M d, Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
-                                <p class="text-sm font-medium text-gray-500">Shipping Transfer Date</p>
+                                <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
                                     {{ $order->shipping_transfer_date ? \Carbon\Carbon::parse($order->shipping_transfer_date)->format('M d, Y') : 'N/A' }}
                                 </p>

@@ -54,24 +54,24 @@ class OrderController extends Controller
                     <div class="text-xs text-gray-600 mt-0.5 mb-1.5 font-medium">' . htmlspecialchars($row->order_name) . '</div>
                     <div class="text-[11px] text-gray-400 flex items-center">
                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Reg: ' . $date . '
+                         ' . __('layouts.reg') . ': ' . $date . '
                     </div>
                 ';
                 })
                 ->addColumn('timeline', function ($row) {
-                    $daysTxt = $row->due_date ? $row->due_date : 'Pending';
+                    $daysTxt = $row->due_date ? $row->due_date :  __('layouts.pending');
                     return '
                     <div class="flex flex-col gap-1.5 items-start">
                         <span class="inline-flex items-center px-2 py-0.5 text-xs font-bold text-orange-700 bg-orange-100 rounded-md">
                             <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Due: ' . htmlspecialchars($daysTxt) . '
+                            ' . __('layouts.due') . ': ' . htmlspecialchars($daysTxt) . '
                         </span>
                     </div>
                 ';
                 })
                 ->addColumn('delivery_info', function ($row) {
-                    $carrier = $row->carrier ? $row->carrier : 'Pending Carrier';
-                    $date = $row->shipping_date ? $row->shipping_date : 'TBD';
+                    $carrier = $row->carrier ? $row->carrier : __('layouts.pending_carrier');
+                    $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
                     <div class="mt-1 text-xs text-gray-500">Est: ' . htmlspecialchars($date) . '</div>
@@ -79,10 +79,10 @@ class OrderController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     $priorityHtml = $row->priority === 'yes'
-                        ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1">High Priority</span>'
-                        : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">Normal</span>';
+                        ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1"> ' . __('layouts.priority') . '</span>'
+                        : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">' . __('layouts.normal') . '</span>';
 
-                    $statusText = $row->shipping_status ? strtoupper($row->shipping_status) : 'PENDING';
+                    $statusText = $row->shipping_status ? strtoupper($row->shipping_status) : '.' . __('layouts.pending') . '.';
                     $statusColor = $row->shipping_status === 'arranged' ? 'text-blue-700 bg-blue-100' : 'text-yellow-800 bg-yellow-100';
 
                     return '

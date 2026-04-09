@@ -335,8 +335,224 @@ return [
     'truck_type_updated' => 'Truck type updated successfully',
     'truck_type_deleted' => 'Truck type deleted successfully',
     'truck_type_status_updated' => 'Truck type status changed from :from to :to',
-    'cannot_delete_truck_type_linked' => 'This truck type cannot be deleted because it is associated with freight rates.'
+    'cannot_delete_truck_type_linked' => 'This truck type cannot be deleted because it is associated with freight rates.',
 
+    ////////////////////////////////// Create Orders/////////////////////////////////
+
+
+    'reg' => 'REG',
+    'pending_carrier' => 'Pending Carrier',
+    'tbd' => 'TBD',
+    'pending' => 'Pending',
+    'due' => 'Due',
+
+    'basic_info' => 'Basic Info',
+    'delivery' => 'Delivery',
+    'billing' => 'Billing',
+    'freight' => 'Freight',
+    'dates' => 'Dates',
+
+    'e_g_ord_10200' => 'e.g. ORD-10200',
+
+    // Order - General
+    'create_order' => 'Create Order',
+    'fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information' => 'Fill in basic details to generate a new order. Proceed to the next steps for optional information.',
+    'please_correct_the_errors_below_toProceed' => 'Please correct the errors below to proceed.',
+    'cancel' => 'Cancel',
+    'previous' => 'Previous',
+    'next_step' => 'Next Step',
+    'save_order' => 'Save Order',
+
+    // Steps
+    'basic_information' => 'Basic Information',
+    'delivery_shipping' => 'Delivery & Shipping',
+    'documents_&_billing' => 'Documents & Billing',
+    'freight_info' => 'Freight Info',
+    'internal_dates' => 'Internal Dates',
+    'optional' => 'Optional',
+
+    // Basic Info
+    'order_number' => 'Order Number',
+    'order_name' => 'Order Name',
+    'registered_date' => 'Registered Date',
+
+    // Delivery
+    'due_date' => 'Due Date',
+    'due_confidence' => 'Due Confidence',
+    'confirmed' => 'Confirmed',
+    'unconfirmed' => 'Unconfirmed',
+    'inspection_date' => 'Inspection Date',
+    'priority' => 'Priority',
+    'normal' => 'Normal',
+    'high_priority' => 'High Priority',
+
+    // Shipping
+    'shipping_date' => 'Shipping Date',
+    'shipping_status' => 'Shipping Status',
+    'select_status' => 'Select Status',
+    'unarranged' => 'Unarranged',
+    'arranged' => 'Arranged',
+    'direct_delivery' => 'Direct Delivery',
+    'courier' => 'Courier',
+
+    // Documents
+    'document_submission' => 'Document Submission',
+    'dw_status' => 'DW Status',
+    'delivered' => 'Delivered',
+    'undelivered' => 'Undelivered',
+    'not_required' => 'Not Required',
+
+    'quotation_status' => 'Quotation Status',
+    'submitted' => 'Submitted',
+    'not_submitted' => 'Not Submitted',
+
+    'order_status' => 'Order Status',
+    'received' => 'Received',
+    'not_received' => 'Not Received',
+
+    // Client Schedule
+    'client_schedule' => 'Client Schedule',
+    'material_pickup_date' => 'Material Pickup Date',
+    'inspection_due_date' => 'Inspection Due Date',
+    'parts_pickup_date' => 'Parts Pickup Date',
+
+    // Billing
+    'billing_information' => 'Billing Information',
+    'inspection_slip_status' => 'Inspection Slip Status',
+    'invoice_status' => 'Invoice Status',
+    'sent' => 'Sent',
+    'not_sent' => 'Not Sent',
+    'order_amount' => 'Order Amount',
+
+    // Freight
+    'destination' => 'Destination',
+    'carrier' => 'Carrier',
+    'truck_type' => 'Truck Type',
+    'freight_price' => 'Freight Price',
+
+    // Internal Dates
+    'pickup_transfer_date' => 'Pickup Transfer Date',
+    'sales_transfer_date' => 'Sales Transfer Date',
+    'shipping_transfer_date' => 'Shipping Transfer Date',
+
+
+    ///////////// Edit Order ///////////////////////
+    // Edit Order
+    'edit_order' => 'Edit Order',
+    'update_order' => 'Update Order',
+    'back_to_orders' => 'Back to Orders',
+    'update_the_details_for_this_order_navigate_through_the_steps_to_modify_optional_information' => 'Update the details for this order. Navigate through the steps to modify optional information.',
+
+    // Stepper Labels (NEW missing)
+    'delivery' => 'Delivery',
+    'billing' => 'Billing',
+    'freight' => 'Freight',
+    'dates' => 'Dates',
+
+    // Section Titles
+    'delivery_and_shipping' => 'Delivery & Shipping',
+    'delivery_details' => 'Delivery Details',
+    'shipping_details' => 'Shipping Details',
+
+    // Fix duplicate key (IMPORTANT)
+    'please_correct_the_errors_below_to_proceed' => 'Please correct the errors below to proceed.',
+
+    // Docs & Billing (fix key name mismatch)
+    'docs_&_billing' => 'Documents & Billing',
+
+    /////////////////////////// Orders Index Page ///////////////////////
+    // Order List Page
+    'order.list' => 'Orders',
+    'order.create' => 'Create Order',
+
+    'manage_and_track_all_active_order_and_deliveries' => 'Manage and track all active orders and deliveries',
+
+    // Filters
+    'search' => 'Search',
+    'search_placeholder' => 'Model number or name...',
+    'remaining_days' => 'Remaining Days',
+    'all_timelines' => 'All Timelines',
+    'overdue' => 'Overdue',
+    '0_3_days' => '0-3 Days',
+    '4_7_days' => '4-7 Days',
+    '8_15_days' => '8-15 Days',
+    '15_plus_days' => '15+ Days',
+
+    'delivery_status' => 'Delivery Status',
+    'all_statuses' => 'All Statuses',
+
+    'clear_filters' => 'Clear Filters',
+    'apply_filters' => 'Apply Filters',
+
+    // Table
+    'order_details' => 'Order Details',
+    'timeline' => 'Timeline',
+    'delivery_info' => 'Delivery Info',
+    'status' => 'Status',
+    'actions' => 'Actions',
+
+
+
+    ///////////////// View Order Page ///////////////////////
+    // View Order Page
+    'order.view' => 'View Order',
+    'order_details_for' => 'Order details for',
+
+    'back_to_list' => 'Back to List',
+    'edit_order' => 'Edit Order',
+
+    // General
+    'na' => 'N/A',
+    'pending' => 'Pending',
+
+    // Sections
+    'basic_information' => 'Basic Information',
+    'delivery_information' => 'Delivery Information',
+    'shipping_information' => 'Shipping Information',
+    'document_submission' => 'Document Submission',
+    'billing_information' => 'Billing Information',
+    'freight_information' => 'Freight Information',
+    'client_schedule' => 'Client Schedule',
+    'internal_dates' => 'Internal Dates',
+
+    // Fields
+    'order_number' => 'Order Number',
+    'order_name' => 'Order Name',
+    'registered_date' => 'Registered Date',
+
+    'due_date' => 'Due Date',
+    'due_confidence' => 'Due Confidence',
+    'confirmed' => 'Confirmed',
+    'unconfirmed' => 'Unconfirmed',
+
+    'inspection_date' => 'Inspection Date',
+    'priority' => 'Priority',
+    'high' => 'High',
+    'normal' => 'Normal',
+
+    'shipping_date' => 'Shipping Date',
+    'shipping_status' => 'Shipping Status',
+
+    'dw_status' => 'DW Status',
+    'quotation_status' => 'Quotation Status',
+    'order_status' => 'Order Status',
+
+    'inspection_slip_status' => 'Inspection Slip Status',
+    'invoice_status' => 'Invoice Status',
+    'order_amount' => 'Order Amount',
+
+    'destination' => 'Destination',
+    'carrier' => 'Carrier',
+    'truck_type' => 'Truck Type',
+    'freight_price' => 'Freight Price',
+
+    'material_pickup_date' => 'Material Pickup Date',
+    'inspection_due_date' => 'Inspection Due Date',
+    'parts_pickup_date' => 'Parts Pickup Date',
+
+    'pickup_transfer_date' => 'Pickup Transfer Date',
+    'sales_transfer_date' => 'Sales Transfer Date',
+    'shipping_transfer_date' => 'Shipping Transfer Date',
 
 
 
