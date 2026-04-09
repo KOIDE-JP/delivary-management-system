@@ -69,7 +69,13 @@ return new class extends Migration
             $table->string('destination')->nullable(); // prefecture
             $table->string('carrier')->nullable();
             $table->string('truck_type')->nullable();
+            $table->decimal('freight_master_price', 12, 2)->nullable();
             $table->decimal('freight_price', 12, 2)->nullable();
+            $table->boolean('freight_is_manual')->default(0);
+            $table->text('freight_note')->nullable();
+            $table->decimal('tax_rate', 5, 2)->default(0.10);
+            $table->decimal('freight_tax_amount', 15, 2)->nullable();
+            $table->decimal('freight_total_amount', 15, 2)->nullable();
 
             /*
             |--------------------------------------------------------------------------
