@@ -433,6 +433,9 @@ return [
     'carrier' => '運送業者',
     'truck_type' => 'トラック種別',
     'freight_price' => '運賃',
+    'freight_master_price' => 'マスタ運賃',
+    'freight_note' => '運賃メモ',
+    'enter_freight_notes' => '運賃メモを入力',
 
     // Internal Dates
     'pickup_transfer_date' => '引取移動日',

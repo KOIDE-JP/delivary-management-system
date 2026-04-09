@@ -8,7 +8,9 @@
             {{-- HEADER --}}
             <div class="p-8 pb-6 border-b border-gray-100 bg-white">
                 <h4 class="text-2xl font-bold text-gray-900">{{ __('layouts.create_order') }}</h4>
-                <p class="mt-1 text-sm text-gray-500">{{ __('layouts.fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information') }}</p>
+                <p class="mt-1 text-sm text-gray-500">
+                    {{ __('layouts.fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information') }}
+                </p>
 
                 {{-- Global Error Alert --}}
                 @if ($errors->any())
@@ -92,21 +94,24 @@
 
                     {{-- PANEL 0: BASIC INFORMATION --}}
                     <div id="panel-0" class="wizard-panel block">
-                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 1. {{ __('layouts.basic_information') }}</h5>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 1.
+                            {{ __('layouts.basic_information') }}</h5>
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_number') }} <span
-                                        class="text-red-500">*</span></label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_number') }}
+                                    <span class="text-red-500">*</span></label>
                                 <input type="text" name="order_number" value="{{ old('order_number') }}"
-                                    placeholder="{{ __('layouts.e_g_ord_10200')}}" required
+                                    placeholder="{{ __('layouts.e_g_ord_10200') }}" required
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_number') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('order_number')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_name') }} <span
-                                        class="text-red-500">*</span></label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_name') }}
+                                    <span class="text-red-500">*</span></label>
                                 <input type="text" name="order_name" value="{{ old('order_name') }}"
                                     placeholder="{{ __('layouts.order_name') }}" required
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_name') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -115,8 +120,9 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.registered_date') }} <span
-                                        class="text-red-500">*</span></label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.registered_date') }}
+                                    <span class="text-red-500">*</span></label>
                                 <input type="date" name="registered_date" value="{{ old('registered_date') }}" required
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('registered_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('registered_date')
@@ -128,13 +134,16 @@
 
                     {{-- PANEL 1: DELIVERY & SHIPPING --}}
                     <div id="panel-1" class="wizard-panel hidden space-y-8">
-                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 2. {{ __('layouts.delivery_shipping') }}
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 2.
+                            {{ __('layouts.delivery_shipping') }}
                         </h5>
                         <div>
-                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">{{ __('layouts.delivery_details') }}</h6>
+                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                {{ __('layouts.delivery_details') }}</h6>
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.due_date') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.due_date') }}</label>
                                     <input type="date" name="due_date" value="{{ old('due_date') }}"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('due_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                     @error('due_date')
@@ -142,15 +151,18 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.due_confidence') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.due_confidence') }}</label>
                                     <select name="due_confidence"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('due_confidence') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="" disabled {{ old('due_confidence') ? '' : 'selected' }}>
                                             {{ __('layouts.select_status') }}</option>
                                         <option value="confirmed"
-                                            {{ old('due_confidence') == 'confirmed' ? 'selected' : '' }}>{{ __('layouts.confirmed') }}</option>
+                                            {{ old('due_confidence') == 'confirmed' ? 'selected' : '' }}>
+                                            {{ __('layouts.confirmed') }}</option>
                                         <option value="unconfirmed"
-                                            {{ old('due_confidence') == 'unconfirmed' ? 'selected' : '' }}>{{ __('layouts.unconfirmed') }}
+                                            {{ old('due_confidence') == 'unconfirmed' ? 'selected' : '' }}>
+                                            {{ __('layouts.unconfirmed') }}
                                         </option>
                                     </select>
                                     @error('due_confidence')
@@ -158,7 +170,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_date') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_date') }}</label>
                                     <input type="date" name="inspection_date" value="{{ old('inspection_date') }}"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                     @error('inspection_date')
@@ -166,12 +179,15 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.priority') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.priority') }}</label>
                                     <select name="priority"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('priority') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="no" {{ old('priority', 'no') == 'no' ? 'selected' : '' }}>{{ __('layouts.normal') }}
+                                        <option value="no" {{ old('priority', 'no') == 'no' ? 'selected' : '' }}>
+                                            {{ __('layouts.normal') }}
                                         </option>
-                                        <option value="yes" {{ old('priority') == 'yes' ? 'selected' : '' }}>{{ __('layouts.high_priority') }}</option>
+                                        <option value="yes" {{ old('priority') == 'yes' ? 'selected' : '' }}>
+                                            {{ __('layouts.high_priority') }}</option>
                                     </select>
                                     @error('priority')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -181,10 +197,12 @@
                         </div>
 
                         <div class="pt-6 border-t border-gray-100">
-                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">{{ __('layouts.shipping_details') }}</h6>
+                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                {{ __('layouts.shipping_details') }}</h6>
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_date') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_date') }}</label>
                                     <input type="date" name="shipping_date" value="{{ old('shipping_date') }}"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                     @error('shipping_date')
@@ -192,23 +210,29 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_status') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_status') }}</label>
                                     <select name="shipping_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="" disabled {{ old('shipping_status') ? '' : 'selected' }}>
                                             {{ __('layouts.select_status') }}</option>
                                         <option value="unconfirmed"
-                                            {{ old('shipping_status') == 'unconfirmed' ? 'selected' : '' }}>{{ __('layouts.unconfirmed') }}
+                                            {{ old('shipping_status') == 'unconfirmed' ? 'selected' : '' }}>
+                                            {{ __('layouts.unconfirmed') }}
                                         </option>
                                         <option value="unarranged"
-                                            {{ old('shipping_status') == 'unarranged' ? 'selected' : '' }}>{{ __('layouts.unarranged') }}
+                                            {{ old('shipping_status') == 'unarranged' ? 'selected' : '' }}>
+                                            {{ __('layouts.unarranged') }}
                                         </option>
                                         <option value="arranged"
-                                            {{ old('shipping_status') == 'arranged' ? 'selected' : '' }}>{{ __('layouts.arranged') }}</option>
+                                            {{ old('shipping_status') == 'arranged' ? 'selected' : '' }}>
+                                            {{ __('layouts.arranged') }}</option>
                                         <option value="direct_delivery"
-                                            {{ old('shipping_status') == 'direct_delivery' ? 'selected' : '' }}>{{ __('layouts.direct_delivery') }}</option>
+                                            {{ old('shipping_status') == 'direct_delivery' ? 'selected' : '' }}>
+                                            {{ __('layouts.direct_delivery') }}</option>
                                         <option value="courier"
-                                            {{ old('shipping_status') == 'courier' ? 'selected' : '' }}>{{ __('layouts.courier') }}</option>
+                                            {{ old('shipping_status') == 'courier' ? 'selected' : '' }}>
+                                            {{ __('layouts.courier') }}</option>
                                     </select>
                                     @error('shipping_status')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -220,14 +244,17 @@
 
                     {{-- PANEL 2: DOCS & BILLING --}}
                     <div id="panel-2" class="wizard-panel hidden space-y-8">
-                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 3. {{ __('layouts.documents_&_billing') }}
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2"> 3.
+                            {{ __('layouts.documents_&_billing') }}
                         </h5>
                         <div>
-                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">{{ __('layouts.document_submission') }}
+                            <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                {{ __('layouts.document_submission') }}
                             </h6>
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.dw_status') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.dw_status') }}</label>
                                     <select name="dw_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('dw_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="undelivered"
@@ -246,7 +273,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.quotation_status') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.quotation_status') }}</label>
                                     <select name="quotation_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('quotation_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="submitted"
@@ -267,7 +295,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_status') }}</label>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_status') }}</label>
                                     <select name="order_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="received"
@@ -292,11 +321,13 @@
 
                         <div class="grid grid-cols-1 gap-8 pt-6 border-t border-gray-100 md:grid-cols-2">
                             <div>
-                                <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">{{__('layouts.client_schedule') }}
+                                <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                    {{ __('layouts.client_schedule') }}
                                 </h6>
                                 <div class="grid grid-cols-1 gap-6">
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.material_pickup_date') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.material_pickup_date') }}</label>
                                         <input type="date" name="material_pickup_date"
                                             value="{{ old('material_pickup_date') }}"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('material_pickup_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -305,7 +336,8 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_due_date') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_due_date') }}</label>
                                         <input type="date" name="inspection_due_date"
                                             value="{{ old('inspection_due_date') }}"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_due_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -314,7 +346,8 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.parts_pickup_date') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.parts_pickup_date') }}</label>
                                         <input type="date" name="parts_pickup_date"
                                             value="{{ old('parts_pickup_date') }}"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('parts_pickup_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -325,10 +358,12 @@
                                 </div>
                             </div>
                             <div>
-                                <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">{{ __('layouts.billing_information') }}</h6>
+                                <h6 class="mb-4 text-sm font-bold text-gray-500 uppercase tracking-wider">
+                                    {{ __('layouts.billing_information') }}</h6>
                                 <div class="grid grid-cols-1 gap-6">
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_slip_status') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_slip_status') }}</label>
                                         <select name="inspection_slip_status"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_slip_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                             <option value="received"
@@ -347,7 +382,8 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.invoice_status') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.invoice_status') }}</label>
                                         <select name="invoice_status"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('invoice_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                             <option value="sent"
@@ -368,7 +404,8 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_amount') }}</label>
+                                        <label
+                                            class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_amount') }}</label>
                                         <div class="relative">
                                             <div
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -389,13 +426,20 @@
 
                     {{-- PANEL 3: FREIGHT INFO --}}
                     <div id="panel-3" class="wizard-panel hidden">
-                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">4. {{ __('layouts.freight_info') }} ({{__('layouts.optional')}})</h5>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">4.
+                            {{ __('layouts.freight_info') }} ({{ __('layouts.optional') }})</h5>
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.destination') }}</label>
-                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="destination">
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.destination') }}</label>
+                                <select
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    name="destination">
+                                    <option value="" disabled {{ old('destination') ? '' : 'selected' }}>
+                                        {{ __('layouts.select_destination') }}</option>
                                     @foreach ($destinations as $item)
-                                        <option value="{{ $item->id }}" {{ old('destination') == $item->id ? 'selected' : '' }}>
+                                        <option value="{{ $item->id }}"
+                                            {{ old('destination') == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
@@ -405,10 +449,16 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.carrier') }}</label>
-                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="carrier">
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.carrier') }}</label>
+                                <select
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    name="carrier">
+                                    <option value="" disabled {{ old('carrier') ? '' : 'selected' }}>
+                                        {{ __('layouts.select_carrier') }}</option>
                                     @foreach ($carriers as $item)
-                                        <option value="{{ $item->id }}" {{ old('carrier') == $item->id ? 'selected' : '' }}>
+                                        <option value="{{ $item->id }}"
+                                            {{ old('carrier') == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
@@ -418,10 +468,17 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.truck_type') }}</label>
-                                <select class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" name="truck_type">
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.truck_type') }}</label>
+                                <select
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    name="truck_type">
+                                    <option value="" disabled {{ old('truck_type') ? '' : 'selected' }}>
+                                        {{ __('layouts.select_truck_type') }}</option>
+
                                     @foreach ($truckTypes as $item)
-                                        <option value="{{ $item->id }}" {{ old('truck_type') == $item->id ? 'selected' : '' }}>
+                                        <option value="{{ $item->id }}"
+                                            {{ old('truck_type') == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
@@ -431,7 +488,23 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.freight_price') }}</label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.freight_master_price') }}</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">¥</span>
+                                    </div>
+                                    <input readonly type="number" step="0.01" name="freight_master_price"
+                                        value="{{ old('freight_master_price') }}" placeholder="0.00"
+                                        class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-gray-100 border @error('freight_master_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-not-allowed opacity-60">
+                                </div>
+                                @error('freight_master_price')
+                                    <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.freight_price') }}</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                         <span class="text-gray-500 sm:text-sm">¥</span>
@@ -444,16 +517,28 @@
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
+                            <div>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.freight_note') }}</label>
+                                <textarea name="freight_note" rows="3"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('freight_note') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    placeholder="{{ __('layouts.enter_freight_notes') }}">{{ old('freight_note') }}</textarea>
+                                @error('freight_note')
+                                    <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     {{-- PANEL 4: INTERNAL DATES --}}
                     <div id="panel-4" class="wizard-panel hidden">
-                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">5. {{ __('layouts.internal_dates') }} ({{ __('layouts.optional') }})
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">5.
+                            {{ __('layouts.internal_dates') }} ({{ __('layouts.optional') }})
                         </h5>
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.pickup_transfer_date') }}</label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.pickup_transfer_date') }}</label>
                                 <input type="date" name="pickup_transfer_date"
                                     value="{{ old('pickup_transfer_date') }}"
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('pickup_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -462,7 +547,8 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.sales_transfer_date') }}</label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.sales_transfer_date') }}</label>
                                 <input type="date" name="sales_transfer_date"
                                     value="{{ old('sales_transfer_date') }}"
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('sales_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -471,7 +557,8 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_transfer_date') }}</label>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.shipping_transfer_date') }}</label>
                                 <input type="date" name="shipping_transfer_date"
                                     value="{{ old('shipping_transfer_date') }}"
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('shipping_transfer_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
@@ -608,6 +695,43 @@
             });
 
             updateUI();
+
+            function fetchFreightPrice() {
+                let destination = $('select[name="destination"]').val();
+                let carrier = $('select[name="carrier"]').val();
+                let truckType = $('select[name="truck_type"]').val();
+
+                // Only call when all selected
+                if (destination && carrier && truckType) {
+                    $.ajax({
+                        url: "{{ route('freight-rates.getRateAjax') }}",
+                        type: "GET",
+                        data: {
+                            destination_id: destination,
+                            carrier_id: carrier,
+                            truck_type_id: truckType,
+                        },
+                        success: function(response) {
+                            if (response.price !== null) {
+                                $('input[name="freight_price"]').val(response.price);
+                                $('input[name="freight_master_price"]').val(response.price);
+                            } else {
+                                $('input[name="freight_price"]').val('');
+                                $('input[name="freight_master_price"]').val('');
+                            }
+                        },
+                        error: function() {
+                            console.log('Error fetching freight rate');
+                        }
+                    });
+                }
+            }
+
+            // Trigger on change
+            $('select[name="destination"], select[name="carrier"], select[name="truck_type"]').on('change',
+                function() {
+                    fetchFreightPrice();
+                });
         });
     </script>
 @endpush
