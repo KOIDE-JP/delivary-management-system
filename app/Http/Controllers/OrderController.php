@@ -189,12 +189,18 @@ class OrderController extends Controller
             'carrier'                => 'nullable|string|max:255',
             'truck_type'             => 'nullable|string|max:255',
             'freight_price'          => 'nullable|numeric|min:0',
-
+            'freight_master_price'   => 'nullable|numeric|min:0',
             // Internal Dates
             'pickup_transfer_date'   => 'nullable|date',
             'sales_transfer_date'    => 'nullable|date',
             'shipping_transfer_date' => 'nullable|date',
         ]);
+
+        if (!is_null($validatedData['freight_price']) && !is_null($validatedData['freight_master_price'])) {
+            if ((float)$validatedData['freight_price'] !== (float)$validatedData['freight_master_price']) {
+                $validatedData['freight_is_manual'] = true;
+            }
+        }
 
         // 2. Create the order using Mass Assignment
         // Note: Make sure these fields are added to your Order model's $fillable array!
@@ -211,57 +217,55 @@ class OrderController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $order = \App\Models\Order::findOrFail($id);
+    {
+        $order = Order::findOrFail($id);
 
-    // 1. Validate the request data
-    $validatedData = $request->validate([
-        // Ignore the current order's ID for the unique check
-        'order_number'           => 'required|string|max:255|unique:orders,order_number,' . $order->id,
-        'order_name'             => 'required|string|max:255',
-        'registered_date'        => 'required|date',
+        // 1. Validate the request data
+        $validatedData = $request->validate([
+            // Ignore the current order's ID for the unique check
+            'order_number'           => 'required|string|max:255|unique:orders,order_number,' . $order->id,
+            'order_name'             => 'required|string|max:255',
+            'registered_date'        => 'required|date',
 
-        // Delivery & Shipping
-        'due_date'               => 'nullable|date',
-        'due_confidence'         => 'nullable|in:confirmed,unconfirmed',
-        'inspection_date'        => 'nullable|date',
-        'priority'               => 'nullable|in:no,yes',
-        'shipping_date'          => 'nullable|date',
-        'shipping_status'        => 'nullable|in:unconfirmed,unarranged,arranged,direct_delivery,courier',
+            // Delivery & Shipping
+            'due_date'               => 'nullable|date',
+            'due_confidence'         => 'nullable|in:confirmed,unconfirmed',
+            'inspection_date'        => 'nullable|date',
+            'priority'               => 'nullable|in:no,yes',
+            'shipping_date'          => 'nullable|date',
+            'shipping_status'        => 'nullable|in:unconfirmed,unarranged,arranged,direct_delivery,courier',
 
-        // Documents & Billing
-        'dw_status'              => 'nullable|in:undelivered,delivered,not_required',
-        'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
-        'order_status'           => 'nullable|in:received,not_received,not_required',
-        
-        // Client Schedule
-        'material_pickup_date'   => 'nullable|date',
-        'inspection_due_date'    => 'nullable|date',
-        'parts_pickup_date'      => 'nullable|date',
+            // Documents & Billing
+            'dw_status'              => 'nullable|in:undelivered,delivered,not_required',
+            'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
+            'order_status'           => 'nullable|in:received,not_received,not_required',
 
-        // Billing
-        'inspection_slip_status' => 'nullable|in:received,not_received,not_required',
-        'invoice_status'         => 'nullable|in:sent,not_sent,not_required',
-        'order_amount'           => 'nullable|numeric|min:0',
+            // Client Schedule
+            'material_pickup_date'   => 'nullable|date',
+            'inspection_due_date'    => 'nullable|date',
+            'parts_pickup_date'      => 'nullable|date',
 
-        // Freight Info
-        'destination'            => 'nullable|string|max:255',
-        'carrier'                => 'nullable|string|max:255',
-        'truck_type'             => 'nullable|string|max:255',
-        'freight_price'          => 'nullable|numeric|min:0',
+            // Billing
+            'inspection_slip_status' => 'nullable|in:received,not_received,not_required',
+            'invoice_status'         => 'nullable|in:sent,not_sent,not_required',
+            'order_amount'           => 'nullable|numeric|min:0',
 
-        // Internal Dates
-        'pickup_transfer_date'   => 'nullable|date',
-        'sales_transfer_date'    => 'nullable|date',
-        'shipping_transfer_date' => 'nullable|date',
-    ]);
+            // Freight Info
+            'destination'            => 'nullable|string|max:255',
+            'carrier'                => 'nullable|string|max:255',
+            'truck_type'             => 'nullable|string|max:255',
+            'freight_price'          => 'nullable|numeric|min:0',
 
-    // 2. Update the order
-    $order->update($validatedData);
+            // Internal Dates
+            'pickup_transfer_date'   => 'nullable|date',
+            'sales_transfer_date'    => 'nullable|date',
+            'shipping_transfer_date' => 'nullable|date',
+        ]);
 
-    // 3. Redirect back with success message
-    return redirect()->route('order.index')->with('success', 'Order updated successfully!');
-}
+        // 2. Update the order
+        $order->update($validatedData);
 
-
+        // 3. Redirect back with success message
+        return redirect()->route('order.index')->with('success', 'Order updated successfully!');
+    }
 }

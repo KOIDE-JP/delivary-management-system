@@ -44,7 +44,7 @@ class FreightRateController extends Controller
                     $actions   = '<div class="text-center space-x-2">';
 
                     // if (auth()->user()->hasPermission('freight-rates.view')) {
-                        $actions .= '
+                    $actions .= '
                             <a title="' . __('layouts.view') . '" href="' . $viewUrl . '"
                                 class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium
                                 rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2
@@ -103,10 +103,11 @@ class FreightRateController extends Controller
             'truck_type_id'  => ['required', 'exists:truck_types,id'],
             'price'          => ['required', 'numeric', 'min:0'],
             'destination_id' => [
-                Rule::unique('freight_rates')->where(fn($q) =>
+                Rule::unique('freight_rates')->where(
+                    fn($q) =>
                     $q->where('destination_id', $request->destination_id)
-                    ->where('carrier_id', $request->carrier_id)
-                    ->where('truck_type_id', $request->truck_type_id)
+                        ->where('carrier_id', $request->carrier_id)
+                        ->where('truck_type_id', $request->truck_type_id)
                 ),
             ],
         ], [
@@ -159,10 +160,11 @@ class FreightRateController extends Controller
             'price'          => ['required', 'numeric', 'min:0'],
             'status'         => ['required', 'in:0,1'],
             'destination_id' => [
-                Rule::unique('freight_rates')->where(fn($q) =>
+                Rule::unique('freight_rates')->where(
+                    fn($q) =>
                     $q->where('destination_id', $request->destination_id)
-                    ->where('carrier_id', $request->carrier_id)
-                    ->where('truck_type_id', $request->truck_type_id)
+                        ->where('carrier_id', $request->carrier_id)
+                        ->where('truck_type_id', $request->truck_type_id)
                 )->ignore($freightRate->id),
             ],
         ], [
@@ -250,5 +252,18 @@ class FreightRateController extends Controller
         );
 
         return response()->json(['success' => true, 'status' => $freightRate->status]);
+    }
+
+    public function getFreightRateAjax(Request $request)
+    {
+        $rate = FreightRate::where('destination_id', $request->destination_id)
+            ->where('carrier_id', $request->carrier_id)
+            ->where('truck_type_id', $request->truck_type_id)
+            ->where('status', 1)
+            ->first();
+
+        return response()->json([
+            'price' => $rate?->price
+        ]);
     }
 }

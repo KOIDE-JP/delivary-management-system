@@ -28,7 +28,6 @@
             {{-- FORM ACTION & METHOD SPOOFING --}}
             <form action="{{ route('order.update', $order->id) }}" method="POST" id="wizard-form">
                 @csrf
-                @method('PUT')
 
                 {{-- STEPPER NAVIGATION --}}
                 <div class="bg-gray-50/50 px-4 sm:px-8 py-4 border-b border-gray-200">

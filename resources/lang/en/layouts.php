@@ -431,6 +431,9 @@ return [
     'carrier' => 'Carrier',
     'truck_type' => 'Truck Type',
     'freight_price' => 'Freight Price',
+    'freight_master_price' => 'Master Freight Price',
+    'freight_note' => 'Freight Note',
+    'enter_freight_notes' => 'Enter Freight Notes',
 
     // Internal Dates
     'pickup_transfer_date' => 'Pickup Transfer Date',
