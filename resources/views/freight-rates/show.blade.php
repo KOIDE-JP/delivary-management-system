@@ -105,13 +105,13 @@
                     So we compare $log->action against the current language's translated strings.
                 --}}
                 @php
-                    $actionCreated       = __('layouts.action_created');
-                    $actionUpdated       = __('layouts.action_updated');
-                    $actionDeleted       = __('layouts.action_deleted');
-                    $actionStatusUpdated = __('layouts.action_status_updated');
-                    $statusSuccess       = __('layouts.status_success');
-                    $statusFailed        = __('layouts.status_failed');
-                    $statusWarning       = __('layouts.status_warning');
+                    $actionCreated       = 'action_created';
+                    $actionUpdated       = 'action_updated';
+                    $actionDeleted       = 'action_deleted';
+                    $actionStatusUpdated = 'action_status_updated';
+                    $statusSuccess       = 'status_success';
+                    $statusFailed        = 'status_failed';
+                    $statusWarning       = 'status_warning';
                 @endphp
 
                 <div class="relative">
@@ -170,7 +170,7 @@
                                             @elseif($log->action === $actionStatusUpdated) bg-emerald-100 text-emerald-700
                                             @else                                          bg-gray-100    text-gray-600
                                             @endif">
-                                            {{ $log->action }}
+                                            {{ __('layouts.' . $log->action) }}
                                         </span>
 
                                         {{-- Log Status Badge --}}
@@ -180,7 +180,7 @@
                                             @elseif($log->log_status === $statusWarning)   bg-yellow-50  text-yellow-600
                                             @else                                          bg-gray-100   text-gray-500
                                             @endif">
-                                            {{ $log->log_status }}
+                                            {{ __('layouts.' . $log->log_status) }}
                                         </span>
 
                                         {{-- Timestamp --}}
@@ -191,7 +191,22 @@
 
                                     {{-- Message --}}
                                     @if($log->log_message)
-                                        <p class="text-sm text-gray-600 mt-1">{{ $log->log_message }}</p>
+                                        @php
+                                            $msg = json_decode($log->log_message, true);
+                                        @endphp
+
+                                        @if($msg && isset($msg['key']))
+                                            <p class="text-sm text-gray-600 mt-1">
+                                                {{ __('layouts.' . $msg['key'], [
+                                                    'from' => __('layouts.' . $msg['from']),
+                                                    'to'   => __('layouts.' . $msg['to']),
+                                                ]) }}
+                                            </p>
+                                        @else
+                                            <p class="text-sm text-gray-600 mt-1">
+                                                {{ __('layouts.' . $log->log_message) }}
+                                            </p>
+                                        @endif
                                     @endif
 
                                     {{-- Performed by --}}

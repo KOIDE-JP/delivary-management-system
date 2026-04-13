@@ -321,12 +321,14 @@ return [
 
     //Carrier
     'carrier_details'     => 'Carrier Details',
+    'edit_carrier' => 'Edit Carrier',
     'carrier_information' => 'Carrier Information',
     'carrier_created' => 'Carrier created successfully',
     'carrier_updated' => 'Carrier updated successfully',
     'carrier_deleted' => 'Carrier deleted successfully',
     'carrier_status_updated' => 'Carrier status changed from :from to :to',
     'cannot_delete_carrier_linked' => 'This carrier cannot be deleted because it is associated with freight rates.',
+
 
     //Truck Type    
     'truck_type_details'     => 'Truck Type Details',

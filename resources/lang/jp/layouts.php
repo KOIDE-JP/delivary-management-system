@@ -325,6 +325,7 @@ return [
 
     //Carrier
     'carrier_details' => '運送業者の詳細',
+    'edit_carrier' => '運送業者を編集',
     'carrier_information' => '運送業者の情報',
     'carrier_created' => '運送業者が正常に作成されました',
     'carrier_updated' => '運送業者が正常に更新されました',

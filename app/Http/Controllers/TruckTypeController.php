@@ -95,11 +95,17 @@ class TruckTypeController extends Controller
 
         $truckType = TruckType::create($validated);
 
+        // logActivity(
+        //     $truckType,
+        //     __('layouts.action_created'),
+        //     __('layouts.truck_type_created'),
+        //     __('layouts.status_success')
+        // );
         logActivity(
             $truckType,
-            __('layouts.action_created'),
-            __('layouts.truck_type_created'),
-            __('layouts.status_success')
+            'action_created',
+            'truck_type_created',
+            'status_success'
         );
 
         return redirect()->route('truck-types.index')
@@ -121,11 +127,18 @@ class TruckTypeController extends Controller
         $validated['updated_by'] = auth()->id();
         $truckType->update($validated);
 
+        // logActivity(
+        //     $truckType,
+        //     __('layouts.action_updated'),
+        //     __('layouts.truck_type_updated'),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $truckType,
-            __('layouts.action_updated'),
-            __('layouts.truck_type_updated'),
-            __('layouts.status_success')
+            'action_updated',
+            'truck_type_updated',
+            'status_success'
         );
 
         return redirect()->route('truck-types.index')
@@ -165,14 +178,24 @@ class TruckTypeController extends Controller
             'updated_by' => auth()->id(),
         ]);
 
+        // logActivity(
+        //     $truckType,
+        //     __('layouts.action_status_updated'),
+        //     __('layouts.truck_type_status_updated', [
+        //         'from' => $truckType->status ? __('layouts.inactive') : __('layouts.active'),
+        //         'to'   => $truckType->status ? __('layouts.active') : __('layouts.inactive'),
+        //     ]),
+        //     __('layouts.status_success')
+        // );
         logActivity(
             $truckType,
-            __('layouts.action_status_updated'),
-            __('layouts.truck_type_status_updated', [
-                'from' => $truckType->status ? __('layouts.inactive') : __('layouts.active'),
-                'to'   => $truckType->status ? __('layouts.active') : __('layouts.inactive'),
+            'action_status_updated',
+            json_encode([
+                'key'  => 'truck_type_status_updated',
+                'from' => $truckType->status ? 'inactive' : 'active',
+                'to'   => $truckType->status ? 'active'   : 'inactive',
             ]),
-            __('layouts.status_success')
+            'status_success'
         );
 
         return response()->json(['success' => true, 'status' => $truckType->status]);

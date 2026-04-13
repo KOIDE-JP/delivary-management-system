@@ -123,11 +123,18 @@ class FreightRateController extends Controller
             'updated_by'     => auth()->id(),
         ]);
 
+        // logActivity(
+        //     $freightRate,
+        //     __('layouts.action_created'),
+        //     __('layouts.freight_rate_created'),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $freightRate,
-            __('layouts.action_created'),
-            __('layouts.freight_rate_created'),
-            __('layouts.status_success')
+            'action_created',
+            'freight_rate_created',
+            'status_success'
         );
 
         return redirect()->route('freight-rates.index')
@@ -171,11 +178,18 @@ class FreightRateController extends Controller
             'updated_by'     => auth()->id(),
         ]);
 
+        // logActivity(
+        //     $freightRate,
+        //     __('layouts.action_updated'),
+        //     __('layouts.freight_rate_updated'),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $freightRate,
-            __('layouts.action_updated'),
-            __('layouts.freight_rate_updated'),
-            __('layouts.status_success')
+            'action_updated',
+            'freight_rate_updated',
+            'status_success'
         );
 
         return redirect()->route('freight-rates.index')
@@ -214,14 +228,25 @@ class FreightRateController extends Controller
             'updated_by' => auth()->id(),
         ]);
 
+        // logActivity(
+        //     $freightRate,
+        //     __('layouts.action_status_updated'),
+        //     __('layouts.freight_rate_status_updated', [
+        //         'from' => $freightRate->status ? __('layouts.inactive') : __('layouts.active'),
+        //         'to'   => $freightRate->status ? __('layouts.active') : __('layouts.inactive'),
+        //     ]),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $freightRate,
-            __('layouts.action_status_updated'),
-            __('layouts.freight_rate_status_updated', [
-                'from' => $freightRate->status ? __('layouts.inactive') : __('layouts.active'),
-                'to'   => $freightRate->status ? __('layouts.active') : __('layouts.inactive'),
+            'action_status_updated',
+            json_encode([
+                'key'  => 'freight_rate_status_updated',
+                'from' => $freightRate->status ? 'inactive' : 'active',
+                'to'   => $freightRate->status ? 'active'   : 'inactive',
             ]),
-            __('layouts.status_success')
+            'status_success'
         );
 
         return response()->json(['success' => true, 'status' => $freightRate->status]);

@@ -95,11 +95,18 @@ class CarrierController extends Controller
 
         $carrier = Carrier::create($validated);
 
+        // logActivity(
+        //     $carrier,
+        //     __('layouts.action_created'),
+        //     __('layouts.carrier_created'),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $carrier,
-            __('layouts.action_created'),
-            __('layouts.carrier_created'),
-            __('layouts.status_success')
+            'action_created',
+            'carrier_created',
+            'status_success'
         );
 
         return redirect()->route('carriers.index')
@@ -121,11 +128,18 @@ class CarrierController extends Controller
         $validated['updated_by'] = auth()->id();
         $carrier->update($validated);
 
+        // logActivity(
+        //     $carrier,
+        //     __('layouts.action_updated'),
+        //     __('layouts.carrier_updated'),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $carrier,
-            __('layouts.action_updated'),
-            __('layouts.carrier_updated'),
-            __('layouts.status_success')
+            'action_updated',
+            'carrier_updated',
+            'status_success'
         );
 
         return redirect()->route('carriers.index')
@@ -165,14 +179,25 @@ class CarrierController extends Controller
             'updated_by' => auth()->id(),
         ]);
 
+        // logActivity(
+        //     $carrier,
+        //     __('layouts.action_status_updated'),
+        //     __('layouts.carrier_status_updated', [
+        //         'from' => $carrier->status ? __('layouts.inactive') : __('layouts.active'),
+        //         'to'   => $carrier->status ? __('layouts.active') : __('layouts.inactive'),
+        //     ]),
+        //     __('layouts.status_success')
+        // );
+
         logActivity(
             $carrier,
-            __('layouts.action_status_updated'),
-            __('layouts.carrier_status_updated', [
-                'from' => $carrier->status ? __('layouts.inactive') : __('layouts.active'),
-                'to'   => $carrier->status ? __('layouts.active') : __('layouts.inactive'),
+            'action_status_updated',
+            json_encode([
+                'key'  => 'carrier_status_updated',
+                'from' => $carrier->status ? 'inactive' : 'active',
+                'to'   => $carrier->status ? 'active'   : 'inactive',
             ]),
-            __('layouts.status_success')
+            'status_success'
         );
 
         return response()->json(['success' => true, 'status' => $carrier->status]);
