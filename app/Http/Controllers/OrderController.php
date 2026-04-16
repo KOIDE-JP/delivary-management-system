@@ -82,7 +82,8 @@ class OrderController extends Controller
                         ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1"> ' . __('layouts.priority') . '</span>'
                         : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">' . __('layouts.normal') . '</span>';
 
-                    $statusText = $row->shipping_status ? strtoupper($row->shipping_status) : '.' . __('layouts.pending') . '.';
+                    // $statusText = $row->shipping_status ? strtoupper($row->shipping_status) : '.' . __('layouts.pending') . '.';
+                    $statusText = $row->shipping_status ? __('layouts.' . $row->shipping_status) : __('layouts.pending');
                     $statusColor = $row->shipping_status === 'arranged' ? 'text-blue-700 bg-blue-100' : 'text-yellow-800 bg-yellow-100';
 
                     return '
@@ -149,7 +150,8 @@ class OrderController extends Controller
     public function view($id)
     {
         $order = Order::findOrFail($id);
-        return view('orders.view', compact('order'));
+        $activityLogs = $order->activityLogs()->latest()->paginate(5);
+        return view('orders.view', compact('order', 'activityLogs'));
     }
 
     public function store(Request $request)
@@ -206,14 +208,25 @@ class OrderController extends Controller
         // Note: Make sure these fields are added to your Order model's $fillable array!
         $order = Order::create($validatedData);
 
+        logActivity(
+            $order,
+            'action_created',
+            'order_created',
+            'status_success'
+        );
+
         // 3. Redirect back with success message
         return redirect()->route('order.index')->with('success', 'Order created successfully!');
     }
 
     public function edit($id)
     {
+        $destinations = Destination::select('name', 'id')->get();
+        $carriers = Carrier::select('name', 'id')->get();
+        $truckTypes = TruckType::select('name', 'id')->get();
+        $freightRates = FreightRate::all();
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
+        return view('orders.edit', compact('order', 'destinations', 'carriers', 'truckTypes', 'freightRates'));
     }
 
     public function update(Request $request, $id)
@@ -264,6 +277,13 @@ class OrderController extends Controller
 
         // 2. Update the order
         $order->update($validatedData);
+
+        logActivity(
+            $order,
+            'action_updated',
+            'order_updated',
+            'status_success'
+        );
 
         // 3. Redirect back with success message
         return redirect()->route('order.index')->with('success', 'Order updated successfully!');

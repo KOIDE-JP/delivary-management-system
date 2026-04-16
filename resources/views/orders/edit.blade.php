@@ -242,22 +242,22 @@
                     </div>
 
                     {{-- PANEL 3: FREIGHT INFO --}}
-                    <div id="panel-3" class="wizard-panel hidden">
+                    {{-- <div id="panel-3" class="wizard-panel hidden">
                         <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">{{ __('layouts.freight_info') }}</h5>
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.destination') }}</label>
-                                <input type="text" name="destination" value="{{ old('destination', $order->destination) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="text" name="destination" value="{{ old('destination', $order->destination->name) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('destination') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.carrier') }}</label>
-                                <input type="text" name="carrier" value="{{ old('carrier', $order->carrier) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="text" name="carrier" value="{{ old('carrier', $order->carrier->name) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('carrier') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
                                 <label class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.truck_type') }}</label>
-                                <input type="text" name="truck_type" value="{{ old('truck_type', $order->truck_type) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <input type="text" name="truck_type" value="{{ old('truck_type', $order->truck_type->name) }}" class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('truck_type') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
                             <div>
@@ -270,6 +270,147 @@
                                 </div>
                                 @error('freight_price') <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p> @enderror
                             </div>
+                        </div>
+                    </div> --}}
+                    {{-- PANEL 3: FREIGHT INFO --}}
+                    <div id="panel-3" class="wizard-panel hidden">
+                        <h5 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">
+                            {{ __('layouts.freight_info') }}
+                        </h5>
+
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+
+                            {{-- Destination --}}
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.destination') }}
+                                </label>
+
+                                <select name="destination"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+
+                                    <option value="" disabled>
+                                        {{ __('layouts.select_destination') }}
+                                    </option>
+
+                                    @foreach ($destinations as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('destination', $order->destination_id) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('destination')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Carrier --}}
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.carrier') }}
+                                </label>
+
+                                <select name="carrier"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+
+                                    <option value="" disabled>
+                                        {{ __('layouts.select_carrier') }}
+                                    </option>
+
+                                    @foreach ($carriers as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('carrier', $order->carrier_id) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('carrier')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Truck Type --}}
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.truck_type') }}
+                                </label>
+
+                                <select name="truck_type"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+
+                                    <option value="" disabled>
+                                        {{ __('layouts.select_truck_type') }}
+                                    </option>
+
+                                    @foreach ($truckTypes as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('truck_type', $order->truck_type_id) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('truck_type')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Freight Master Price (Readonly) --}}
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.freight_master_price') }}
+                                </label>
+
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">¥</span>
+                                    </div>
+
+                                    <input readonly type="number" step="0.01" name="freight_master_price"
+                                        value="{{ old('freight_master_price', $order->freight_master_price) }}"
+                                        class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg shadow-sm cursor-not-allowed opacity-60">
+                                </div>
+                            </div>
+
+                            {{-- Freight Price --}}
+                            <div>
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.freight_price') }}
+                                </label>
+
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">¥</span>
+                                    </div>
+
+                                    <input type="number" step="0.01" name="freight_price"
+                                        value="{{ old('freight_price', $order->freight_price) }}"
+                                        class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('freight_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+
+                                @error('freight_price')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Freight Note --}}
+                            <div class="md:col-span-2 lg:col-span-2">
+                                <label class="block mb-1.5 text-sm font-semibold text-gray-700">
+                                    {{ __('layouts.freight_note') }}
+                                </label>
+
+                                <textarea name="freight_note" rows="3"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('freight_note') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="{{ __('layouts.enter_freight_notes') }}">{{ old('freight_note', $order->freight_note) }}</textarea>
+
+                                @error('freight_note')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                         </div>
                     </div>
 
@@ -403,7 +544,61 @@
                 }
             });
 
-            updateUI();
+
+
+
+
+
+        // =========================
+        // FREIGHT PRICE LOGIC
+        // =========================
+        function fetchFreightPrice() {
+            let destination = $('select[name="destination"]').val();
+            let carrier = $('select[name="carrier"]').val();
+            let truckType = $('select[name="truck_type"]').val();
+
+            if (destination && carrier && truckType) {
+                $.ajax({
+                    url: "{{ route('freight-rates.getRateAjax') }}",
+                    type: "GET",
+                    data: {
+                        destination_id: destination,
+                        carrier_id: carrier,
+                        truck_type_id: truckType,
+                    },
+                    success: function(response) {
+                        if (response.price !== null) {
+                            $('input[name="freight_price"]').val(response.price);
+                            $('input[name="freight_master_price"]').val(response.price);
+                        } else {
+                            $('input[name="freight_price"]').val('');
+                            $('input[name="freight_master_price"]').val('');
+                        }
+                    },
+                    error: function() {
+                        console.log('Error fetching freight rate');
+                    }
+                });
+            }
+        }
+
+        // Trigger on change
+        $('select[name="destination"], select[name="carrier"], select[name="truck_type"]').on('change', function() {
+            fetchFreightPrice();
         });
+
+        // 👉 Trigger on page load (for edit)
+        if (
+            $('select[name="destination"]').val() &&
+            $('select[name="carrier"]').val() &&
+            $('select[name="truck_type"]').val()
+        ) {
+            fetchFreightPrice();
+        }
+
+        updateUI();
+    });
+
+
     </script>
 @endpush

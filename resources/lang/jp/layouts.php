@@ -344,6 +344,13 @@ return [
 
     /////////////////////////////////Orders/////////////////////////////////
 
+    // 'undelivered' => '未配達',      // Undelivered
+    // 'delivered' => '配達済み',      // Delivered
+    // 'not_required' => '不要',      // Not Required
+    'order_created' => '注文が正常に作成されました',
+    'order_updated' => '注文が正常に更新されました',
+    
+    'na' => '該当なし',
     'reg' => '登録',
     'pending_carrier' => '保留中',
     'tbd' => '未定',

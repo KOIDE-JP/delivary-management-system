@@ -341,7 +341,11 @@ return [
 
     ////////////////////////////////// Create Orders/////////////////////////////////
 
-
+    'undelivered' => 'Undelivered',
+    'delivered' => 'Delivered',
+    'not_required' => 'Not Required',
+    'na' => 'N/A',
+    
     'reg' => 'REG',
     'pending_carrier' => 'Pending Carrier',
     'tbd' => 'TBD',
@@ -502,6 +506,8 @@ return [
     // View Order Page
     'order.view' => 'View Order',
     'order_details_for' => 'Order details for',
+    'order_created' => 'Order created successfully',
+    'order_updated' => 'Order updated successfully',
 
     'back_to_list' => 'Back to List',
     'edit_order' => 'Edit Order',

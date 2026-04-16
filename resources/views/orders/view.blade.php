@@ -62,7 +62,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.registered_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->registered_date ? \Carbon\Carbon::parse($order->registered_date)->format('M d, Y') : 'N/A' }}
+                                {{ $order->registered_date ? \Carbon\Carbon::parse($order->registered_date)->format('M d, Y') : __('layouts.na') }}
                             </p>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.due_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-red-600">
-                                {{ $order->due_date ? \Carbon\Carbon::parse($order->due_date)->format('M d, Y') : 'Pending' }}
+                                {{ $order->due_date ? \Carbon\Carbon::parse($order->due_date)->format('M d, Y') : __('layouts.pending') }}
                             </p>
                         </div>
                         <div>
@@ -89,14 +89,14 @@
                                 @elseif($order->due_confidence == 'unconfirmed')
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">{{ __('layouts.unconfirmed') }}</span>
                                 @else
-                                    <span class="text-gray-500 text-sm">N/A</span>
+                                    <span class="text-gray-500 text-sm">{{ __('layouts.na') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->inspection_date ? \Carbon\Carbon::parse($order->inspection_date)->format('M d, Y') : 'N/A' }}
+                                {{ $order->inspection_date ? \Carbon\Carbon::parse($order->inspection_date)->format('M d, Y') : __('layouts.na') }}
                             </p>
                         </div>
                         <div>
@@ -122,7 +122,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->shipping_date ? \Carbon\Carbon::parse($order->shipping_date)->format('M d, Y') : 'N/A' }}
+                                {{ $order->shipping_date ? \Carbon\Carbon::parse($order->shipping_date)->format('M d, Y') : __('layouts.na') }}
                             </p>
                         </div>
                         <div>
@@ -137,7 +137,9 @@
                                         'unconfirmed' => 'bg-gray-100 text-gray-800',
                                     ];
                                     $colorClass = $statusColors[$order->shipping_status] ?? 'bg-gray-100 text-gray-800';
-                                    $displayText = $order->shipping_status ? ucwords(str_replace('_', ' ', $order->shipping_status)) : 'N/A';
+                                    // $displayText = $order->shipping_status ? ucwords(str_replace('_', ' ', $order->shipping_status)) : 'N/A';
+                                    //  Convert status to display text using localization
+                                    $displayText = __('layouts.' . ($order->shipping_status ?? 'na'));
                                 @endphp
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $colorClass }}">
                                     {{ $displayText }}
@@ -158,15 +160,16 @@
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.dw_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->dw_status ?? 'N/A')) }}</p>
+                                {{-- <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->dw_status ?? 'N/A')) }}</p> --}}
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->dw_status ?? 'na')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.quotation_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->quotation_status ?? 'N/A')) }}</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->quotation_status ?? 'na')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->order_status ?? 'N/A')) }}</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->order_status ?? 'na')) }}</p>
                             </div>
                         </div>
                     </div>
@@ -179,16 +182,17 @@
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_slip_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->inspection_slip_status ?? 'N/A')) }}</p>
+                                {{-- <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->inspection_slip_status ?? 'N/A')) }}</p> --}}
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->inspection_slip_status ?? 'na')) }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.invoice_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">{{ ucwords(str_replace('_', ' ', $order->invoice_status ?? 'N/A')) }}</p>
+                                <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->invoice_status ?? 'na')) }}</p>
                             </div>
                             <div class="sm:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_amount') }}</p>
                                 <p class="mt-1 text-xl font-bold text-blue-600">
-                                    {{ $order->order_amount ? '¥' . number_format($order->order_amount, 2) : 'N/A' }}
+                                    {{ $order->order_amount ? '¥' . number_format($order->order_amount, 2) : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>
@@ -204,20 +208,20 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.destination') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->destination ?? 'N/A' }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->destination->name ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.carrier') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->carrier ?? 'N/A' }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->carrier ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.truck_type') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->truck_type ?? 'N/A' }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->truck_type ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.freight_price') }}</p>
                             <p class="mt-1 text-lg font-bold text-gray-900">
-                                {{ $order->freight_price ? '¥' . number_format($order->freight_price, 2) : 'N/A' }}
+                                {{ $order->freight_price ? '¥' . number_format($order->freight_price, 2) : __('layouts.na') }}
                             </p>
                         </div>
                     </div>
@@ -235,19 +239,19 @@
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.material_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->material_pickup_date ? \Carbon\Carbon::parse($order->material_pickup_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->material_pickup_date ? \Carbon\Carbon::parse($order->material_pickup_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_due_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->inspection_due_date ? \Carbon\Carbon::parse($order->inspection_due_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->inspection_due_date ? \Carbon\Carbon::parse($order->inspection_due_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.parts_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->parts_pickup_date ? \Carbon\Carbon::parse($order->parts_pickup_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->parts_pickup_date ? \Carbon\Carbon::parse($order->parts_pickup_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>
@@ -262,28 +266,181 @@
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.pickup_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->pickup_transfer_date ? \Carbon\Carbon::parse($order->pickup_transfer_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->pickup_transfer_date ? \Carbon\Carbon::parse($order->pickup_transfer_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.sales_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->sales_transfer_date ? \Carbon\Carbon::parse($order->sales_transfer_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->sales_transfer_date ? \Carbon\Carbon::parse($order->sales_transfer_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->shipping_transfer_date ? \Carbon\Carbon::parse($order->shipping_transfer_date)->format('M d, Y') : 'N/A' }}
+                                    {{ $order->shipping_transfer_date ? \Carbon\Carbon::parse($order->shipping_transfer_date)->format('M d, Y') : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-3">
+                {{-- <div class="mt-3">
                     @includeIf('components.activity-log-component')
+                </div> --}}
+
+
+                {{-- ===================== ACTIVITY LOG TIMELINE ===================== --}}
+                <div class="p-6 border border-gray-100 rounded-xl bg-gray-50/50">
+                    <h5 class="flex items-center gap-2 mb-6 text-lg font-bold text-gray-800 border-b border-gray-200 pb-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ __('layouts.activity_log') }}
+                        <span class="ml-auto text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                            {{ $activityLogs->total() }} {{ __('layouts.records') }}
+                        </span>
+                    </h5>
+ 
+                    @if($activityLogs->isEmpty())
+                        <div class="flex flex-col items-center justify-center py-12 text-gray-400">
+                            <svg class="w-12 h-12 mb-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                            <p class="text-sm">{{ __('layouts.no_activity_logs') }}</p>
+                        </div>
+                    @else
+ 
+                        @php
+                            $actionCreated       = 'action_created';
+                            $actionUpdated       = 'action_updated';
+                            $actionDeleted       = 'action_deleted';
+                            $actionStatusUpdated = 'action_status_updated';
+                            $statusSuccess       = 'status_success';
+                            $statusFailed        = 'status_failed';
+                            $statusWarning       = 'status_warning';
+                        @endphp
+ 
+                        <div class="relative">
+                            {{-- Vertical line --}}
+                            <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-100"></div>
+ 
+                            <div class="space-y-4">
+                                @foreach($activityLogs as $log)
+                                    <div class="relative flex gap-4 pl-2">
+ 
+                                        {{-- Icon Circle --}}
+                                        <div class="relative z-10 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-sm border-2
+                                            @if($log->action === $actionCreated)           bg-green-50   border-green-200
+                                            @elseif($log->action === $actionUpdated)       bg-blue-50    border-blue-200
+                                            @elseif($log->action === $actionDeleted)       bg-red-50     border-red-200
+                                            @elseif($log->action === $actionStatusUpdated) bg-emerald-50 border-emerald-200
+                                            @else                                          bg-gray-50    border-gray-200
+                                            @endif">
+ 
+                                            @if($log->action === $actionCreated)
+                                                <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                                                </svg>
+                                            @elseif($log->action === $actionUpdated)
+                                                <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            @elseif($log->action === $actionDeleted)
+                                                <svg class="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            @elseif($log->action === $actionStatusUpdated)
+                                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                </svg>
+                                            @else
+                                                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                </svg>
+                                            @endif
+                                        </div>
+ 
+                                        {{-- Content --}}
+                                        <div class="flex-1 bg-white rounded-xl p-4 border border-gray-100 min-w-0">
+                                            <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+ 
+                                                {{-- Action Badge --}}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
+                                                    @if($log->action === $actionCreated)           bg-green-100   text-green-700
+                                                    @elseif($log->action === $actionUpdated)       bg-blue-100    text-blue-700
+                                                    @elseif($log->action === $actionDeleted)       bg-red-100     text-red-600
+                                                    @elseif($log->action === $actionStatusUpdated) bg-emerald-100 text-emerald-700
+                                                    @else                                          bg-gray-100    text-gray-600
+                                                    @endif">
+                                                    {{ __('layouts.' . $log->action) }}
+                                                </span>
+ 
+                                                {{-- Log Status Badge --}}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                                    @if($log->log_status === $statusSuccess)     bg-emerald-50 text-emerald-600
+                                                    @elseif($log->log_status === $statusFailed)  bg-red-50     text-red-500
+                                                    @elseif($log->log_status === $statusWarning) bg-yellow-50  text-yellow-600
+                                                    @else                                        bg-gray-100   text-gray-500
+                                                    @endif">
+                                                    {{ __('layouts.' . $log->log_status) }}
+                                                </span>
+ 
+                                                {{-- Timestamp --}}
+                                                <span class="text-xs text-gray-400 ml-auto">
+                                                    {{ $log->created_at->format('Y-m-d H:i') }}
+                                                </span>
+                                            </div>
+ 
+                                            {{-- Message --}}
+                                            @if($log->log_message)
+                                                @php
+                                                    $msg = json_decode($log->log_message, true);
+                                                @endphp
+ 
+                                                @if($msg && isset($msg['key']))
+                                                    <p class="text-sm text-gray-600 mt-1">
+                                                        {{ __('layouts.' . $msg['key'], [
+                                                            'from' => __('layouts.' . $msg['from']),
+                                                            'to'   => __('layouts.' . $msg['to']),
+                                                        ]) }}
+                                                    </p>
+                                                @else
+                                                    <p class="text-sm text-gray-600 mt-1">
+                                                        {{ __('layouts.' . $log->log_message) }}
+                                                    </p>
+                                                @endif
+                                            @endif
+ 
+                                            {{-- Performed by --}}
+                                            @if($log->user)
+                                                <p class="text-xs text-gray-400 mt-2 flex items-center gap-1">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                                    </svg>
+                                                    {{ $log->user->name }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+ 
+                            {{-- Pagination --}}
+                            <div class="mt-6">
+                                {{ $activityLogs->links() }}
+                            </div>
+                        </div>
+                    @endif
                 </div>
+                {{-- ===================== END ACTIVITY LOG ===================== --}}
 
             </div>
 
