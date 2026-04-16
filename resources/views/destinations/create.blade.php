@@ -20,7 +20,7 @@
                                 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500
                                 peer-placeholder-shown:top-3 sm:peer-placeholder-shown:top-4 peer-focus:top-1.5 sm:peer-focus:top-2
                                 peer-focus:text-xs peer-focus:text-blue-600 font-medium">
-                                {{ __('layouts.prefix') }}
+                                {{ __('layouts.prefix') }} {{ __('layouts.max_2_chars') }}
                             </label>
                             @error('prefix')
                                 <div class="mt-2 flex items-center text-red-500 text-xs sm:text-sm">

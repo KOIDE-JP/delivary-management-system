@@ -341,6 +341,7 @@ return [
     'truck_type_deleted' => 'トラック種別が削除されました',
     'truck_type_status_updated' => 'トラック種別のステータスが :from から :to に変更されました',
     'cannot_delete_truck_type_linked' => ' このトラックタイプはフレートレートに関連付けられているため、削除できません。',
+    'max_2_chars' => '最大2文字',
 
     /////////////////////////////////Orders/////////////////////////////////
 

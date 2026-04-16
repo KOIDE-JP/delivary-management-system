@@ -499,7 +499,7 @@ return [
     'delivery_info' => 'Delivery Info',
     'status' => 'Status',
     'actions' => 'Actions',
-
+    'max_2_chars' => 'Max 2 chars',
 
 
     ///////////////// View Order Page ///////////////////////
