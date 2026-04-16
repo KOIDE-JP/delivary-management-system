@@ -12,7 +12,7 @@
 
                         {{-- Prefix --}}
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1">{{ __('layouts.prefix') }} {{ __('layouts.max_2_chars') }}</label>
+                            <label class="block text-sm font-medium mb-1">{{ __('layouts.prefix') }} ({{ __('layouts.max_2_chars') }})</label>
                             <input type="text" name="prefix" maxlength="2"
                                 value="{{ old('prefix', $destination->prefix) }}"
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400"/>
