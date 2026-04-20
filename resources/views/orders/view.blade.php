@@ -192,7 +192,7 @@
                             <div class="sm:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_amount') }}</p>
                                 <p class="mt-1 text-xl font-bold text-blue-600">
-                                    {{ $order->order_amount ? '¥' . number_format($order->order_amount, 2) : __('layouts.na') }}
+                                    {{ $order->order_amount ? '¥' . formatAmount($order->order_amount) : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>
@@ -208,20 +208,20 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.destination') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->destination->name ?? __('layouts.na') }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->Destination->name ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.carrier') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->carrier ?? __('layouts.na') }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->Carrier->name ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.truck_type') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->truck_type ?? __('layouts.na') }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">{{ $order->TruckType->name ?? __('layouts.na') }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.freight_price') }}</p>
                             <p class="mt-1 text-lg font-bold text-gray-900">
-                                {{ $order->freight_price ? '¥' . number_format($order->freight_price, 2) : __('layouts.na') }}
+                                {{ $order->freight_price ? '¥' . formatAmount($order->freight_price) : __('layouts.na') }}
                             </p>
                         </div>
                     </div>

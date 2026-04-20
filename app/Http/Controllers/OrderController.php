@@ -70,7 +70,7 @@ class OrderController extends Controller
                 ';
                 })
                 ->addColumn('delivery_info', function ($row) {
-                    $carrier = $row->carrier ? $row->carrier : __('layouts.pending_carrier');
+                    $carrier = $row->carrier ? $row?->Carrier?->name : __('layouts.pending_carrier');
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
@@ -138,7 +138,7 @@ class OrderController extends Controller
 
     public function create(Request $request)
     {
-        $destinations = Destination::select('name', 'id')->get();
+        $destinations = Destination::select('name', 'id', 'prefix')->get();
         $carriers = Carrier::select('name', 'id')->get();
         $truckTypes = TruckType::select('name', 'id')->get();
         $freightRates = FreightRate::all();
@@ -150,6 +150,7 @@ class OrderController extends Controller
     public function view($id)
     {
         $order = Order::findOrFail($id);
+        // dd($order->Destination->name);
         $activityLogs = $order->activityLogs()->latest()->paginate(5);
         return view('orders.view', compact('order', 'activityLogs'));
     }
@@ -192,6 +193,8 @@ class OrderController extends Controller
             'truck_type'             => 'nullable|string|max:255',
             'freight_price'          => 'nullable|numeric|min:0',
             'freight_master_price'   => 'nullable|numeric|min:0',
+            'freight_note'           => 'nullable|string|max:255',
+            
             // Internal Dates
             'pickup_transfer_date'   => 'nullable|date',
             'sales_transfer_date'    => 'nullable|date',
@@ -221,7 +224,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $destinations = Destination::select('name', 'id')->get();
+        $destinations = Destination::select('name', 'id', 'prefix')->get();
         $carriers = Carrier::select('name', 'id')->get();
         $truckTypes = TruckType::select('name', 'id')->get();
         $freightRates = FreightRate::all();
@@ -268,6 +271,8 @@ class OrderController extends Controller
             'carrier'                => 'nullable|string|max:255',
             'truck_type'             => 'nullable|string|max:255',
             'freight_price'          => 'nullable|numeric|min:0',
+            'freight_master_price'   => 'nullable|numeric|min:0',
+            'freight_note'           => 'nullable|string|max:255',
 
             // Internal Dates
             'pickup_transfer_date'   => 'nullable|date',

@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
     <div class="flex justify-center w-full p-4 sm:p-6 bg-gray-50 min-h-screen">
         <div
             class="w-full max-w-6xl p-0 bg-white border border-gray-100 shadow-xl rounded-2xl overflow-hidden flex flex-col h-fit">
@@ -433,14 +438,14 @@
                                 <label
                                     class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.destination') }}</label>
                                 <select
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                     name="destination">
                                     <option value="" disabled {{ old('destination') ? '' : 'selected' }}>
                                         {{ __('layouts.select_destination') }}</option>
                                     @foreach ($destinations as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old('destination') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}
+                                            {{ $item->prefix .' - '. $item->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -452,7 +457,7 @@
                                 <label
                                     class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.carrier') }}</label>
                                 <select
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                     name="carrier">
                                     <option value="" disabled {{ old('carrier') ? '' : 'selected' }}>
                                         {{ __('layouts.select_carrier') }}</option>
@@ -471,7 +476,7 @@
                                 <label
                                     class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.truck_type') }}</label>
                                 <select
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                     name="truck_type">
                                     <option value="" disabled {{ old('truck_type') ? '' : 'selected' }}>
                                         {{ __('layouts.select_truck_type') }}</option>

@@ -100,11 +100,24 @@ if (!function_exists('logActivity')) {
                 'action'        => $action,
                 'log_status'    => $status,
                 'log_message'   => $message
-                                    ? $message
-                                    : $action . ' ' . class_basename($model) . ' #' . $model->getKey(),
+                    ? $message
+                    : $action . ' ' . class_basename($model) . ' #' . $model->getKey(),
             ]);
         } catch (\Exception $e) {
             Log::error('Activity log failed: ' . $e->getMessage());
+        }
+    }
+}
+
+if (!function_exists('formatAmount')) {
+
+    function formatAmount($amount, $decimals = 3, $decimalSeparator = '.', $thousandSeparator = ','): string
+    {
+        try {
+            return number_format($amount, $decimals, $decimalSeparator, $thousandSeparator);
+        } catch (\Exception $e) {
+            Log::error('Error in formatAmount: ' . $e->getMessage());
+            return (string) $amount;
         }
     }
 }

@@ -2,11 +2,14 @@
 #### First clone the repo. To do that open your terminal and run bellow code
 
 ``if you use SSH ``
-> git clone origin git@github.com:KOIDE-JP/FabTrace.git
+> git clone origin git@github.com:KOIDE-JP/delivary-management-system.git
 
 
 ``if you use HTTPS ``
-> git clone origin https://github.com/KOIDE-JP/FabTrace.git
+> git clone origin https://github.com/KOIDE-JP/delivary-management-system.git
+
+#### Create directory inside 'storage/framework' folder named 'views'
+> mkdir storage/framework/views
 
 #### Run the composer command to get all the packages with into vendor directory
 > composer install
@@ -27,9 +30,9 @@
 
 >DB_DATABASE=your_database_name
 
->DB_USERNAME=root
+>DB_USERNAME=your_database_username
 
->DB_PASSWORD=
+>DB_PASSWORD=your_database_password
 
 
 #### Run the migration command to get all the table into your database
@@ -44,19 +47,5 @@
 #### Create symbolink link
 >  php artisan storage:link
 
-<!-- #### Create custom symbolink link -->
-<!-- mklink /D C:\laragon\www\CameraUploader\public\uploads D:\CameraUploader\uploads -->
-
-
-
-
-
-
-
 <!-- #### Run the jwt secret to generate secret for API authentication
 > php artisan jwt:secret -->
-<!-- 
-#### Finally, Run the command to get the Bangladesh geo-location data
-> php artisan BangladeshGeocode:setup -->
-
-

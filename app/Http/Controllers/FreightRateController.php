@@ -23,6 +23,7 @@ class FreightRateController extends Controller
                 ->addColumn('destination_name', fn($row) => $row->destination?->name ?? '-')
                 ->addColumn('carrier_name',     fn($row) => $row->carrier?->name ?? '-')
                 ->addColumn('truck_type_name',  fn($row) => $row->truckType?->name ?? '-')
+                ->addColumn('price',  fn($row) => $row->price ? '¥ ' . formatAmount($row->price) : '-')
                 ->addColumn('status', function ($row) {
                     $checked  = $row->status ? 'checked' : '';
                     $disabled = auth()->user()->hasPermission('freight-rates.edit') ? '' : 'disabled';

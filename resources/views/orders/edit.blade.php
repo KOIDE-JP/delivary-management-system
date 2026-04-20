@@ -1,5 +1,9 @@
 @extends('layouts.master')
-
+<style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
 @section('content')
     <div class="flex justify-center w-full p-4 sm:p-6 bg-gray-50 min-h-screen">
         <div class="w-full max-w-6xl p-0 bg-white border border-gray-100 shadow-xl rounded-2xl overflow-hidden flex flex-col h-fit">
@@ -287,7 +291,7 @@
                                 </label>
 
                                 <select name="destination"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('destination') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
                                     <option value="" disabled>
                                         {{ __('layouts.select_destination') }}
@@ -295,8 +299,8 @@
 
                                     @foreach ($destinations as $item)
                                         <option value="{{ $item->id }}"
-                                            {{ old('destination', $order->destination_id) == $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}
+                                            {{ old('destination', $order->destination) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->prefix .' - '. $item->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -313,7 +317,7 @@
                                 </label>
 
                                 <select name="carrier"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
                                     <option value="" disabled>
                                         {{ __('layouts.select_carrier') }}
@@ -321,7 +325,7 @@
 
                                     @foreach ($carriers as $item)
                                         <option value="{{ $item->id }}"
-                                            {{ old('carrier', $order->carrier_id) == $item->id ? 'selected' : '' }}>
+                                            {{ old('carrier', $order->carrier) == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
@@ -339,7 +343,7 @@
                                 </label>
 
                                 <select name="truck_type"
-                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
                                     <option value="" disabled>
                                         {{ __('layouts.select_truck_type') }}
@@ -347,7 +351,7 @@
 
                                     @foreach ($truckTypes as $item)
                                         <option value="{{ $item->id }}"
-                                            {{ old('truck_type', $order->truck_type_id) == $item->id ? 'selected' : '' }}>
+                                            {{ old('truck_type', $order->truck_type) == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
