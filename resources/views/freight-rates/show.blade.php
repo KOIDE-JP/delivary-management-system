@@ -56,7 +56,7 @@
                 </div>
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <p class="text-xs text-gray-400 uppercase tracking-wide font-medium mb-1">{{ __('layouts.price') }} ({{ __('layouts.tax_excluded') }})</p>
-                    <p class="text-gray-800 font-semibold">¥{{ number_format($freightRate->price, 2) }}</p>
+                    <p class="text-gray-800 font-semibold">¥{{ formatAmount($freightRate->price) }}</p>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <p class="text-xs text-gray-400 uppercase tracking-wide font-medium mb-1">{{ __('layouts.status') }}</p>
