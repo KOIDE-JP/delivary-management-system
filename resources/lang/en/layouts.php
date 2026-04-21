@@ -508,6 +508,7 @@ return [
     'order_details_for' => 'Order details for',
     'order_created' => 'Order created successfully',
     'order_updated' => 'Order updated successfully',
+    'updated_fields' => 'Changed fields',
 
     'back_to_list' => 'Back to List',
     'edit_order' => 'Edit Order',
