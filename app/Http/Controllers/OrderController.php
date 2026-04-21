@@ -90,7 +90,7 @@ class OrderController extends Controller
                 ->addColumn('order_details', function ($row) {
                     $date = $row->registered_date ? $row->registered_date : 'N/A';
                     return '
-                    <div class="font-bold text-gray-900">' . htmlspecialchars($row->order_number) . '</div>
+                    <div class="font-bold text-gray-900"># ' . htmlspecialchars($row->order_number) . '</div>
                     <div class="text-xs text-gray-600 mt-0.5 mb-1.5 font-medium">' . htmlspecialchars($row->order_name) . '</div>
                     <div class="text-[11px] text-gray-400 flex items-center">
                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
