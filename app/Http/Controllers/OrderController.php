@@ -7,6 +7,7 @@ use App\Models\Destination;
 use App\Models\FreightRate;
 use App\Models\Order;
 use App\Models\TruckType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -35,9 +36,9 @@ class OrderController extends Controller
                 $query->where('shipping_status', $request->status);
             }
 
-            // 4. Apply Remaining Days Filter (Example Logic)
+            // 4. Apply Remaining Days Filter
             if ($request->filled('remaining_days')) {
-                $today = now();
+                $today = now()->startOfDay();
                 if ($request->remaining_days == 'overdue') {
                     $query->where('due_date', '<', $today);
                 } elseif ($request->remaining_days == '0_3') {
@@ -47,6 +48,45 @@ class OrderController extends Controller
             }
 
             return DataTables::of($query)
+                // APPLY HIGHLIGHT RULES: due_date - today <= 0 AND priority == 'yes'
+                ->setRowClass(function ($row) {
+                    $highlight = false;
+                    
+                    if ($row->due_date && $row->priority === 'yes') {
+                        $today = now()->startOfDay();
+                        $dueDate = Carbon::parse($row->due_date)->startOfDay();
+                        
+                        if ($dueDate->lte($today)) {
+                            $highlight = true;
+                        }
+                    }
+
+                    return $highlight 
+                        ? 'bg-red-100 hover:bg-red-200 transition-colors divide-y divide-red-200 text-sm' 
+                        : 'bg-white hover:bg-blue-50/50 transition-colors divide-y divide-gray-100 text-sm';
+                })
+                ->addColumn('remaining_days', function ($row) {
+                    if (!$row->due_date) {
+                        return '<span class="text-xs text-gray-500">' . __('layouts.pending') . '</span>';
+                    }
+
+                    $today = now()->startOfDay();
+                    $dueDate = Carbon::parse($row->due_date)->startOfDay();
+                    $diff = $today->diffInDays($dueDate, false);
+
+                    if ($diff < 0) {
+                        $text = abs($diff) . ' Days Overdue';
+                        $badge = 'text-red-700 bg-red-100';
+                    } elseif ($diff == 0) {
+                        $text = 'Today';
+                        $badge = 'text-orange-700 bg-orange-100';
+                    } else {
+                        $text = $diff . ' Days Left';
+                        $badge = 'text-green-700 bg-green-100';
+                    }
+
+                    return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md ' . $badge . '">' . $text . '</span>';
+                })
                 ->addColumn('order_details', function ($row) {
                     $date = $row->registered_date ? $row->registered_date : 'N/A';
                     return '
@@ -55,17 +95,6 @@ class OrderController extends Controller
                     <div class="text-[11px] text-gray-400 flex items-center">
                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                          ' . __('layouts.reg') . ': ' . $date . '
-                    </div>
-                ';
-                })
-                ->addColumn('timeline', function ($row) {
-                    $daysTxt = $row->due_date ? $row->due_date :  __('layouts.pending');
-                    return '
-                    <div class="flex flex-col gap-1.5 items-start">
-                        <span class="inline-flex items-center px-2 py-0.5 text-xs font-bold text-orange-700 bg-orange-100 rounded-md">
-                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            ' . __('layouts.due') . ': ' . htmlspecialchars($daysTxt) . '
-                        </span>
                     </div>
                 ';
                 })
@@ -82,7 +111,6 @@ class OrderController extends Controller
                         ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1"> ' . __('layouts.priority') . '</span>'
                         : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">' . __('layouts.normal') . '</span>';
 
-                    // $statusText = $row->shipping_status ? strtoupper($row->shipping_status) : '.' . __('layouts.pending') . '.';
                     $statusText = $row->shipping_status ? __('layouts.' . $row->shipping_status) : __('layouts.pending');
                     $statusColor = $row->shipping_status === 'arranged' ? 'text-blue-700 bg-blue-100' : 'text-yellow-800 bg-yellow-100';
 
@@ -96,40 +124,27 @@ class OrderController extends Controller
                 ';
                 })
                 ->addColumn('action', function ($row) {
-                    // Here you can securely use route() and check permissions!
-                    $viewUrl   = route('order.view', $row->id); // Update with your actual route names
+                    $viewUrl   = route('order.view', $row->id); 
                     $editUrl   = route('order.edit', $row->id);
 
                     $actions = '<div class="flex items-center justify-end gap-2">';
-
-                    // Example of permission wrapping
-                    // if (auth()->user()->hasPermission('order.view')) {
                     $actions .= '
                         <a href="' . $viewUrl . '" title="' . __('layouts.view') . '" class="p-2 text-gray-600 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200">
                             <i class="fa-solid fa-eye"></i>
                         </a>';
-                    // }
-
-                    // if (auth()->user()->hasPermission('order.edit')) {
                     $actions .= '
                         <a href="' . $editUrl . '" title="' . __('layouts.edit') . '" class="p-2 text-gray-600 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200">
                             <i class="fa-solid fa-pencil"></i>
                         </a>';
-                    // }
-
-                    // if (auth()->user()->hasPermission('order.delete')) {
                     $actions .= '
                         <a href="#" title="' . __('layouts.delete') . '" class="p-2 text-red-500 transition-colors bg-red-50 border border-red-100 rounded-lg hover:text-red-700 hover:bg-red-100 hover:border-red-200">
                             <i class="fa-solid fa-trash"></i>
                         </a>';
-                    // }
-
                     $actions .= '</div>';
 
                     return $actions;
                 })
-                // CRITICAL: Tell DataTables to render these columns as raw HTML
-                ->rawColumns(['order_details', 'timeline', 'delivery_info', 'status', 'action'])
+                ->rawColumns(['remaining_days', 'order_details', 'delivery_info', 'status', 'action'])
                 ->make(true);
         }
 
@@ -194,7 +209,7 @@ class OrderController extends Controller
             'freight_price'          => 'nullable|numeric|min:0',
             'freight_master_price'   => 'nullable|numeric|min:0',
             'freight_note'           => 'nullable|string|max:255',
-            
+
             // Internal Dates
             'pickup_transfer_date'   => 'nullable|date',
             'sales_transfer_date'    => 'nullable|date',
@@ -283,14 +298,35 @@ class OrderController extends Controller
         // 2. Update the order
         $order->update($validatedData);
 
+        // Get the fields that were actually changed during the update
+        $changes = $order->getChanges();
+
+        // Remove 'updated_at' as we don't need to explicitly tell the user the timestamp changed
+        unset($changes['updated_at']);
+
+        if (count($changes) > 0) {
+            // Format the changed keys nicely (e.g. 'due_date' becomes 'due date')
+            $changedFields = implode(', ', array_map(function ($field) {
+                return str_replace('_', ' ', $field);
+            }, array_keys($changes)));
+
+            // Pass it as a JSON string so your Blade file can decode it
+            $logMessage = json_encode([
+                'custom_message' => __('layouts.order_updated') . '. ' . __('layouts.updated_fields') . ": " . ucwords($changedFields)
+            ]);
+        } else {
+            // Fallback to the original lang key if they hit 'update' without changing anything
+            $logMessage = 'order_updated';
+        }
+       
         logActivity(
             $order,
             'action_updated',
-            'order_updated',
+            $logMessage,
             'status_success'
         );
 
         // 3. Redirect back with success message
-        return redirect()->route('order.index')->with('success', 'Order updated successfully!');
+        return redirect()->route('order.view', ['id' => $order->id])->with('success', 'Order updated successfully!');
     }
 }

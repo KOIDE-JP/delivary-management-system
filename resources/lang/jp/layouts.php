@@ -350,6 +350,7 @@ return [
     // 'not_required' => '不要',      // Not Required
     'order_created' => '注文が正常に作成されました',
     'order_updated' => '注文が正常に更新されました',
+    'updated_fields' => '変更されたフィールド',
     
     'na' => '該当なし',
     'reg' => '登録',

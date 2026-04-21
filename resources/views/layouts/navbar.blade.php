@@ -259,7 +259,7 @@ $segments = explode('/', $path);
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
-                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200">
+                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200 cursor-pointer">
                                         <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
                                             <i class="fa fa-sign-out text-red-600"></i>
                                         </div>
