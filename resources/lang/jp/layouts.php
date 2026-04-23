@@ -571,5 +571,10 @@ return [
     'pickup_transfer_date' => '引取移管日',
     'sales_transfer_date' => '営業移管日',
     'shipping_transfer_date' => '出荷移管日',
+    'unrecognized_prefix' => '認識できないプレフィックス',
+    'unrecognized_prefix_description' => 'この注文番号の最初の2文字に一致する宛先がありません。このプレフィックスで新しい宛先を作成するか、注文番号を調整してください。',
+    'days_overdue' => '期限超過日数',
+    'today' => '今日',
+    'days_left' => '残り日数'
 
 ];

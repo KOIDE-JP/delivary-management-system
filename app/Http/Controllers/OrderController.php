@@ -75,13 +75,13 @@ class OrderController extends Controller
                     $diff = $today->diffInDays($dueDate, false);
 
                     if ($diff < 0) {
-                        $text = abs($diff) . ' Days Overdue';
+                        $text = abs($diff) . ' ' . __('layouts.days_overdue');
                         $badge = 'text-red-700 bg-red-100';
                     } elseif ($diff == 0) {
-                        $text = 'Today';
+                        $text = __('layouts.today');
                         $badge = 'text-orange-700 bg-orange-100';
                     } else {
-                        $text = $diff . ' Days Left';
+                        $text = $diff . ' ' . __('layouts.days_left');
                         $badge = 'text-green-700 bg-green-100';
                     }
 
@@ -157,7 +157,7 @@ class OrderController extends Controller
         $carriers = Carrier::select('name', 'id')->get();
         $truckTypes = TruckType::select('name', 'id')->get();
         $freightRates = FreightRate::all();
-        // dump($destinations, $carriers, $truckTypes, $freightRates);
+        // dd($destinations->toArray(), $carriers, $truckTypes, $freightRates);
         // dd('Debugging: Check if data is loaded correctly');
         return view('orders.create', compact('destinations', 'carriers', 'truckTypes', 'freightRates'));
     }
