@@ -565,7 +565,11 @@ return [
     'pickup_transfer_date' => 'Pickup Transfer Date',
     'sales_transfer_date' => 'Sales Transfer Date',
     'shipping_transfer_date' => 'Shipping Transfer Date',
-
+    'unrecognized_prefix' => 'Unrecognized Prefix',
+    'unrecognized_prefix_description' => 'No destination matches the first two characters of this order number. You can either create a new destination with this prefix, or adjust the order number.',
+    'days_overdue' => 'Days Overdue',
+    'today' => 'Today',
+    'days_left' => 'Days Left'
 
 
 

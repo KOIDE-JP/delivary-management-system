@@ -112,6 +112,19 @@
                                 @error('order_number')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
+                                <div id="prefix_alert"
+                                    class="hidden mt-3 flex items-start gap-2.5 p-3.5 rounded-xl bg-amber-50/60 backdrop-blur-md border border-amber-200/50 shadow-sm transition-all duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-5 h-5 text-amber-500 shrink-0 mt-0.5">
+                                        <path fill-rule="evenodd"
+                                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+
+                                    <div class="text-xs font-medium leading-relaxed text-amber-800">
+                                        <span class="font-bold text-amber-900">{{ __('layouts.unrecognized_prefix') }}:</span> {{ __('layouts.unrecognized_prefix_description') }}
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label
@@ -442,12 +455,12 @@
                                     name="destination">
                                     <option value="" disabled {{ old('destination') ? '' : 'selected' }}>
                                         {{ __('layouts.select_destination') }}</option>
-                                    @foreach ($destinations as $item)
+                                    {{-- @foreach ($destinations as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old('destination') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->prefix .' - '. $item->name }}
+                                            {{ $item->prefix . ' - ' . $item->name }}
                                         </option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('destination')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -584,20 +597,21 @@
                                 class="cursor-pointer px-6 py-2.5 font-semibold text-center text-gray-700 transition-colors bg-white border border-gray-300 hover:bg-gray-100 rounded-xl shadow-sm">
                                 {{ __('layouts.cancel') }}
                             </a>
-                            <button type="button" id="btn-prev"
-                                class="hidden cursor-pointer px-6 py-2.5 font-semibold text-center text-gray-700 transition-colors bg-white border border-gray-300 hover:bg-gray-100 rounded-xl shadow-sm">
-                                ← {{ __('layouts.previous') }}
+
+                            <button type="submit" id="btn-submit"
+                                class="cursor-pointer px-8 py-2.5 font-semibold text-white transition-opacity bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md">
+                                {{ __('layouts.save_order') }}
                             </button>
                         </div>
 
                         <div class="flex gap-3">
+                            <button type="button" id="btn-prev"
+                                class="hidden cursor-pointer px-6 py-2.5 font-semibold text-center text-gray-700 transition-colors bg-white border border-gray-300 hover:bg-gray-100 rounded-xl shadow-sm">
+                                ← {{ __('layouts.previous') }}
+                            </button>
                             <button type="button" id="btn-next"
                                 class="cursor-pointer px-8 py-2.5 font-semibold text-white transition-opacity bg-gray-800 hover:bg-gray-900 rounded-xl shadow-md flex items-center">
                                 {{ __('layouts.next_step') }} →
-                            </button>
-                            <button type="submit" id="btn-submit"
-                                class="cursor-pointer px-8 py-2.5 font-semibold text-white transition-opacity bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md">
-                                {{ __('layouts.save_order') }}
                             </button>
                         </div>
                     </div>
@@ -626,6 +640,9 @@
         $(document).ready(function() {
             const totalSteps = 5;
             let currentStep = 0;
+            const destinations = @json($destinations);
+            const $orderInput = $('input[name="order_number"]');
+            const $destinationSelect = $('select[name="destination"]');
 
             // --- SMART VALIDATION ROUTING ---
             // Find if there is an error text on the page from Laravel backend validation
@@ -737,6 +754,69 @@
                 function() {
                     fetchFreightPrice();
                 });
+
+            function updateDestination() {
+
+                // 1. ADDED 'selected' to the default option string
+                const defaultOption =
+                    `<option value="" disabled selected>{{ __('layouts.select_destination') }}</option>`;
+
+                $orderInput.on('input', function() {
+                    const orderValue = $(this).val().trim();
+
+                    // Clear the dropdown and append the default disabled option
+                    $destinationSelect.empty().append(defaultOption);
+
+                    if (orderValue.length >= 2) {
+                        const enteredPrefix = orderValue.substring(0, 2).toLowerCase();
+
+                        // Filter the destinations array
+                        const filteredDestinations = destinations.filter(item => {
+                            return item.prefix && item.prefix.toLowerCase() === enteredPrefix;
+                        });
+
+                        // Only append options if a match is found
+                        if (filteredDestinations.length > 0) {
+                            $('#prefix_alert').addClass('hidden');
+                            filteredDestinations.forEach(item => {
+                                $destinationSelect.append(
+                                    $('<option>', {
+                                        value: item.id,
+                                        text: `${item.prefix} - ${item.name}`
+                                    })
+                                );
+                            });
+                        }
+                        else{
+                            $('#prefix_alert').removeClass('hidden');
+                        }
+                    }
+                    else{
+                        $('#prefix_alert').addClass('hidden');
+                    }
+
+                    // 2. FORCE Select2 to sit on the empty placeholder value after rebuilding
+                    $destinationSelect.val("").trigger('change');
+                });
+
+                // Handle Laravel's old() input state after a validation failure
+                if ($orderInput.val().length >= 2) {
+                    // Trigger the input event to run the filtering logic above
+                    $orderInput.trigger('input');
+
+                    // Re-select the previously chosen destination
+                    const oldDestination = "{{ old('destination') }}";
+                    if (oldDestination) {
+                        // This will safely override the .val("") we forced in the input event
+                        $destinationSelect.val(oldDestination).trigger('change');
+                    }
+                } else {
+                    // Ensure Select2 reflects the empty/default state on initial fresh load
+                    $destinationSelect.val("").trigger('change');
+                }
+            }
+
+            updateDestination();
         });
     </script>
 @endpush
