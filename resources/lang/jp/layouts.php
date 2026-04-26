@@ -321,9 +321,9 @@ return [
     'freight_rate_created'              => '運送費が正常に作成されました',
     'freight_rate_updated'              => '運送費が正常に更新されました',
     'freight_rate_deleted'              => '運送費が削除されました',
-    'freight_rate_status_active'        => '運賃のステータスが有効に変更されました',
-    'freight_rate_status_inactive'      => '運賃のステータスが無効に変更されました',
-    'freight_rate_status_updated' => '運賃のステータスが :from から :to に変更されました',
+    'freight_rate_status_active'        => '運送費のステータスが有効に変更されました',
+    'freight_rate_status_inactive'      => '運送費のステータスが無効に変更されました',
+    'freight_rate_status_updated' => '運送費のステータスが :from から :to に変更されました',
     'cannot_delete_freight_rate_linked' => 'このフレートレートは注文に関連付けられているため、削除できません。',
 
     //Destination
@@ -374,10 +374,10 @@ return [
     'basic_info' => '基本情報',
     'delivery' => '配送',
     'billing' => '請求',
-    'freight' => '運賃',
+    'freight' => '運送費',
     'dates' => '日付',
 
-    'e_g_ord_10200' => '例：ORD-10200',
+    'e_g_YM1234' => '例：YM1234',
 
 
     // Order - General
@@ -393,13 +393,13 @@ return [
     'basic_information' => '基本情報',
     'delivery_shipping' => '配送と出荷',
     'documents_&_billing' => '書類と請求',
-    'freight_info' => '運賃情報',
+    'freight_info' => '運送費情報',
     'internal_dates' => '内部日付',
     'optional' => '任意',
 
     // Basic Info
-    'order_number' => '注文番号',
-    'order_name' => '注文名',
+    'order_number' => '型番',
+    'order_name' => '型名',
     'registered_date' => '登録日',
 
     // Delivery
@@ -422,7 +422,7 @@ return [
     'courier' => '宅配便',
 
     // Documents
-    'document_submission' => '書類提出',
+    'document_submission' => '配信と書類',
     'dw_status' => 'DWステータス',
     'shipped' => '提出済み',
     'not_shipped' => '未提出',
@@ -438,10 +438,10 @@ return [
     'not_received' => '未受領',
 
     // Client Schedule
-    'client_schedule' => '顧客スケジュール',
-    'material_pickup_date' => '材料引取日',
-    'inspection_due_date' => '検査期限日',
-    'parts_pickup_date' => '部品引取日',
+    'client_schedule' => '素材寸検と金型引取日',
+    'material_pickup_date' => '素材引取日',
+    'inspection_due_date' => '寸検完了予定日',
+    'parts_pickup_date' => '金型引取日',
 
     // Billing
     'billing_information' => '請求情報',
@@ -455,10 +455,10 @@ return [
     'destination' => '目的地',
     'carrier' => '運送業者',
     'truck_type' => 'トラック種別',
-    'freight_price' => '運賃',
-    'freight_master_price' => 'マスタ運賃',
-    'freight_note' => '運賃メモ',
-    'enter_freight_notes' => '運賃メモを入力',
+    'freight_price' => '運送費',
+    'freight_master_price' => 'マスタ運送費',
+    'freight_note' => '運送費メモ',
+    'enter_freight_notes' => 'メモを入力',
 
     // Internal Dates
     'pickup_transfer_date' => '引取移動日',
@@ -540,15 +540,15 @@ return [
     'basic_information' => '基本情報',
     'delivery_information' => '配送情報',
     'shipping_information' => '出荷情報',
-    'document_submission' => '書類提出',
+    'document_submission' => '社内配信と書類',
     'billing_information' => '請求情報',
     'freight_information' => '運送情報',
-    'client_schedule' => '顧客スケジュール',
-    'internal_dates' => '社内日程',
+    'client_schedule' => '素材寸検と金型引取日',
+    'internal_dates' => 'その他日程',
 
     // Fields
-    'order_number' => '注文番号',
-    'order_name' => '注文名',
+    'order_number' => '型番',
+    'order_name' => '型名',
     'registered_date' => '登録日',
 
     'due_date' => '納期',
@@ -556,36 +556,36 @@ return [
     'confirmed' => '確定',
     'unconfirmed' => '未確定',
 
-    'inspection_date' => '検査日',
+    'inspection_date' => '顧客寸検日',
     'priority' => '優先度',
     'high' => '高',
     'normal' => '通常',
 
-    'shipping_date' => '出荷日',
-    'shipping_status' => '出荷ステータス',
+    'shipping_date' => '出荷予定日',
+    'shipping_status' => '運送手配',
 
-    'dw_status' => 'DWステータス',
-    'quotation_status' => '見積ステータス',
-    'order_status' => '注文ステータス',
+    'dw_status' => 'DW配信',
+    'quotation_status' => '見積提出',
+    'order_status' => '注文書受領',
 
-    'inspection_slip_status' => '検査票ステータス',
-    'invoice_status' => '請求書ステータス',
-    'order_amount' => '注文金額',
+    'inspection_slip_status' => '検収伝票',
+    'invoice_status' => '請求書',
+    'order_amount' => '受注金額',
 
     'destination' => '配送先',
     'carrier' => '運送業者',
     'truck_type' => 'トラック種類',
-    'freight_price' => '運賃',
+    'freight_price' => '運送費',
 
-    'material_pickup_date' => '材料引取日',
-    'inspection_due_date' => '検査期限',
-    'parts_pickup_date' => '部品引取日',
+    'material_pickup_date' => '素材引取日',
+    'inspection_due_date' => '寸検完了予定日',
+    'parts_pickup_date' => '金型引取予定日',
 
-    'pickup_transfer_date' => '引取移管日',
-    'sales_transfer_date' => '営業移管日',
-    'shipping_transfer_date' => '出荷移管日',
+    'pickup_transfer_date' => '引取転記日',
+    'sales_transfer_date' => '売上転記日',
+    'shipping_transfer_date' => '出荷転記日',
     'unrecognized_prefix' => '認識できないプレフィックス',
-    'unrecognized_prefix_description' => 'この注文番号の最初の2文字に一致する宛先がありません。このプレフィックスで新しい宛先を作成するか、注文番号を調整してください。',
+    'unrecognized_prefix_description' => 'この型番の最初の2文字に一致する宛先がありません。この２文字で新しい宛先を作成するか、型番を確認してください。',
     'days_overdue' => '期限超過日数',
     'today' => '今日',
     'days_left' => '残り日数'
