@@ -113,7 +113,7 @@
                 </li>
                 
                 <!-- Order Menu -->
-                {{-- @if (auth()->user()->hasPermission('statuses.index') || auth()->user()->hasPermission('statuses.create')) --}}
+                @if (auth()->user()->hasPermission('order.index') || auth()->user()->hasPermission('order.create'))
                     <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('order.*') ? 'true' : 'false' }} }">
                         <a href="javascript:;" @click="open = !open"
                             class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
@@ -142,7 +142,7 @@
                         </a>
 
                         <ul x-show="open" x-collapse class="ml-4 mt-2 space-y-1">
-                            {{-- @if (auth()->user()->hasPermission('order.create')) --}}
+                            @if (auth()->user()->hasPermission('order.create'))
                                 <li class="child-menu-list">
                                     <a href="{{ route('order.create') }}"
                                         class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('order.create') ? 'active font-semibold text-white' : '' }}">
@@ -152,9 +152,9 @@
                                         {{ __('layouts.order.create') }}
                                     </a>
                                 </li>
-                            {{-- @endif --}}
+                            @endif
 
-                            {{-- @if (auth()->user()->hasPermission('order.index')) --}}
+                            @if (auth()->user()->hasPermission('order.index'))
                                 <li class="child-menu-list">
                                     <a href="{{ route('order.index') }}"
                                         class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('order.index') ? 'active font-semibold text-white' : '' }}">
@@ -163,10 +163,21 @@
                                         {{ __('layouts.order.list') }}
                                     </a>
                                 </li>
-                            {{-- @endif --}}
+                            @endif
+
+                            @if (auth()->user()->hasPermission('order.trashed'))
+                                <li class="child-menu-list">
+                                    <a href="{{ route('order.trashed') }}"
+                                        class="flex items-center px-4 py-2.5 text-sm text-slate-300 rounded-lg submenu-item-glass hover:text-white transition-all duration-200 {{ request()->routeIs('order.trashed') ? 'active font-semibold text-white' : '' }}">
+                                        <div class="w-2 h-2 bg-red-400 rounded-full mr-3 shadow-sm shadow-blue-400/50">
+                                        </div>
+                                        {{ __('layouts.order.trashed') }}
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
-                {{-- @endif --}}
+                @endif
 
 
 
@@ -363,7 +374,7 @@
                 <!-- Users Menu -->
                 @if (auth()->user()->hasPermission('users.index') || auth()->user()->hasPermission('users.create') || auth()->user()->hasPermission('role.list'))
 
-                <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('users.*') || request()->routeIs('role.list') ? 'true' : 'false' }} }">
+                <li class="mt-2 w-full" x-data="{ open: {{ request()->routeIs('users.*') || request()->routeIs('role.*') ? 'true' : 'false' }} }">
                     <a href="javascript:;" @click="open = !open"
                         class="flex items-center justify-between px-4 py-3.5 text-slate-200 rounded-xl menu-item-glass hover:text-white transition-all duration-200 group"
                         :class="{ 'text-white bg-white/10': open }">

@@ -31,6 +31,7 @@ return [
         'Freight-rates' => '運賃',
         'Orders' => '注文',
         'View' => '表示',
+        'Trashed' => '削除された',
     ],
 
     'Delivery_Deadline_Management_System' => 'DMS - 納期管理システム',
@@ -277,8 +278,19 @@ return [
         'orders' => '注文',
         'list' => '注文リスト',
         'create' => '注文を作成',
-        'view' => '注文を表示'
+        'view' => '注文を表示',
+        'trashed' => '削除された注文',
+        'trashed_list' => '削除された注文リスト',
+        'manage_deleted_orders' => '削除された注文を管理',
     ],
+    'move_to_trash' => 'ゴミ箱に移動',
+    'order_can_be_recovered' => 'この注文は後でゴミ箱から復元できます。',
+    'force_delete' => '完全に削除',
+    'deleted_at' => '削除日時',
+    'order_text' => '注文',
+    'moved_to_trash_success' => '注文がゴミ箱に正常に移動されました！',
+    'order_restore_success' => '注文が正常に復元されました！',
+    'order_deleted_permanently' => '注文が完全に削除されました！',
 
 
     'already_exists_freight_rates' => 'この目的地、運送業者、トラック種別の組み合わせはすでに存在しています。',
@@ -412,8 +424,9 @@ return [
     // Documents
     'document_submission' => '書類提出',
     'dw_status' => 'DWステータス',
-    'delivered' => '提出済み',
-    'undelivered' => '未提出',
+    'shipped' => '提出済み',
+    'not_shipped' => '未提出',
+    'no_shipping_required' => '出荷不要',
     'not_required' => '不要',
 
     'quotation_status' => '見積状況',

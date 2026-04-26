@@ -416,26 +416,6 @@
         });
     });
 
-    // function confirmDelete() {
-    //     Swal.fire({
-    //         title: "{{ __('layouts.delete_confirm') }}",
-    //         text: "{{ __('layouts.not_revert') }}",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: "{{ __('layouts.delete_confirm') }}",
-    //         cancelButtonText: "{{ __('layouts.cancel_btn') }}",
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             console.log("Delete confirmed");
-
-    //             document.getElementById('deleteForm')
-    //                 .submit(); // Need to use this id for the delete so that it can be used in multiple places
-
-    //         }
-    //     });
-    // }
     function confirmDelete(button) {
         Swal.fire({
             title: "{{ __('layouts.delete_confirm') }}",

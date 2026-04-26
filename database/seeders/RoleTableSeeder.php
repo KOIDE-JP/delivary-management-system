@@ -18,7 +18,7 @@ class RoleTableSeeder extends Seeder
                 'name' => 'Super Admin',
                 'slug' => 'super-admin',
             ],
-                        [
+            [
                 'name' => 'Admin',
                 'slug' => 'admin',
             ],
@@ -37,7 +37,10 @@ class RoleTableSeeder extends Seeder
         ];
 
         foreach ($data as $info) {
-            Role::create($info);
+            Role::firstOrCreate(
+                ['slug' => $info['slug']],
+                $info
+            );
         }
     }
 }

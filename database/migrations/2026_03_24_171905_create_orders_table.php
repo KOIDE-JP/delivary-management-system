@@ -47,9 +47,9 @@ return new class extends Migration
             | DOCUMENTS & BILLING
             |--------------------------------------------------------------------------
             */
-            $table->enum('dw_status', ['undelivered', 'delivered', 'not_required'])->default('undelivered');
-            $table->enum('quotation_status', ['submitted', 'not_submitted', 'not_required'])->default('submitted');
-            $table->enum('order_status', ['received', 'not_received', 'not_required'])->default('received');
+            $table->enum('dw_status', ['not_shipped', 'shipped', 'no_shipping_required'])->default('not_shipped');
+            $table->enum('quotation_status', ['submitted', 'not_submitted', 'not_required'])->default('not_submitted');
+            $table->enum('order_status', ['received', 'not_received', 'not_required'])->default('not_received');
 
             // Client Schedule
             $table->date('material_pickup_date')->nullable();
@@ -57,8 +57,8 @@ return new class extends Migration
             $table->date('parts_pickup_date')->nullable();
 
             // Billing
-            $table->enum('inspection_slip_status', ['received', 'not_received', 'not_required'])->default('received');
-            $table->enum('invoice_status', ['sent', 'not_sent', 'not_required'])->default('sent');
+            $table->enum('inspection_slip_status', ['received', 'not_received', 'not_required'])->default('not_received');
+            $table->enum('invoice_status', ['sent', 'not_sent', 'not_required'])->default('not_sent');
             $table->decimal('order_amount', 12, 2)->nullable();
 
             /*
@@ -92,6 +92,7 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
