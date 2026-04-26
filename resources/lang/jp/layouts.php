@@ -294,8 +294,8 @@ return [
 
 
     'already_exists_freight_rates' => 'この目的地、運送業者、トラック種別の組み合わせはすでに存在しています。',
-    'freight_rate_details' => '運賃詳細',
-    'freight_rate_information' => '運賃情報',
+    'freight_rate_details' => '運送費詳細',
+    'freight_rate_information' => '運送費情報',
     'activity_logs' => 'アクティビティログ',
     'activity_log' => 'アクティビティログ',
     'records' => '記録',
@@ -318,9 +318,9 @@ return [
     // Activity log messages
 
     //Freight Rate
-    'freight_rate_created'              => '運賃が正常に作成されました',
-    'freight_rate_updated'              => '運賃が正常に更新されました',
-    'freight_rate_deleted'              => '運賃が削除されました',
+    'freight_rate_created'              => '運送費が正常に作成されました',
+    'freight_rate_updated'              => '運送費が正常に更新されました',
+    'freight_rate_deleted'              => '運送費が削除されました',
     'freight_rate_status_active'        => '運賃のステータスが有効に変更されました',
     'freight_rate_status_inactive'      => '運賃のステータスが無効に変更されました',
     'freight_rate_status_updated' => '運賃のステータスが :from から :to に変更されました',
