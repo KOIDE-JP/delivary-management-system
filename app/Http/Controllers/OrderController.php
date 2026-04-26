@@ -51,18 +51,18 @@ class OrderController extends Controller
                 // APPLY HIGHLIGHT RULES: due_date - today <= 0 AND priority == 'yes'
                 ->setRowClass(function ($row) {
                     $highlight = false;
-                    
+
                     if ($row->due_date && $row->priority === 'yes') {
                         $today = now()->startOfDay();
                         $dueDate = Carbon::parse($row->due_date)->startOfDay();
-                        
+
                         if ($dueDate->lte($today)) {
                             $highlight = true;
                         }
                     }
 
-                    return $highlight 
-                        ? 'bg-red-100 hover:bg-red-200 transition-colors divide-y divide-red-200 text-sm' 
+                    return $highlight
+                        ? 'bg-red-100 hover:bg-red-200 transition-colors divide-y divide-red-200 text-sm'
                         : 'bg-white hover:bg-blue-50/50 transition-colors divide-y divide-gray-100 text-sm';
                 })
                 ->addColumn('remaining_days', function ($row) {
@@ -103,7 +103,7 @@ class OrderController extends Controller
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
-                    <div class="mt-1 text-xs text-gray-500">Est: ' . htmlspecialchars($date) . '</div>
+                    <div class="mt-1 text-xs text-gray-500">'.__('layouts.shipping_date').': ' . htmlspecialchars($date) . '</div>
                 ';
                 })
                 ->addColumn('status', function ($row) {
@@ -124,8 +124,9 @@ class OrderController extends Controller
                 ';
                 })
                 ->addColumn('action', function ($row) {
-                    $viewUrl   = route('order.view', $row->id); 
+                    $viewUrl   = route('order.view', $row->id);
                     $editUrl   = route('order.edit', $row->id);
+                    $deleteUrl   = route('order.destroy', $row->id);
 
                     $actions = '<div class="flex items-center justify-end gap-2">';
                     $actions .= '
@@ -136,10 +137,16 @@ class OrderController extends Controller
                         <a href="' . $editUrl . '" title="' . __('layouts.edit') . '" class="p-2 text-gray-600 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200">
                             <i class="fa-solid fa-pencil"></i>
                         </a>';
-                    $actions .= '
-                        <a href="#" title="' . __('layouts.delete') . '" class="p-2 text-red-500 transition-colors bg-red-50 border border-red-100 rounded-lg hover:text-red-700 hover:bg-red-100 hover:border-red-200">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>';
+                    if (auth()->user()->hasPermission('carriers.destroy')) {
+                        $actions .= '
+                            <form action="' . $deleteUrl . '" method="POST" class="inline">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button title="' . __('layouts.delete') . '" type="button" onclick="confirmOrderDelete(this)"
+                                    class="p-2 text-red-500 transition-colors bg-red-50 border border-red-100 rounded-lg hover:text-red-700 hover:bg-red-100 hover:border-red-200 cursor-pointer">
+                                    <i class="fa-solid fa-trash w-3 h-3"></i>
+                                </button>
+                            </form>';
+                    }
                     $actions .= '</div>';
 
                     return $actions;
@@ -188,7 +195,7 @@ class OrderController extends Controller
             'shipping_status'        => 'nullable|in:unconfirmed,unarranged,arranged,direct_delivery,courier',
 
             // Documents & Billing
-            'dw_status'              => 'nullable|in:undelivered,delivered,not_required',
+            'dw_status'              => 'nullable|in:not_shipped,shipped,no_shipping_required',
             'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
             'order_status'           => 'nullable|in:received,not_received,not_required',
 
@@ -234,7 +241,7 @@ class OrderController extends Controller
         );
 
         // 3. Redirect back with success message
-        return redirect()->route('order.index')->with('success', 'Order created successfully!');
+        return redirect()->route('order.index')->with('success', __('layouts.order_text').' '.__('layouts.created_successfully'));
     }
 
     public function edit($id)
@@ -267,7 +274,7 @@ class OrderController extends Controller
             'shipping_status'        => 'nullable|in:unconfirmed,unarranged,arranged,direct_delivery,courier',
 
             // Documents & Billing
-            'dw_status'              => 'nullable|in:undelivered,delivered,not_required',
+            'dw_status'              => 'nullable|in:not_shipped,shipped,no_shipping_required',
             'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
             'order_status'           => 'nullable|in:received,not_received,not_required',
 
@@ -318,7 +325,7 @@ class OrderController extends Controller
             // Fallback to the original lang key if they hit 'update' without changing anything
             $logMessage = 'order_updated';
         }
-       
+
         logActivity(
             $order,
             'action_updated',
@@ -327,6 +334,126 @@ class OrderController extends Controller
         );
 
         // 3. Redirect back with success message
-        return redirect()->route('order.view', ['id' => $order->id])->with('success', 'Order updated successfully!');
+        return redirect()->route('order.view', ['id' => $order->id])->with('success', __('layouts.order_text').' '.__('layouts.updated_successfully'));
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        logActivity(
+            $order,
+            'action_deleted',
+            'order_deleted',
+            'status_success'
+        );
+
+        return redirect()->route('order.index')->with('success', __('layouts.moved_to_trash_success'));
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->ajax()) {
+            // Get only trashed orders
+            $query = Order::onlyTrashed();
+
+            // 1. Apply Custom Search Filter
+            if ($request->filled('custom_search')) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('order_number', 'like', '%' . $request->custom_search . '%')
+                        ->orWhere('order_name', 'like', '%' . $request->custom_search . '%');
+                });
+            }
+
+            return DataTables::of($query)
+                ->addColumn('order_details', function ($row) {
+                    $date = $row->registered_date ? $row->registered_date : 'N/A';
+                    return '
+                <div class="font-bold text-gray-900"># ' . htmlspecialchars($row->order_number) . '</div>
+                <div class="text-xs text-gray-600 mt-0.5 mb-1.5 font-medium">' . htmlspecialchars($row->order_name) . '</div>
+                <div class="text-[11px] text-gray-400 flex items-center">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                     ' . __('layouts.reg') . ': ' . $date . '
+                </div>';
+                })
+                ->addColumn('deleted_at', function ($row) {
+                    $formattedDate = $row->deleted_at ? $row->deleted_at->format('Y-m-d H:i') : 'N/A';
+                    return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-red-700 bg-red-100">' . htmlspecialchars($formattedDate) . '</span>';
+                })
+                ->addColumn('delivery_info', function ($row) {
+                    $carrier = $row->carrier ? $row?->Carrier?->name : __('layouts.pending_carrier');
+                    $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
+                    return '
+                <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
+                <div class="mt-1 text-xs text-gray-500">'.__('layouts.shipping_date').': ' . htmlspecialchars($date) . '</div>';
+                })
+                ->addColumn('status', function ($row) {
+                    $priorityHtml = $row->priority === 'yes'
+                        ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1"> ' . __('layouts.priority') . '</span>'
+                        : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">' . __('layouts.normal') . '</span>';
+
+                    $statusText = $row->shipping_status ? __('layouts.' . $row->shipping_status) : __('layouts.pending');
+                    $statusColor = $row->shipping_status === 'arranged' ? 'text-blue-700 bg-blue-100' : 'text-yellow-800 bg-yellow-100';
+
+                    return '
+                <div class="flex flex-col items-start">
+                    ' . $priorityHtml . '
+                    <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium ' . $statusColor . ' rounded-full">
+                        ' . htmlspecialchars($statusText) . '
+                    </span>
+                </div>';
+                })
+                ->addColumn('action', function ($row) {
+                    $restoreUrl     = route('order.restore', $row->id);
+                    $forceDeleteUrl = route('order.forceDelete', $row->id);
+
+                    $actions = '<div class="flex items-center justify-end gap-2">';
+
+                    // Restore Button
+                    $actions .= '
+                    <form action="' . $restoreUrl . '" method="POST" class="inline">
+                        ' . csrf_field() . '
+                        <button title="' . __('layouts.restore') . '" type="submit" 
+                            class="p-2 text-green-600 transition-colors bg-green-50 border border-green-200 rounded-lg hover:text-green-800 hover:bg-green-100 hover:border-green-300 cursor-pointer">
+                            <i class="fa-solid fa-rotate-left w-3 h-3"></i>
+                        </button>
+                    </form>';
+
+                    // Force Delete Button (Wrap in permission check if needed)
+                    $actions .= '
+                    <form action="' . $forceDeleteUrl . '" method="POST" class="inline">
+                        ' . csrf_field() . method_field('DELETE') . '
+                        <button title="' . __('layouts.force_delete') . '" type="button" onclick="confirmDelete(this)"
+                            class="p-2 text-red-600 transition-colors bg-red-50 border border-red-200 rounded-lg hover:text-red-800 hover:bg-red-100 hover:border-red-300 cursor-pointer">
+                            <i class="fa-solid fa-trash-can w-3 h-3"></i>
+                        </button>
+                    </form>';
+
+                    $actions .= '</div>';
+
+                    return $actions;
+                })
+                ->rawColumns(['order_details', 'deleted_at', 'delivery_info', 'status', 'action'])
+                ->make(true);
+        }
+
+        return view('orders.trashed');
+    }
+
+    public function restore($id)
+    {
+        $order = Order::onlyTrashed()->findOrFail($id);
+        $order->restore();
+
+        return back()->with('success', __('layouts.order_restore_success'));
+    }
+
+    public function forceDelete($id)
+    {
+        $order = Order::onlyTrashed()->findOrFail($id);
+        $order->forceDelete();
+
+        return back()->with('success', __('layouts.order_deleted_permanently'));
     }
 }

@@ -30,6 +30,7 @@ return [
         'Carriers' => 'Carriers',
         'Truck-types' => 'Truck Types',
         'Freight-rates' => 'Freight Rates',
+        'Trashed' => 'Trashed',
     ],
 
     'Delivery_Deadline_Management_System' => 'Delivery Deadline Management System',
@@ -241,8 +242,19 @@ return [
         'orders' => 'Orders',
         'list' => 'Order List',
         'create' => 'Create Order',
-        'view' => 'View Order'
+        'view' => 'View Order',
+        'trashed' => 'Trashed Orders',
+        'trashed_list' => 'Trashed Order List',
+        'manage_deleted_orders' => 'Manage Deleted Orders',
     ],
+    'move_to_trash' => 'Move to Trash',
+    'order_can_be_recovered' => 'You can recover this order from trash later.',
+    'force_delete' => 'Force Delete',
+    'deleted_at' => 'Deleted At',
+    'order_text' => 'Order',
+    'moved_to_trash_success' => 'Order moved to trash successfully!',
+    'order_restore_success' => 'Order restored successfully!',
+    'order_deleted_permanently' => 'Order permanently deleted!',
 
     //
 
@@ -404,8 +416,9 @@ return [
     // Documents
     'document_submission' => 'Document Submission',
     'dw_status' => 'DW Status',
-    'delivered' => 'Delivered',
-    'undelivered' => 'Undelivered',
+    'shipped' => 'Shipped',
+    'not_shipped' => 'Not Shipped',
+    'no_shipping_required' => 'No Shipping Required',
     'not_required' => 'Not Required',
 
     'quotation_status' => 'Quotation Status',

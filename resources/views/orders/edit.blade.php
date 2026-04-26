@@ -285,15 +285,18 @@
                                         class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.dw_status') }}</label>
                                     <select name="dw_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('dw_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="undelivered"
-                                            {{ old('dw_status', $order->dw_status) == 'undelivered' ? 'selected' : '' }}>
-                                            {{ __('layouts.undelivered') }}</option>
-                                        <option value="delivered"
-                                            {{ old('dw_status', $order->dw_status) == 'delivered' ? 'selected' : '' }}>
-                                            {{ __('layouts.delivered') }}</option>
-                                        <option value="not_required"
-                                            {{ old('dw_status', $order->dw_status) == 'not_required' ? 'selected' : '' }}>
-                                            {{ __('layouts.not_required') }}</option>
+                                        <option value="not_shipped"
+                                            {{ old('dw_status', $order->dw_status) == 'not_shipped' ? 'selected' : '' }}>
+                                            {{ __('layouts.not_shipped') }}
+                                        </option>
+                                        <option value="shipped"
+                                            {{ old('dw_status', $order->dw_status) == 'shipped' ? 'selected' : '' }}>
+                                            {{ __('layouts.shipped') }}
+                                        </option>
+                                        <option value="no_shipping_required"
+                                            {{ old('dw_status', $order->dw_status) == 'no_shipping_required' ? 'selected' : '' }}>
+                                            {{ __('layouts.no_shipping_required') }}
+                                        </option>
                                     </select>
                                     @error('dw_status')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -304,12 +307,12 @@
                                         class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.quotation_status') }}</label>
                                     <select name="quotation_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('quotation_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="submitted"
-                                            {{ old('quotation_status', $order->quotation_status) == 'submitted' ? 'selected' : '' }}>
-                                            {{ __('layouts.submitted') }}</option>
                                         <option value="not_submitted"
                                             {{ old('quotation_status', $order->quotation_status) == 'not_submitted' ? 'selected' : '' }}>
                                             {{ __('layouts.not_submitted') }}</option>
+                                        <option value="submitted"
+                                            {{ old('quotation_status', $order->quotation_status) == 'submitted' ? 'selected' : '' }}>
+                                            {{ __('layouts.submitted') }}</option>
                                         <option value="not_required"
                                             {{ old('quotation_status', $order->quotation_status) == 'not_required' ? 'selected' : '' }}>
                                             {{ __('layouts.not_required') }}</option>
@@ -323,12 +326,12 @@
                                         class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.order_status') }}</label>
                                     <select name="order_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                        <option value="received"
-                                            {{ old('order_status', $order->order_status) == 'received' ? 'selected' : '' }}>
-                                            {{ __('layouts.received') }}</option>
                                         <option value="not_received"
                                             {{ old('order_status', $order->order_status) == 'not_received' ? 'selected' : '' }}>
                                             {{ __('layouts.not_received') }}</option>
+                                        <option value="received"
+                                            {{ old('order_status', $order->order_status) == 'received' ? 'selected' : '' }}>
+                                            {{ __('layouts.received') }}</option>
                                         <option value="not_required"
                                             {{ old('order_status', $order->order_status) == 'not_required' ? 'selected' : '' }}>
                                             {{ __('layouts.not_required') }}</option>
@@ -386,12 +389,12 @@
                                             class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.inspection_slip_status') }}</label>
                                         <select name="inspection_slip_status"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('inspection_slip_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                            <option value="received"
-                                                {{ old('inspection_slip_status', $order->inspection_slip_status) == 'received' ? 'selected' : '' }}>
-                                                {{ __('layouts.received') }}</option>
                                             <option value="not_received"
                                                 {{ old('inspection_slip_status', $order->inspection_slip_status) == 'not_received' ? 'selected' : '' }}>
                                                 {{ __('layouts.not_received') }}</option>
+                                            <option value="received"
+                                                {{ old('inspection_slip_status', $order->inspection_slip_status) == 'received' ? 'selected' : '' }}>
+                                                {{ __('layouts.received') }}</option>
                                             <option value="not_required"
                                                 {{ old('inspection_slip_status', $order->inspection_slip_status) == 'not_required' ? 'selected' : '' }}>
                                                 {{ __('layouts.not_required') }}</option>
@@ -405,12 +408,12 @@
                                             class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.invoice_status') }}</label>
                                         <select name="invoice_status"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('invoice_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                            <option value="sent"
-                                                {{ old('invoice_status', $order->invoice_status) == 'sent' ? 'selected' : '' }}>
-                                                {{ __('layouts.sent') }}</option>
                                             <option value="not_sent"
                                                 {{ old('invoice_status', $order->invoice_status) == 'not_sent' ? 'selected' : '' }}>
                                                 {{ __('layouts.not_sent') }}</option>
+                                            <option value="sent"
+                                                {{ old('invoice_status', $order->invoice_status) == 'sent' ? 'selected' : '' }}>
+                                                {{ __('layouts.sent') }}</option>
                                             <option value="not_required"
                                                 {{ old('invoice_status', $order->invoice_status) == 'not_required' ? 'selected' : '' }}>
                                                 {{ __('layouts.not_required') }}</option>
@@ -802,6 +805,11 @@
 
             updateUI();
 
+            // Sync shipping_date with due_date
+            $('input[name="due_date"]').on('change', function() {
+                $('input[name="shipping_date"]').val($(this).val());
+            });
+            
             function updateDestination() {
 
                 // 1. ADDED 'selected' to the default option string
