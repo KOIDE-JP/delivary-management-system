@@ -39,6 +39,7 @@ Route::get('/show-app-log', function () {
 Route::middleware([
     'setLocale',
     LoginAuthMiddleware::class,
+    'permission'
 ])->group(function () {
 
     Route::group(['prefix' => 'roles'], function () {

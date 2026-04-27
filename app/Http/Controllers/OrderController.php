@@ -103,7 +103,7 @@ class OrderController extends Controller
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
-                    <div class="mt-1 text-xs text-gray-500">'.__('layouts.shipping_date').': ' . htmlspecialchars($date) . '</div>
+                    <div class="mt-1 text-xs text-gray-500">' . __('layouts.shipping_date') . ': ' . htmlspecialchars($date) . '</div>
                 ';
                 })
                 ->addColumn('status', function ($row) {
@@ -129,15 +129,19 @@ class OrderController extends Controller
                     $deleteUrl   = route('order.destroy', $row->id);
 
                     $actions = '<div class="flex items-center justify-end gap-2">';
-                    $actions .= '
+                    if (auth()->user()->hasPermission('order.view')) {
+                        $actions .= '
                         <a href="' . $viewUrl . '" title="' . __('layouts.view') . '" class="p-2 text-gray-600 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200">
                             <i class="fa-solid fa-eye"></i>
                         </a>';
-                    $actions .= '
+                    }
+                    if (auth()->user()->hasPermission('order.edit')) {
+                        $actions .= '
                         <a href="' . $editUrl . '" title="' . __('layouts.edit') . '" class="p-2 text-gray-600 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:text-blue-600 hover:bg-blue-50 hover:border-blue-200">
                             <i class="fa-solid fa-pencil"></i>
                         </a>';
-                    if (auth()->user()->hasPermission('carriers.destroy')) {
+                    }
+                    if (auth()->user()->hasPermission('order.destroy')) {
                         $actions .= '
                             <form action="' . $deleteUrl . '" method="POST" class="inline">
                                 ' . csrf_field() . method_field('DELETE') . '
@@ -241,7 +245,7 @@ class OrderController extends Controller
         );
 
         // 3. Redirect back with success message
-        return redirect()->route('order.index')->with('success', __('layouts.order_text').' '.__('layouts.created_successfully'));
+        return redirect()->route('order.index')->with('success', __('layouts.order_text') . ' ' . __('layouts.created_successfully'));
     }
 
     public function edit($id)
@@ -334,7 +338,7 @@ class OrderController extends Controller
         );
 
         // 3. Redirect back with success message
-        return redirect()->route('order.view', ['id' => $order->id])->with('success', __('layouts.order_text').' '.__('layouts.updated_successfully'));
+        return redirect()->route('order.view', ['id' => $order->id])->with('success', __('layouts.order_text') . ' ' . __('layouts.updated_successfully'));
     }
 
     public function destroy($id)
@@ -345,7 +349,7 @@ class OrderController extends Controller
         logActivity(
             $order,
             'action_deleted',
-            'order_deleted',
+            'moved_to_trash_success',
             'status_success'
         );
 
@@ -386,7 +390,7 @@ class OrderController extends Controller
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
                     return '
                 <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
-                <div class="mt-1 text-xs text-gray-500">'.__('layouts.shipping_date').': ' . htmlspecialchars($date) . '</div>';
+                <div class="mt-1 text-xs text-gray-500">' . __('layouts.shipping_date') . ': ' . htmlspecialchars($date) . '</div>';
                 })
                 ->addColumn('status', function ($row) {
                     $priorityHtml = $row->priority === 'yes'

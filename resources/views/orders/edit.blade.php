@@ -30,6 +30,16 @@
                         <span class="font-medium">{{ __('layouts.please_correct_the_errors_below_to_proceed') }}</span>
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="mt-4 flex items-start p-4 mb-6 text-red-700 border-l-4 border-red-500 rounded-lg bg-red-50">
+                        <svg class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.707-9.293a1 1 0 011.414-1.414L10 8.586l1.707-1.707a1 1 0 011.414 1.414L11.414 10l1.707 1.707a1 1 0 01-1.414 1.414L10 11.414l-1.707 1.707a1 1 0 01-1.414-1.414L8.586 10l-1.707-1.707z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span>{{ session('error') }}</span>
+                    </div>
+                @endif
             </div>
 
             {{-- FORM ACTION & METHOD SPOOFING --}}
@@ -677,7 +687,7 @@
             let currentStep = 0;
             const destinations = @json($destinations);
             const $orderInput = $('input[name="order_number"]');
-            const $selectedDestination = @json($order->destination ? (int)$order->destination : null);
+            const $selectedDestination = @json($order->destination ? (int) $order->destination : null);
             const $destinationSelect = $('select[name="destination"]');
 
             // --- SMART VALIDATION ROUTING ---
@@ -809,7 +819,7 @@
             $('input[name="due_date"]').on('change', function() {
                 $('input[name="shipping_date"]').val($(this).val());
             });
-            
+
             function updateDestination() {
 
                 // 1. ADDED 'selected' to the default option string

@@ -17,10 +17,12 @@
                         class="min-w-[9rem] flex-1 px-2 py-2 font-semibold text-center text-gray-700 transition-colors bg-gray-200 hover:bg-gray-300 rounded-xl">
                         {{ __('layouts.back_to_list') }}
                     </a>
+                    @if (auth()->user()->hasPermission('order.edit'))
                     <a href="{{ route('order.edit', $order->id) }}"
                         class="min-w-[9rem] cursor-pointer flex-1 px-2 py-2 font-semibold text-center text-white transition-opacity bg-gradient-to-r from-blue-600 to-cyan-400 hover:opacity-90 rounded-xl shadow-md">
                         {{ __('layouts.edit_order') }}
                     </a>
+                    @endif
                 </div>
             </div>
 

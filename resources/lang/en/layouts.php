@@ -582,8 +582,8 @@ return [
     'unrecognized_prefix_description' => 'No destination matches the first two characters of this order number. You can either create a new destination with this prefix, or adjust the order number.',
     'days_overdue' => 'Days Overdue',
     'today' => 'Today',
-    'days_left' => 'Days Left'
-
+    'days_left' => 'Days Left',
+    'no_access_to_this_route' => 'You don\'t have access on this route',
 
 
 ];

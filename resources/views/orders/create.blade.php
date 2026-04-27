@@ -23,6 +23,16 @@
                         <span class="font-medium">{{ __('layouts.please_correct_the_errors_below_toProceed') }}</span>
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="mt-4 flex items-start p-4 mb-6 text-red-700 border-l-4 border-red-500 rounded-lg bg-red-50">
+                        <svg class="flex-shrink-0 w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.707-9.293a1 1 0 011.414-1.414L10 8.586l1.707-1.707a1 1 0 011.414 1.414L11.414 10l1.707 1.707a1 1 0 01-1.414 1.414L10 11.414l-1.707 1.707a1 1 0 01-1.414-1.414L8.586 10l-1.707-1.707z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span>{{ session('error') }}</span>
+                    </div>
+                @endif
             </div>
 
             <form action="{{ route('order.store') }}" method="POST" id="wizard-form">
@@ -122,7 +132,9 @@
                                     </svg>
 
                                     <div class="text-xs font-medium leading-relaxed text-amber-800">
-                                        <span class="font-bold text-amber-900">{{ __('layouts.unrecognized_prefix') }}:</span> {{ __('layouts.unrecognized_prefix_description') }}
+                                        <span
+                                            class="font-bold text-amber-900">{{ __('layouts.unrecognized_prefix') }}:</span>
+                                        {{ __('layouts.unrecognized_prefix_description') }}
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +153,8 @@
                                 <label
                                     class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.registered_date') }}
                                     <span class="text-red-500">*</span></label>
-                                <input type="date" name="registered_date" value="{{ old('registered_date', now()->toDateString()) }}" required
+                                <input type="date" name="registered_date"
+                                    value="{{ old('registered_date', now()->toDateString()) }}" required
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('registered_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('registered_date')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -319,7 +332,7 @@
                                     <select name="order_status"
                                         class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('order_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         <option value="not_received"
-                                            {{ old('order_status','not_received') == 'not_received' ? 'selected' : '' }}>
+                                            {{ old('order_status', 'not_received') == 'not_received' ? 'selected' : '' }}>
                                             {{ __('layouts.not_received') }}
                                         </option>
                                         <option value="received"
@@ -405,7 +418,7 @@
                                         <select name="invoice_status"
                                             class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('invoice_status') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                             <option value="not_sent"
-                                                {{ old('invoice_status','not_sent') == 'not_sent' ? 'selected' : '' }}>
+                                                {{ old('invoice_status', 'not_sent') == 'not_sent' ? 'selected' : '' }}>
                                                 {{ __('layouts.not_sent') }}
                                             </option>
                                             <option value="sent"
@@ -791,12 +804,10 @@
                                     })
                                 );
                             });
-                        }
-                        else{
+                        } else {
                             $('#prefix_alert').removeClass('hidden');
                         }
-                    }
-                    else{
+                    } else {
                         $('#prefix_alert').addClass('hidden');
                     }
 

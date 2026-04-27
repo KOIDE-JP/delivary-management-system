@@ -588,6 +588,7 @@ return [
     'unrecognized_prefix_description' => 'この型番の最初の2文字に一致する宛先がありません。この２文字で新しい宛先を作成するか、型番を確認してください。',
     'days_overdue' => '期限超過日数',
     'today' => '今日',
-    'days_left' => '残り日数'
+    'days_left' => '残り日数',
+    'no_access_to_this_route' => 'このルートへのアクセス権がありません',
 
 ];
