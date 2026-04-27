@@ -15,7 +15,10 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $this->checkPermission($request);
+        $response = $this->checkPermission($request);
+        if ($response) {
+            return $response;
+        }
         return $next($request);
     }
 
@@ -23,17 +26,16 @@ class CheckPermission
     {
         $user = auth()->user();
 
-        if(! $user->role){
+        if (! $user->role) {
             return back()->with('error', "You don't have access on this page");
-        }else{
+        } else {
             $permissions = $user->role->permissions->pluck('slug')->toArray();
             $current_route_name = $request->route()->action['as'];
-            if($current_route_name!='admin.dashboard'){
-                if(! in_array($current_route_name, $permissions)){
-                    return back()->with('error', "You don't have access on this page");
+            if ($current_route_name != 'admin.dashboard') {
+                if (! in_array($current_route_name, $permissions)) {
+                    return redirect()->back()->with('error', __('layouts.no_access_to_this_route'));
                 }
             }
-
         }
     }
 }
