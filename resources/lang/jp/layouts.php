@@ -19,7 +19,7 @@ return [
         'Edit_user' => 'ユーザーを編集',
         'List' => 'リスト',
         'Details' => '詳細',
-        'Roles' => 'ロール',
+        'Roles' => '役割',
         'Change-password' => 'パスワードを変更',
         'Profile' => 'プロフィール',
         'Update'  => '更新',
@@ -133,7 +133,7 @@ return [
     //ROLE
     'add_new_role' => '新しいロールを追加',
     'check_all_uncheck_all' => 'すべてをチェック/チェック解除',
-    'permissions_list' => 'パーミッションリスト',
+    'permissions_list' => '権限一覧',
     'enter_role_name' => 'ロール名を入力',
     'role_list' => 'ロールリスト',
     'create_role' => 'ロールを作成',
@@ -144,7 +144,7 @@ return [
     'role_created_successfully' => 'ロールが正常に作成されました。',
     'role_updated_successfully' => 'ロールが正常に更新されました。',
     'role_deleted_successfully' => 'ロールが正常に削除されました。',
-    'permission_updated_successfully' => 'パーミッションが正常に更新されました。',
+    'permission_updated_successfully' => '権限が正常に更新されました。',
     'IN' => '在庫入庫',
     'OUT' => '在庫出庫',
     'new' => '新規',
@@ -236,7 +236,7 @@ return [
     'unauthorized_action' => '認可されていないアクション',
     'message' => 'メッセージ',
     'filters' => 'フィルター',
-    'permitted_roles' => '許可されたロール',
+    'permitted_roles' => '許可された役割',
     'reset_all' => 'すべてをリセット',
 
 
@@ -416,8 +416,8 @@ return [
     'shipping_date' => '出荷日',
     'shipping_status' => '出荷状況',
     'select_status' => 'ステータスを選択',
-    'unarranged' => '未手配',
-    'arranged' => '手配済み',
+    'unarranged' => '運送未手配',
+    'arranged' => '運送手配済み',
     'direct_delivery' => '直送',
     'courier' => '宅配便',
 
