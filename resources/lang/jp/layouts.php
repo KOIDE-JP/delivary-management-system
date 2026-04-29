@@ -282,6 +282,7 @@ return [
         'trashed' => '削除された注文',
         'trashed_list' => '削除された注文リスト',
         'manage_deleted_orders' => '削除された注文を管理',
+        'import' => '注文をインポート',
     ],
     'move_to_trash' => 'ゴミ箱に移動',
     'order_can_be_recovered' => 'この注文は後でゴミ箱から復元できます。',

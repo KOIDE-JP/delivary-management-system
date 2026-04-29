@@ -30,8 +30,8 @@ class CheckPermission
             return back()->with('error', "You don't have access on this page");
         } else {
             $permissions = $user->role->permissions->pluck('slug')->toArray();
-            $current_route_name = $request->route()->action['as'];
-            if ($current_route_name != 'admin.dashboard') {
+            $current_route_name = $request->route()->getName();
+            if ($current_route_name && $current_route_name != 'admin.dashboard') {
                 if (! in_array($current_route_name, $permissions)) {
                     return redirect()->back()->with('error', __('layouts.no_access_to_this_route'));
                 }

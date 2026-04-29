@@ -9,6 +9,9 @@ use App\Models\Order;
 use App\Models\TruckType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -459,5 +462,170 @@ class OrderController extends Controller
         $order->forceDelete();
 
         return back()->with('success', __('layouts.order_deleted_permanently'));
+    }
+
+    public function importOrders()
+    {
+        return view('orders.import');
+    }
+
+    public function uploadImportFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:10240', // Max 10MB
+        ]);
+
+        try {
+            // Parse Excel file into an array using Maatwebsite\Excel
+            $data = Excel::toArray(new class implements \Maatwebsite\Excel\Concerns\ToArray {
+                public function array(array $array) { return $array; }
+            }, $request->file('file'));
+
+            $rows = $data[0] ?? [];
+
+            // Data starts at row 4
+            $rows = array_slice($rows, 3); 
+            
+            // Filter out completely empty rows
+            $rows = array_filter($rows, function($row) {
+                return !empty(array_filter($row)); 
+            });
+
+            // Save to a temporary JSON file for chunk processing
+            $fileId = uniqid('import_');
+            Storage::put("temp/{$fileId}.json", json_encode(array_values($rows)));
+
+            return response()->json([
+                'success' => true,
+                'file_id' => $fileId,
+                'total_rows' => count($rows)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function processImportChunk(Request $request)
+    {
+        $fileId = $request->input('file_id');
+        $offset = (int) $request->input('offset', 0);
+        $limit = 50; // Process 50 rows per request
+
+        $path = "temp/{$fileId}.json";
+        if (!Storage::exists($path)) {
+            return response()->json(['success' => false, 'message' => 'Import file expired or lost.'], 404);
+        }
+
+        $rows = json_decode(Storage::get($path), true);
+        $chunk = array_slice($rows, $offset, $limit);
+
+        foreach ($chunk as $row) {
+            // Skip if no Order Number
+            if (empty($row[2])) continue; 
+
+            $shippingDate = $this->parseDate($row[11] ?? null);
+
+            Order::updateOrCreate(
+                ['order_number' => trim($row[2])],
+                [
+                    'registered_date'        => $this->parseDate($row[1] ?? null),
+                    'order_name'             => trim($row[3] ?? ''),
+                    'due_date'               => $this->parseDate($row[4] ?? null),
+                    
+                    'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
+                    'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
+                    'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
+                    
+                    'material_pickup_date'   => $this->parseDate($row[8] ?? null),
+                    'parts_pickup_date'      => $this->parseDate($row[9] ?? null),
+                    
+                    'shipping_date'          => $shippingDate,
+                    // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
+                    'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
+                    
+                    'invoice_status'         => $this->mapStatus($row[12] ?? null, 'invoice'),
+                    'inspection_due_date'    => $this->parseDate($row[13] ?? null),
+                    'inspection_slip_status' => $this->mapStatus($row[14] ?? null, 'inspection'),
+                    
+                    'order_amount'           => $this->parseAmount($row[15] ?? null),
+                    
+                    'destination'            => trim($row[17] ?? null),
+                    'carrier'                => trim($row[18] ?? null),
+                    'truck_type'             => trim($row[19] ?? null),
+                    'freight_price'          => $this->parseAmount($row[20] ?? null),
+                    
+                    'pickup_transfer_date'   => $this->parseDate($row[21] ?? null),
+                    'sales_transfer_date'    => $this->parseDate($row[22] ?? null),
+                    'shipping_transfer_date' => $this->parseDate($row[23] ?? null),
+                ]
+            );
+        }
+
+        $newOffset = $offset + count($chunk);
+        $isDone = $newOffset >= count($rows);
+
+        if ($isDone) {
+            Storage::delete($path); // Cleanup
+        }
+
+        return response()->json([
+            'success' => true,
+            'processed' => $newOffset,
+            'is_done' => $isDone
+        ]);
+    }
+
+    // --- Helper Methods ---
+
+    private function parseDate($value)
+    {
+        if (empty($value)) return null;
+        if (is_numeric($value)) {
+            return Date::excelToDateTimeObject($value)->format('Y-m-d');
+        }
+        try {
+            return Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    private function parseAmount($value)
+    {
+        if (empty($value)) return null;
+        // Remove ¥, commas, and spaces
+        $clean = preg_replace('/[¥, \s]/u', '', $value);
+        return is_numeric($clean) ? (float) $clean : null;
+    }
+
+    private function mapStatus($value, $type)
+    {
+        $val = trim((string)$value);
+        $isO = ($val === 'O' || $val === '〇' || $val === '0');
+        $isX = ($val === 'X' || $val === '×');
+
+        switch($type) {
+            case 'dw':
+                if ($isO) return 'shipped';
+                if ($isX) return 'no_shipping_required';
+                return 'not_shipped';
+            case 'quotation':
+                if ($isO) return 'submitted';
+                if ($isX) return 'not_required';
+                return 'not_submitted';
+            case 'order':
+                if ($isO) return 'received';
+                if ($isX) return 'not_required';
+                return 'not_received';
+            case 'invoice':
+                if ($isO) return 'sent';
+                return 'not_sent';
+            case 'inspection':
+                if ($isO) return 'received';
+                if ($isX) return 'not_required';
+                return 'not_received';
+        }
+        return null;
     }
 }
