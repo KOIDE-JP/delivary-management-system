@@ -160,6 +160,8 @@
                     });
 
                     const data = await res.json();
+                    console.log(data);
+                    
 
                     if (!res.ok || !data.success) {
                         throw new Error(data.message || 'Error processing data chunk.');

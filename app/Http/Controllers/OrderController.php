@@ -526,6 +526,38 @@ class OrderController extends Controller
 
             $shippingDate = $this->parseDate($row[11] ?? null);
 
+            // return([
+            //         'registered_date'        => $this->parseDate($row[1] ?? null),
+            //         'order_number' => trim($row[2]),
+            //         'order_name'             => trim($row[3] ?? ''),
+            //         'due_date'               => $this->parseDate($row[4] ?? null),
+                    
+            //         'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
+            //         'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
+            //         'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
+                    
+            //         'material_pickup_date'   => $this->parseDate($row[8] ?? null),
+            //         'inspection_due_date'      => $this->parseDate($row[9] ?? null),
+            //         'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
+                    
+            //         'shipping_date'          => $shippingDate,
+            //         'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
+            //         'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
+            //         // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
+            //         'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
+                    
+            //         'order_amount'           => $this->parseAmount($row[15] ?? null),
+                    
+            //         'destination'            => trim($row[16] ?? null),
+            //         'carrier'                => trim($row[17] ?? null),
+            //         'truck_type'             => trim($row[18] ?? null),
+            //         'freight_price'          => $this->parseAmount($row[19] ?? null),
+                    
+            //         'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
+            //         'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
+            //         'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
+            //     ]);
+
             Order::updateOrCreate(
                 ['order_number' => trim($row[2])],
                 [
@@ -538,26 +570,25 @@ class OrderController extends Controller
                     'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
                     
                     'material_pickup_date'   => $this->parseDate($row[8] ?? null),
-                    'parts_pickup_date'      => $this->parseDate($row[9] ?? null),
+                    'inspection_due_date'      => $this->parseDate($row[9] ?? null),
+                    'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
                     
                     'shipping_date'          => $shippingDate,
+                    'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
+                    'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
                     // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
                     'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
                     
-                    'invoice_status'         => $this->mapStatus($row[12] ?? null, 'invoice'),
-                    'inspection_due_date'    => $this->parseDate($row[13] ?? null),
-                    'inspection_slip_status' => $this->mapStatus($row[14] ?? null, 'inspection'),
-                    
                     'order_amount'           => $this->parseAmount($row[15] ?? null),
                     
-                    'destination'            => trim($row[17] ?? null),
-                    'carrier'                => trim($row[18] ?? null),
-                    'truck_type'             => trim($row[19] ?? null),
-                    'freight_price'          => $this->parseAmount($row[20] ?? null),
+                    'destination'            => trim($row[16] ?? null),
+                    'carrier'                => trim($row[17] ?? null),
+                    'truck_type'             => trim($row[18] ?? null),
+                    'freight_price'          => $this->parseAmount($row[19] ?? null),
                     
-                    'pickup_transfer_date'   => $this->parseDate($row[21] ?? null),
-                    'sales_transfer_date'    => $this->parseDate($row[22] ?? null),
-                    'shipping_transfer_date' => $this->parseDate($row[23] ?? null),
+                    'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
+                    'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
+                    'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
                 ]
             );
         }
@@ -602,7 +633,7 @@ class OrderController extends Controller
     private function mapStatus($value, $type)
     {
         $val = trim((string)$value);
-        $isO = ($val === 'O' || $val === '〇' || $val === '0');
+        $isO = ($val === 'O' || $val === '○' || $val === '0');
         $isX = ($val === 'X' || $val === '×');
 
         switch($type) {
