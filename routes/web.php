@@ -139,5 +139,8 @@ Route::middleware([
         Route::get('/trashed', [OrderController::class, 'trashed'])->name('trashed');
         Route::post('/restore/{id}', [OrderController::class, 'restore'])->name('restore');
         Route::delete('/force-delete/{id}', [OrderController::class, 'forceDelete'])->name('forceDelete');
+        Route::get('/import', [OrderController::class, 'importOrders'])->name('import');
+        Route::post('/import/upload', [OrderController::class, 'uploadImportFile'])->name('import.upload');
+        Route::post('/import/process', [OrderController::class, 'processImportChunk'])->name('import.process');
     });
 });

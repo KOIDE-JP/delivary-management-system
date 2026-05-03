@@ -13,15 +13,28 @@
                         {{ __('layouts.manage_and_track_all_active_order_and_deliveries') }}
                     </p>
                 </div>
-                @if (auth()->user()->hasPermission('order.create'))
-                <a href="{{ route('order.create') }}"
-                    class="inline-flex items-center justify-center w-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-sm sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 hover:shadow rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    {{ __('layouts.order.create') ?? 'Create Order' }}
-                </a>
-                @endif
+                <div class="">
+                    @if (auth()->user()->hasPermission('order.create'))
+                        <a href="{{ route('order.create') }}"
+                            class="inline-flex items-center justify-center w-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-sm sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 hover:shadow rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                                </path>
+                            </svg>
+                            {{ __('layouts.order.create') ?? 'Create Order' }}
+                        </a>
+                    @endif
+                    @if (auth()->user()->hasPermission('order.import'))
+                        <a href="{{ route('order.import') }}"
+                            class="inline-flex items-center justify-center w-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-sm sm:w-auto bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 hover:shadow rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3-3m0 0l3 3m-3-3v7">
+                                </path>
+                            </svg>
+                            {{ __('layouts.order.import') ?? 'Import Orders' }}
+                        </a>
+                    @endif
+                </div>
             </div>
 
             {{-- SESSION MESSAGES --}}

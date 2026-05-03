@@ -246,6 +246,7 @@ return [
         'trashed' => 'Trashed Orders',
         'trashed_list' => 'Trashed Order List',
         'manage_deleted_orders' => 'Manage Deleted Orders',
+        'import' => 'Import Orders',
     ],
     'move_to_trash' => 'Move to Trash',
     'order_can_be_recovered' => 'You can recover this order from trash later.',
