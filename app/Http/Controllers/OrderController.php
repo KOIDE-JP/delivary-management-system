@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\TruckType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -478,17 +479,20 @@ class OrderController extends Controller
         try {
             // Parse Excel file into an array using Maatwebsite\Excel
             $data = Excel::toArray(new class implements \Maatwebsite\Excel\Concerns\ToArray {
-                public function array(array $array) { return $array; }
+                public function array(array $array)
+                {
+                    return $array;
+                }
             }, $request->file('file'));
 
             $rows = $data[0] ?? [];
 
             // Data starts at row 4
-            $rows = array_slice($rows, 3); 
-            
+            $rows = array_slice($rows, 3);
+
             // Filter out completely empty rows
-            $rows = array_filter($rows, function($row) {
-                return !empty(array_filter($row)); 
+            $rows = array_filter($rows, function ($row) {
+                return !empty(array_filter($row));
             });
 
             // Save to a temporary JSON file for chunk processing
@@ -500,8 +504,11 @@ class OrderController extends Controller
                 'file_id' => $fileId,
                 'total_rows' => count($rows)
             ]);
-
         } catch (\Exception $e) {
+            Log::error('Error in uploadImportFile: ' . $e->getMessage(), [
+                'exception' => $e,
+                'request_data' => $request->all(),
+            ]);
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
@@ -520,77 +527,71 @@ class OrderController extends Controller
         $rows = json_decode(Storage::get($path), true);
         $chunk = array_slice($rows, $offset, $limit);
 
-        foreach ($chunk as $row) {
+        foreach ($chunk as $index => $row) {
             // Skip if no Order Number
-            if (empty($row[2])) continue; 
+            if (empty($row[2])) continue;
 
-            $shippingDate = $this->parseDate($row[11] ?? null);
+            try {
+                $shippingDate = $this->parseDate($row[11] ?? null);
 
-            // return([
-            //         'registered_date'        => $this->parseDate($row[1] ?? null),
-            //         'order_number' => trim($row[2]),
-            //         'order_name'             => trim($row[3] ?? ''),
-            //         'due_date'               => $this->parseDate($row[4] ?? null),
-                    
-            //         'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
-            //         'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
-            //         'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
-                    
-            //         'material_pickup_date'   => $this->parseDate($row[8] ?? null),
-            //         'inspection_due_date'      => $this->parseDate($row[9] ?? null),
-            //         'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
-                    
-            //         'shipping_date'          => $shippingDate,
-            //         'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
-            //         'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
-            //         // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
-            //         'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
-                    
-            //         'order_amount'           => $this->parseAmount($row[15] ?? null),
-                    
-            //         'destination'            => trim($row[16] ?? null),
-            //         'carrier'                => trim($row[17] ?? null),
-            //         'truck_type'             => trim($row[18] ?? null),
-            //         'freight_price'          => $this->parseAmount($row[19] ?? null),
-                    
-            //         'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
-            //         'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
-            //         'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
-            //     ]);
+                $orderNo = trim($row[2] ?? '');
+                $destination = Destination::firstOrCreate(
+                    ['name' => trim($row[16] ?? null)],
+                    ['prefix' => mb_substr($orderNo, 0, 2)]
+                );
+                $carrier = Carrier::firstOrCreate(['name' => trim($row[17] ?? null)]);
+                $truckType = TruckType::firstOrCreate(['name' => trim($row[18] ?? null)]);
 
-            Order::updateOrCreate(
-                ['order_number' => trim($row[2])],
-                [
-                    'registered_date'        => $this->parseDate($row[1] ?? null),
-                    'order_name'             => trim($row[3] ?? ''),
-                    'due_date'               => $this->parseDate($row[4] ?? null),
-                    
-                    'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
-                    'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
-                    'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
-                    
-                    'material_pickup_date'   => $this->parseDate($row[8] ?? null),
-                    'inspection_due_date'      => $this->parseDate($row[9] ?? null),
-                    'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
-                    
-                    'shipping_date'          => $shippingDate,
-                    'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
-                    'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
-                    // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
-                    'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
-                    
-                    'order_amount'           => $this->parseAmount($row[15] ?? null),
-                    
-                    'destination'            => trim($row[16] ?? null),
-                    'carrier'                => trim($row[17] ?? null),
-                    'truck_type'             => trim($row[18] ?? null),
-                    'freight_price'          => $this->parseAmount($row[19] ?? null),
-                    
-                    'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
-                    'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
-                    'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
-                ]
-            );
+                $freight_master_price = FreightRate::where('destination_id', $destination->id)
+                    ->where('carrier_id', $carrier->id)
+                    ->where('truck_type_id', $truckType->id)
+                    ->value('price');
+
+                    Order::updateOrCreate(
+                    ['order_number' => trim($row[2])],
+                    [
+                        'registered_date'        => $this->parseDate($row[1] ?? null),
+                        'order_name'             => trim($row[3] ?? ''),
+                        'due_date'               => $this->parseDate($row[4] ?? null),
+
+                        'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
+                        'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
+                        'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
+
+                        'material_pickup_date'   => $this->parseDate($row[8] ?? null),
+                        'inspection_due_date'    => $this->parseDate($row[9] ?? null),
+                        'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
+
+                        'shipping_date'          => $shippingDate,
+                        'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
+                        'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
+                        // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
+                        'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
+
+                        'order_amount'           => $this->parseAmount($row[15] ?? null),
+
+                        'destination'            => $destination ? $destination->id : null,
+                        'carrier'                => $carrier ? $carrier->id : null,
+                        'truck_type'             => $truckType ? $truckType->id : null,
+                        'freight_price'          => $this->parseAmount($row[19] ?? null),
+                        'freight_master_price'   => $freight_master_price,
+
+                        'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
+                        'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
+                        'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
+                    ]
+                );
+            } catch (\Exception $e) {
+                // Log the error and continue to the next row
+                Log::error("processImportChunk: Failed to import order row.", [
+                    'order_number' => trim($row[2] ?? 'UNKNOWN'),
+                    'error_message' => $e->getMessage(),
+                    'file_id' => $fileId,
+                    'row_data' => $row
+                ]);
+
+                continue;
+            }
         }
 
         $newOffset = $offset + count($chunk);
@@ -607,7 +608,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // --- Helper Methods ---
 
     private function parseDate($value)
     {
@@ -636,7 +636,7 @@ class OrderController extends Controller
         $isO = ($val === 'O' || $val === '○' || $val === '0');
         $isX = ($val === 'X' || $val === '×');
 
-        switch($type) {
+        switch ($type) {
             case 'dw':
                 if ($isO) return 'shipped';
                 if ($isX) return 'no_shipping_required';
