@@ -10,7 +10,7 @@
                     <h4 class="text-2xl font-extrabold tracking-tight text-gray-900">
                         {{ __('layouts.order.import') ?? 'Import Orders' }}
                     </h4>
-                    <p class="mt-1 text-sm text-gray-500">Upload your Excel sheet to update or create order records.</p>
+                    <p class="mt-1 text-sm text-gray-500">{{ __('layouts.order.import_description') }}</p>
                 </div>
                 <a href="{{ route('order.index') }}"
                     class="text-sm font-medium text-blue-600 transition-colors hover:text-blue-800">
@@ -31,9 +31,8 @@
                                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
                                 </path>
                             </svg>
-                            <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag
-                                and drop</p>
-                            <p class="text-xs text-gray-500">.XLSX, .XLS, or .CSV (Max 10MB)</p>
+                            <p class="mb-2 text-sm text-gray-500 font-semibold">{{ __('layouts.order.upload_instruction') }}</p>
+                            <p class="text-xs text-gray-500">{{ __('layouts.order.upload_ins_files') }}</p>
                         </div>
                         <input id="fileDropzone" type="file" name="file" accept=".xlsx, .xls, .csv" class="hidden"
                             required />
@@ -44,8 +43,8 @@
 
                 <div class="w-full flex justify-center">
                     <button type="submit" id="submitBtn"
-                    class="w-50 px-5 py-3 text-sm font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed">
-                    Start Import
+                    class="w-50 px-5 py-3 text-sm font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+                    {{ __('layouts.order.start_import') }}
                 </button>
                 </div>
             </form>
@@ -53,7 +52,7 @@
             {{-- PROGRESS SECTION (Hidden by default) --}}
             <div id="progressSection" class="hidden mt-8 space-y-4">
                 <div class="flex justify-between text-sm font-medium text-gray-700">
-                    <span id="progressStatus">Uploading file...</span>
+                    <span id="progressStatus">{{ __('layouts.order.uploading_file') }}</span>
                     <span id="progressPercentage">0%</span>
                 </div>
                 <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
@@ -87,7 +86,7 @@
             // Show selected file name
             fileInput.addEventListener('change', function(e) {
                 if (e.target.files.length > 0) {
-                    fileNameDisplay.textContent = `Selected File: ${e.target.files[0].name}`;
+                    fileNameDisplay.textContent = `{{ __('layouts.order.selected_file') }}: ${e.target.files[0].name}`;
                     fileNameDisplay.classList.remove('hidden');
                 }
             });
@@ -113,7 +112,7 @@
                 fileInput.disabled = true;
                 progressSection.classList.remove('hidden');
                 progressBar.style.width = '5%';
-                progressStatus.textContent = 'Uploading and parsing file...';
+                progressStatus.textContent = '{{ __('layouts.order.uploading_file') }}...';
 
                 try {
                     // STEP 1: Upload File
@@ -133,7 +132,7 @@
                     }
 
                     // STEP 2: Process Chunks
-                    progressStatus.textContent = 'Importing records...';
+                    progressStatus.textContent = '{{ __('layouts.order.importing_records') }}...';
                     await processChunk(uploadData.file_id, 0, uploadData.total_rows);
 
                 } catch (error) {
@@ -174,9 +173,9 @@
                     progressCount.textContent = `${data.processed} of ${totalRows} rows processed`;
 
                     if (data.is_done) {
-                        progressStatus.textContent = 'Import Complete!';
+                        progressStatus.textContent = '{{ __('layouts.order.import_complete') }}';
                         progressBar.classList.replace('bg-blue-600', 'bg-green-500');
-                        showAlert('Orders imported successfully!', 'success');
+                        showAlert('{{ __('layouts.order.import_complete') }}', 'success');
 
                         // Optional: redirect back to index after a delay
                         setTimeout(() => {
