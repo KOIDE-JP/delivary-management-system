@@ -535,57 +535,84 @@ class OrderController extends Controller
                 $shippingDate = $this->parseDate($row[11] ?? null);
 
                 $orderNo = trim($row[2] ?? '');
-                $destination = Destination::firstOrCreate(
-                    ['name' => trim($row[16] ?? null)],
-                    ['prefix' => mb_substr($orderNo, 0, 2)]
-                );
-                $carrier = Carrier::firstOrCreate(['name' => trim($row[17] ?? null)]);
-                $truckType = TruckType::firstOrCreate(['name' => trim($row[18] ?? null)]);
+                $destination = null;
+                $destination_name = trim($row[16] ?? null);
+                $carrier = null;
+                $carrier_name = trim($row[17] ?? null);
+                $truckType = null;
+                $truckType_name = trim($row[18] ?? null);
+                $freight_master_price = null;
+                $registered_date = $this->parseDate($row[1] ?? null);
 
-                $freight_master_price = FreightRate::where('destination_id', $destination->id)
-                    ->where('carrier_id', $carrier->id)
-                    ->where('truck_type_id', $truckType->id)
-                    ->value('price');
+                if ($destination_name) {
+                    $destination = Destination::firstOrCreate(
+                        ['name' => $destination_name],
+                        ['prefix' => mb_substr($orderNo, 0, 2)]
+                    );
+                }
 
+                if ($carrier_name) {
+                    $carrier = Carrier::firstOrCreate(['name' => $carrier_name]);
+                }
+
+                if ($truckType_name) {
+                    $truckType = TruckType::firstOrCreate(['name' => $truckType_name]);
+                }
+
+                if ($destination && $carrier && $truckType) {
+                    $freight_master_price = FreightRate::where('destination_id', $destination->id)
+                        ->where('carrier_id', $carrier->id)
+                        ->where('truck_type_id', $truckType->id)
+                        ->value('price');
+                }
+
+                if (!$registered_date) {
+                    Log::error("processImportChunk: Failed to import order row. No registered date.", [
+                        'order_number' => trim($row[2] ?? 'UNKNOWN'),
+                        'file_id' => $fileId
+                    ]);
+                } else {
                     Order::updateOrCreate(
-                    ['order_number' => trim($row[2])],
-                    [
-                        'registered_date'        => $this->parseDate($row[1] ?? null),
-                        'order_name'             => trim($row[3] ?? ''),
-                        'due_date'               => $this->parseDate($row[4] ?? null),
+                        ['order_number' => trim($row[2])],
+                        [
+                            'registered_date'        => $registered_date,
+                            'order_name'             => trim($row[3] ?? ''),
+                            'due_date'               => $this->parseDate($row[4] ?? null),
 
-                        'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
-                        'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
-                        'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
+                            'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
+                            'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
+                            'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
 
-                        'material_pickup_date'   => $this->parseDate($row[8] ?? null),
-                        'inspection_due_date'    => $this->parseDate($row[9] ?? null),
-                        'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
+                            'material_pickup_date'   => $this->parseDate($row[8] ?? null),
+                            'inspection_due_date'    => $this->parseDate($row[9] ?? null),
+                            'parts_pickup_date'      => $this->parseDate($row[10] ?? null),
 
-                        'shipping_date'          => $shippingDate,
-                        'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
-                        'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
-                        // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
-                        'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
+                            'shipping_date'          => $shippingDate,
+                            'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
+                            'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
+                            // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
+                            'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
 
-                        'order_amount'           => $this->parseAmount($row[15] ?? null),
+                            'order_amount'           => $this->parseAmount($row[15] ?? null),
 
-                        'destination'            => $destination ? $destination->id : null,
-                        'carrier'                => $carrier ? $carrier->id : null,
-                        'truck_type'             => $truckType ? $truckType->id : null,
-                        'freight_price'          => $this->parseAmount($row[19] ?? null),
-                        'freight_master_price'   => $freight_master_price,
+                            'destination'            => $destination ? $destination?->id : null,
+                            'carrier'                => $carrier ? $carrier?->id : null,
+                            'truck_type'             => $truckType ? $truckType?->id : null,
+                            'freight_price'          => $this->parseAmount($row[19] ?? null),
+                            'freight_master_price'   => $freight_master_price,
 
-                        'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
-                        'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
-                        'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
-                    ]
-                );
+                            'pickup_transfer_date'   => $this->parseDate($row[20] ?? null),
+                            'sales_transfer_date'    => $this->parseDate($row[21] ?? null),
+                            'shipping_transfer_date' => $this->parseDate($row[22] ?? null),
+                        ]
+                    );
+                }
             } catch (\Exception $e) {
                 // Log the error and continue to the next row
                 Log::error("processImportChunk: Failed to import order row.", [
                     'order_number' => trim($row[2] ?? 'UNKNOWN'),
                     'error_message' => $e->getMessage(),
+                    'full_exception' => $e,
                     'file_id' => $fileId,
                     'row_data' => $row
                 ]);
