@@ -49,7 +49,7 @@ return new class extends Migration
             */
             $table->enum('dw_status', ['not_shipped', 'shipped', 'no_shipping_required'])->default('not_shipped');
             $table->enum('quotation_status', ['submitted', 'not_submitted', 'not_required'])->default('not_submitted');
-            $table->enum('order_status', ['received', 'not_received', 'not_required'])->default('not_received');
+            $table->enum('order_status', ['received', 'not_received', 'not_required', 'completed'])->default('not_received');
 
             // Client Schedule
             $table->date('material_pickup_date')->nullable();

@@ -345,6 +345,9 @@
                                         <option value="not_required"
                                             {{ old('order_status', $order->order_status) == 'not_required' ? 'selected' : '' }}>
                                             {{ __('layouts.not_required') }}</option>
+                                        <option value="completed"
+                                            {{ old('order_status', $order->order_status) == 'completed' ? 'selected' : '' }}>
+                                            {{ __('layouts.completed') }}</option>
                                     </select>
                                     @error('order_status')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -440,7 +443,7 @@
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                 <span class="text-gray-500 sm:text-sm">¥</span>
                                             </div>
-                                            <input type="number" step="0.01" name="order_amount"
+                                            <input type="number" step="1" name="order_amount"
                                                 value="{{ old('order_amount', $order->order_amount) }}"
                                                 class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('order_amount') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         </div>
@@ -550,7 +553,7 @@
                                         <span class="text-gray-500 sm:text-sm">¥</span>
                                     </div>
 
-                                    <input readonly type="number" step="0.01" name="freight_master_price"
+                                    <input readonly type="number" step="1" name="freight_master_price"
                                         value="{{ old('freight_master_price', $order->freight_master_price) }}"
                                         class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg shadow-sm cursor-not-allowed opacity-60">
                                 </div>
@@ -567,7 +570,7 @@
                                         <span class="text-gray-500 sm:text-sm">¥</span>
                                     </div>
 
-                                    <input type="number" step="0.01" name="freight_price"
+                                    <input type="number" step="1" name="freight_price"
                                         value="{{ old('freight_price', $order->freight_price) }}"
                                         class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('freight_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
@@ -787,7 +790,7 @@
                                 $('input[name="freight_price"]').val(response.price);
                                 $('input[name="freight_master_price"]').val(response.price);
                             } else {
-                                $('input[name="freight_price"]').val('');
+                                // $('input[name="freight_price"]').val('');
                                 $('input[name="freight_master_price"]').val('');
                             }
                         },
