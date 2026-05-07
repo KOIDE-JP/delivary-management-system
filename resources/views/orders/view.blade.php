@@ -199,8 +199,11 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.order_status') }}</p>
-                                <p class="mt-1 text-base font-semibold text-gray-900">
-                                    {{ __('layouts.' . ($order->order_status ?? 'na')) }}</p>
+                                @if ($order->order_status == 'completed')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">{{ __('layouts.completed') }}</span>
+                                @else
+                                    <p class="mt-1 text-base font-semibold text-gray-900">{{ __('layouts.' . ($order->order_status ?? 'na')) }}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
