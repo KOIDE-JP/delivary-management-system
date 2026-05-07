@@ -111,7 +111,7 @@ if (!function_exists('logActivity')) {
 
 if (!function_exists('formatAmount')) {
 
-    function formatAmount($amount, $decimals = 3, $decimalSeparator = '.', $thousandSeparator = ','): string
+    function formatAmount($amount, $decimals = 0, $decimalSeparator = '.', $thousandSeparator = ','): string
     {
         try {
             return number_format($amount, $decimals, $decimalSeparator, $thousandSeparator);

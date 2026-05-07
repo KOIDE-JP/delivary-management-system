@@ -20,7 +20,29 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Order::query();
+            $query = Order::query()
+    ->orderByRaw("
+        CASE
+            WHEN order_status = 'completed' THEN 4
+            WHEN due_date IS NULL THEN 2
+            WHEN due_date < CURDATE() THEN 3
+            ELSE 1
+        END ASC
+    ")
+    ->orderByRaw("
+        CASE
+            WHEN due_date >= CURDATE()
+                 AND order_status != 'completed'
+            THEN DATEDIFF(due_date, CURDATE())
+        END DESC
+    ")
+    ->orderByRaw("
+        CASE
+            WHEN due_date < CURDATE()
+                 AND order_status != 'completed'
+            THEN DATEDIFF(CURDATE(), due_date)
+        END ASC
+    ");
 
             // 1. Apply Custom Search Filter
             if ($request->filled('custom_search')) {
@@ -70,6 +92,9 @@ class OrderController extends Controller
                         : 'bg-white hover:bg-blue-50/50 transition-colors divide-y divide-gray-100 text-sm';
                 })
                 ->addColumn('remaining_days', function ($row) {
+                    if($row->order_status === 'completed') {
+                        return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.completed') . '</span>';
+                    }
                     if (!$row->due_date) {
                         return '<span class="text-xs text-gray-500">' . __('layouts.pending') . '</span>';
                     }
@@ -180,7 +205,9 @@ class OrderController extends Controller
     public function view($id)
     {
         $order = Order::findOrFail($id);
-        // dd($order->Destination->name);
+        $order->order_amount = (int) $order->order_amount;
+        $order->freight_master_price = (int) $order->freight_master_price;
+        $order->freight_price = (int) $order->freight_price;
         $activityLogs = $order->activityLogs()->latest()->paginate(5);
         return view('orders.view', compact('order', 'activityLogs'));
     }
@@ -259,6 +286,9 @@ class OrderController extends Controller
         $truckTypes = TruckType::select('name', 'id')->get();
         $freightRates = FreightRate::all();
         $order = Order::findOrFail($id);
+        $order->order_amount = (int) $order->order_amount;
+        $order->freight_master_price = (int) $order->freight_master_price;
+        $order->freight_price = (int) $order->freight_price;
         return view('orders.edit', compact('order', 'destinations', 'carriers', 'truckTypes', 'freightRates'));
     }
 
@@ -581,7 +611,7 @@ class OrderController extends Controller
 
                             'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
                             'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
-                            'order_status'           => $this->mapStatus($row[7] ?? null, 'order'),
+                            'order_status'           => $row[0]==='済' ? 'completed' : $this->mapStatus($row[7] ?? null, 'order'),
 
                             'material_pickup_date'   => $this->parseDate($row[8] ?? null),
                             'inspection_due_date'    => $this->parseDate($row[9] ?? null),
