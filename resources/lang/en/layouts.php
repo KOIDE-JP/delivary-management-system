@@ -406,6 +406,8 @@ return [
 
     // Delivery
     'due_date' => 'Due Date',
+    'delivery_date' => 'Delivery Date',
+    'delivered_on' => 'Delivered On',
     'due_confidence' => 'Due Confidence',
     'confirmed' => 'Confirmed',
     'unconfirmed' => 'Unconfirmed',
@@ -417,7 +419,6 @@ return [
     // Shipping
     'shipping_date' => 'Shipping Date',
     'shipping_status' => 'Shipping Status',
-    'select_status' => 'Select Status',
     'unarranged' => 'Unarranged',
     'arranged' => 'Arranged',
     'direct_delivery' => 'Direct Delivery',
@@ -594,6 +595,7 @@ return [
     'today' => 'Today',
     'days_left' => 'Days Left',
     'no_access_to_this_route' => 'You don\'t have access on this route',
+    'select_an_option' => 'Select an option',
 
 
 ];

@@ -149,13 +149,10 @@ return [
     'IN' => '在庫入庫',
     'OUT' => '在庫出庫',
     'new' => '新規',
-    'cancel' => 'キャンセル',
-    'export_csv' => 'CSVをエクスポート',
     'stock_report' => '在庫レポート',
     'pages' => 'ページ:',
     'logout' => 'ログアウト',
     'items' => 'アイテム',
-    'description' => '説明',
     'quantity' =>   '数量',
     'image' =>  '画像',
     'noImageSelected' => '画像が選択されていません',
@@ -163,9 +160,6 @@ return [
 
     //List
     'user_list' => 'ユーザーリスト',
-    'status' => 'ステータス',
-    'created_by' => '作成者',
-    'created_at' => '作成日',
     'actions' => '操作',
     'edit' => '編集',
     'delete' => '削除',
@@ -414,6 +408,8 @@ return [
 
     // Delivery
     'due_date' => '納期',
+    'delivery_date' => '配送日',
+    'delivered_on' => '配達日',
     'due_confidence' => '納期確定度',
     'confirmed' => '確定',
     'unconfirmed' => '未確定',
@@ -425,7 +421,6 @@ return [
     // Shipping
     'shipping_date' => '出荷日',
     'shipping_status' => '出荷状況',
-    'select_status' => 'ステータスを選択',
     'unarranged' => '運送未手配',
     'arranged' => '運送手配済み',
     'direct_delivery' => '直送',
@@ -600,5 +595,5 @@ return [
     'today' => '今日',
     'days_left' => '残り日数',
     'no_access_to_this_route' => 'このルートへのアクセス権がありません',
-
+    'select_an_option' => 'オプションを選択してください',
 ];

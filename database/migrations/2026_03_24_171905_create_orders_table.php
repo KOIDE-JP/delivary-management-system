@@ -29,6 +29,7 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
             $table->date('due_date')->nullable();
+            $table->date('delivery_date')->nullable();
             $table->enum('due_confidence', ['confirmed', 'unconfirmed'])->nullable();
             $table->date('inspection_date')->nullable();
             $table->enum('priority', ['no', 'yes'])->default('no');
