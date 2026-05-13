@@ -92,11 +92,14 @@ class OrderController extends Controller
                         : 'bg-white hover:bg-blue-50/50 transition-colors divide-y divide-gray-100 text-sm';
                 })
                 ->addColumn('remaining_days', function ($row) {
-                    if($row->order_status === 'completed') {
+                    if($row->order_status === 'completed' || $row->delivery_date) {
+                        if($row->delivery_date) {
+                            return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.delivered_on') . ': ' . $row->delivery_date . '</span>';
+                        }
                         return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.completed') . '</span>';
                     }
                     if (!$row->due_date) {
-                        return '<span class="text-xs text-gray-500">' . __('layouts.pending') . '</span>';
+                        return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-orange-600 bg-orange-100">' . __('layouts.pending') . '</span>';
                     }
 
                     $today = now()->startOfDay();
@@ -130,9 +133,11 @@ class OrderController extends Controller
                 ->addColumn('delivery_info', function ($row) {
                     $carrier = $row->carrier ? $row?->Carrier?->name : __('layouts.pending_carrier');
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
+                    $delivery_date = $row->delivery_date ? $row->delivery_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
                     <div class="mt-1 text-xs text-gray-500">' . __('layouts.shipping_date') . ': ' . htmlspecialchars($date) . '</div>
+                    <div class="mt-1 text-xs text-gray-500">' . __('layouts.delivery_date') . ': ' . htmlspecialchars($delivery_date) . '</div>
                 ';
                 })
                 ->addColumn('status', function ($row) {
@@ -223,6 +228,7 @@ class OrderController extends Controller
 
             // Delivery & Shipping
             'due_date'               => 'nullable|date',
+            'delivery_date'          => 'nullable|date',
             'due_confidence'         => 'nullable|in:confirmed,unconfirmed',
             'inspection_date'        => 'nullable|date',
             'priority'               => 'nullable|in:no,yes',
@@ -232,7 +238,7 @@ class OrderController extends Controller
             // Documents & Billing
             'dw_status'              => 'nullable|in:not_shipped,shipped,no_shipping_required',
             'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
-            'order_status'           => 'nullable|in:received,not_received,not_required',
+            'order_status'           => 'nullable|in:received,not_received,not_required,completed',
 
             // Client Schedule
             'material_pickup_date'   => 'nullable|date',
@@ -305,6 +311,7 @@ class OrderController extends Controller
 
             // Delivery & Shipping
             'due_date'               => 'nullable|date',
+            'delivery_date'          => 'nullable|date',
             'due_confidence'         => 'nullable|in:confirmed,unconfirmed',
             'inspection_date'        => 'nullable|date',
             'priority'               => 'nullable|in:no,yes',
@@ -314,7 +321,7 @@ class OrderController extends Controller
             // Documents & Billing
             'dw_status'              => 'nullable|in:not_shipped,shipped,no_shipping_required',
             'quotation_status'       => 'nullable|in:submitted,not_submitted,not_required',
-            'order_status'           => 'nullable|in:received,not_received,not_required',
+            'order_status'           => 'nullable|in:received,not_received,not_required,completed',
 
             // Client Schedule
             'material_pickup_date'   => 'nullable|date',

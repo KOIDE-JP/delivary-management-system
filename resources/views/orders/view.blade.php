@@ -72,7 +72,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.registered_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->registered_date ? \Carbon\Carbon::parse($order->registered_date)->format('M d, Y') : __('layouts.na') }}
+                                {{ $order->registered_date ? $order->registered_date : __('layouts.na') }}
                             </p>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.due_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-red-600">
-                                {{ $order->due_date ? \Carbon\Carbon::parse($order->due_date)->format('M d, Y') : __('layouts.pending') }}
+                                {{ $order->due_date ? $order->due_date : __('layouts.pending') }}
                             </p>
                         </div>
                         <div>
@@ -112,7 +112,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->inspection_date ? \Carbon\Carbon::parse($order->inspection_date)->format('M d, Y') : __('layouts.na') }}
+                                {{ $order->inspection_date ? $order->inspection_date : __('layouts.na') }}
                             </p>
                         </div>
                         <div>
@@ -126,6 +126,12 @@
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ __('layouts.normal') }}</span>
                                 @endif
                             </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.delivery_date') }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">
+                                {{ $order->delivery_date ? $order->delivery_date : __('layouts.na') }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -144,7 +150,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_date') }}</p>
                             <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->shipping_date ? \Carbon\Carbon::parse($order->shipping_date)->format('M d, Y') : __('layouts.na') }}
+                                {{ $order->shipping_date ? $order->shipping_date : __('layouts.na') }}
                             </p>
                         </div>
                         <div>
@@ -291,19 +297,19 @@
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.material_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->material_pickup_date ? \Carbon\Carbon::parse($order->material_pickup_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->material_pickup_date ? $order->material_pickup_date : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.inspection_due_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->inspection_due_date ? \Carbon\Carbon::parse($order->inspection_due_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->inspection_due_date ? $order->inspection_due_date : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.parts_pickup_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->parts_pickup_date ? \Carbon\Carbon::parse($order->parts_pickup_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->parts_pickup_date ? $order->parts_pickup_date : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>
@@ -322,20 +328,20 @@
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.pickup_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->pickup_transfer_date ? \Carbon\Carbon::parse($order->pickup_transfer_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->pickup_transfer_date ? $order->pickup_transfer_date : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.sales_transfer_date') }}</p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->sales_transfer_date ? \Carbon\Carbon::parse($order->sales_transfer_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->sales_transfer_date ? $order->sales_transfer_date : __('layouts.na') }}
                                 </p>
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-sm font-medium text-gray-500">{{ __('layouts.shipping_transfer_date') }}
                                 </p>
                                 <p class="text-sm font-semibold text-gray-900">
-                                    {{ $order->shipping_transfer_date ? \Carbon\Carbon::parse($order->shipping_transfer_date)->format('M d, Y') : __('layouts.na') }}
+                                    {{ $order->shipping_transfer_date ? $order->shipping_transfer_date : __('layouts.na') }}
                                 </p>
                             </div>
                         </div>

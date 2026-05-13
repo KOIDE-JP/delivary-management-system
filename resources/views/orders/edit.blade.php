@@ -168,6 +168,15 @@
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
+                            <div>
+                                <label
+                                    class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.delivery_date') }}</label>
+                                <input type="date" name="delivery_date" value="{{ old('delivery_date') }}"
+                                    class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('delivery_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                @error('delivery_date')
+                                    <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
@@ -230,6 +239,16 @@
                                             {{ __('layouts.high_priority') }}</option>
                                     </select>
                                     @error('priority')
+                                        <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label
+                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.delivery_date') }}</label>
+                                    <input type="date" name="delivery_date"
+                                        value="{{ old('delivery_date', $order->delivery_date) }}"
+                                        class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('delivery_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    @error('delivery_date')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -499,7 +518,7 @@
                                 <select name="carrier"
                                     class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('carrier') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
-                                    <option value="" disabled>
+                                    <option value="" selected disabled>
                                         {{ __('layouts.select_carrier') }}
                                     </option>
 
@@ -525,7 +544,7 @@
                                 <select name="truck_type"
                                     class="search_select block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('truck_type') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
-                                    <option value="" disabled>
+                                    <option value="" selected disabled>
                                         {{ __('layouts.select_truck_type') }}
                                     </option>
 
