@@ -21,7 +21,7 @@ class OrderController extends Controller
     {
         if ($request->ajax()) {
             $query = Order::query()
-    ->orderByRaw("
+                ->orderByRaw("
         CASE
             WHEN order_status = 'completed' THEN 4
             WHEN due_date IS NULL THEN 2
@@ -29,14 +29,14 @@ class OrderController extends Controller
             ELSE 1
         END ASC
     ")
-    ->orderByRaw("
+                ->orderByRaw("
         CASE
             WHEN due_date >= CURDATE()
                  AND order_status != 'completed'
             THEN DATEDIFF(due_date, CURDATE())
         END DESC
     ")
-    ->orderByRaw("
+                ->orderByRaw("
         CASE
             WHEN due_date < CURDATE()
                  AND order_status != 'completed'
@@ -92,14 +92,17 @@ class OrderController extends Controller
                         : 'bg-white hover:bg-blue-50/50 transition-colors divide-y divide-gray-100 text-sm';
                 })
                 ->addColumn('remaining_days', function ($row) {
-                    if($row->order_status === 'completed' || $row->delivery_date) {
-                        if($row->delivery_date) {
-                            return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.delivered_on') . ': ' . $row->delivery_date . '</span>';
+
+                    $due_date = $row->due_date ? $row->due_date : __('layouts.tbd');
+                    $common_div = '<div class="pl-1 my-1 text-xs text-gray-600 font-medium">' . __('layouts.due_date') . ': ' . htmlspecialchars($due_date) . '</div>';
+                    if ($row->order_status === 'completed' || $row->delivery_date) {
+                        if ($row->delivery_date) {
+                            return $common_div . '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.delivered_on') . ': ' . $row->delivery_date . '</span>';
                         }
-                        return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.completed') . '</span>';
+                        return $common_div . '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-green-700 bg-green-100">' . __('layouts.completed') . '</span>';
                     }
                     if (!$row->due_date) {
-                        return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-orange-600 bg-orange-100">' . __('layouts.pending') . '</span>';
+                        return $common_div . '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md text-orange-600 bg-orange-100">' . __('layouts.pending') . '</span>';
                     }
 
                     $today = now()->startOfDay();
@@ -117,7 +120,7 @@ class OrderController extends Controller
                         $badge = 'text-green-700 bg-green-100';
                     }
 
-                    return '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md ' . $badge . '">' . $text . '</span>';
+                    return $common_div . '<span class="inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-md ' . $badge . '">' . $text . '</span>';
                 })
                 ->addColumn('order_details', function ($row) {
                     $date = $row->registered_date ? $row->registered_date : 'N/A';
@@ -133,11 +136,9 @@ class OrderController extends Controller
                 ->addColumn('delivery_info', function ($row) {
                     $carrier = $row->carrier ? $row?->Carrier?->name : __('layouts.pending_carrier');
                     $date = $row->shipping_date ? $row->shipping_date : __('layouts.tbd');
-                    $delivery_date = $row->delivery_date ? $row->delivery_date : __('layouts.tbd');
                     return '
                     <div class="text-sm font-medium text-gray-900">' . htmlspecialchars($carrier) . '</div>
                     <div class="mt-1 text-xs text-gray-500">' . __('layouts.shipping_date') . ': ' . htmlspecialchars($date) . '</div>
-                    <div class="mt-1 text-xs text-gray-500">' . __('layouts.delivery_date') . ': ' . htmlspecialchars($delivery_date) . '</div>
                 ';
                 })
                 ->addColumn('status', function ($row) {
@@ -219,16 +220,30 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'order_amount' => $request->order_amount !== null
+                ? str_replace(',', '', $request->order_amount)
+                : null,
+
+            'freight_price' => $request->freight_price !== null
+                ? str_replace(',', '', $request->freight_price)
+                : null,
+
+            'freight_master_price' => $request->freight_master_price !== null
+                ? str_replace(',', '', $request->freight_master_price)
+                : null,
+        ]);
+
         // 1. Validate the request data
         $validatedData = $request->validate([
             // Basic Info (Required)
             'order_number'           => 'required|string|max:255|unique:orders,order_number',
             'order_name'             => 'required|string|max:255',
             'registered_date'        => 'required|date',
+            'delivery_date'          => 'nullable|date',
 
             // Delivery & Shipping
             'due_date'               => 'nullable|date',
-            'delivery_date'          => 'nullable|date',
             'due_confidence'         => 'nullable|in:confirmed,unconfirmed',
             'inspection_date'        => 'nullable|date',
             'priority'               => 'nullable|in:no,yes',
@@ -301,6 +316,20 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
+
+        $request->merge([
+            'order_amount' => $request->order_amount !== null
+                ? str_replace(',', '', $request->order_amount)
+                : null,
+
+            'freight_price' => $request->freight_price !== null
+                ? str_replace(',', '', $request->freight_price)
+                : null,
+
+            'freight_master_price' => $request->freight_master_price !== null
+                ? str_replace(',', '', $request->freight_master_price)
+                : null,
+        ]);
 
         // 1. Validate the request data
         $validatedData = $request->validate([
@@ -618,7 +647,7 @@ class OrderController extends Controller
 
                             'dw_status'              => $this->mapStatus($row[5] ?? null, 'dw'),
                             'quotation_status'       => $this->mapStatus($row[6] ?? null, 'quotation'),
-                            'order_status'           => $row[0]==='済' ? 'completed' : $this->mapStatus($row[7] ?? null, 'order'),
+                            'order_status'           => $row[0] === '済' ? 'completed' : $this->mapStatus($row[7] ?? null, 'order'),
 
                             'material_pickup_date'   => $this->parseDate($row[8] ?? null),
                             'inspection_due_date'    => $this->parseDate($row[9] ?? null),

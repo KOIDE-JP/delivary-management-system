@@ -75,6 +75,12 @@
                                 {{ $order->registered_date ? $order->registered_date : __('layouts.na') }}
                             </p>
                         </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.delivery_date') }}</p>
+                            <p class="mt-1 text-base font-semibold text-gray-900">
+                                {{ $order->delivery_date ? $order->delivery_date : __('layouts.na') }}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -126,12 +132,6 @@
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">{{ __('layouts.normal') }}</span>
                                 @endif
                             </div>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium text-gray-500">{{ __('layouts.delivery_date') }}</p>
-                            <p class="mt-1 text-base font-semibold text-gray-900">
-                                {{ $order->delivery_date ? $order->delivery_date : __('layouts.na') }}
-                            </p>
                         </div>
                     </div>
                 </div>

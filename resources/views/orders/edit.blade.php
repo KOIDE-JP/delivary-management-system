@@ -168,10 +168,12 @@
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div>
                                 <label
                                     class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.delivery_date') }}</label>
-                                <input type="date" name="delivery_date" value="{{ old('delivery_date') }}"
+                                <input type="date" name="delivery_date"
+                                    value="{{ old('delivery_date', $order->delivery_date) }}"
                                     class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('delivery_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 @error('delivery_date')
                                     <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -239,16 +241,6 @@
                                             {{ __('layouts.high_priority') }}</option>
                                     </select>
                                     @error('priority')
-                                        <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div>
-                                    <label
-                                        class="block mb-1.5 text-sm font-semibold text-gray-700">{{ __('layouts.delivery_date') }}</label>
-                                    <input type="date" name="delivery_date"
-                                        value="{{ old('delivery_date', $order->delivery_date) }}"
-                                        class="block w-full px-4 py-2.5 text-sm text-gray-900 bg-white border @error('delivery_date') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                                    @error('delivery_date')
                                         <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -462,9 +454,10 @@
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                 <span class="text-gray-500 sm:text-sm">¥</span>
                                             </div>
-                                            <input type="number" step="1" name="order_amount"
-                                                value="{{ old('order_amount', $order->order_amount) }}"
-                                                class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('order_amount') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                            <input type="text" name="order_amount"
+                                                value="{{ old('order_amount') ? old('order_amount') : ($order->order_amount ? number_format($order->order_amount) : '') }}"
+                                                placeholder="0" inputmode="numeric" autocomplete="off"
+                                                class="show_formatted_amount block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('order_amount') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                         </div>
                                         @error('order_amount')
                                             <p class="mt-1 text-xs text-red-600 error-text">{{ $message }}</p>
@@ -572,9 +565,9 @@
                                         <span class="text-gray-500 sm:text-sm">¥</span>
                                     </div>
 
-                                    <input readonly type="number" step="1" name="freight_master_price"
-                                        value="{{ old('freight_master_price', $order->freight_master_price) }}"
-                                        class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg shadow-sm cursor-not-allowed opacity-60">
+                                    <input readonly type="text" name="freight_master_price" inputmode="numeric" autocomplete="off"
+                                        value="{{ old('freight_master_price', number_format($order->freight_master_price)) }}"
+                                        class="show_formatted_amount block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg shadow-sm cursor-not-allowed opacity-60">
                                 </div>
                             </div>
 
@@ -589,9 +582,9 @@
                                         <span class="text-gray-500 sm:text-sm">¥</span>
                                     </div>
 
-                                    <input type="number" step="1" name="freight_price"
-                                        value="{{ old('freight_price', $order->freight_price) }}"
-                                        class="block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('freight_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <input type="text" name="freight_price" inputmode="numeric" autocomplete="off"
+                                        value="{{ old('freight_price', number_format($order->freight_price)) }}"
+                                        class="show_formatted_amount block w-full py-2.5 pl-8 pr-4 text-sm text-gray-900 bg-white border @error('freight_price') border-red-500 ring-1 ring-red-500 @else border-gray-300 @enderror rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
 
                                 @error('freight_price')
@@ -912,6 +905,26 @@
             }
 
             updateDestination();
+
+            $('.show_formatted_amount').on('input', function() {
+
+                let value = $(this).val();
+
+                // Remove everything except numbers
+                value = value.replace(/\D/g, '');
+
+                // Prevent negative values
+                if (value === '') {
+                    $(this).val('');
+                    return;
+                }
+
+                // Add comma formatting
+                value = Number(value).toLocaleString('en-US');
+
+                $(this).val(value);
+            });
+
         });
     </script>
 @endpush
