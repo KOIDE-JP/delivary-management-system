@@ -5,6 +5,7 @@ return [
     'add_user' => 'ユーザーを追加',
     'all_users' => 'すべてのユーザー',
     'total_users' => '総ユーザー数',
+
     //Breadcumbs
     'segment' => [
         'Dashboard' => 'ダッシュボード',
@@ -24,7 +25,6 @@ return [
         'Profile' => 'プロフィール',
         'Update'  => '更新',
         'Delete-users' => 'ユーザーを削除',
-        
         'Destinations' => '目的地',
         'Carriers' => '運送業者',
         'Truck-types' => 'トラックの種類',
@@ -53,13 +53,12 @@ return [
     'choose_files' => 'ファイルを選択',
     'description' => '説明',
     'choose' => '選択',
-    'added_by' => '追加者',
     'feedback' => 'フィードバック',
     'closed' => '閉じる',
 
     'successfully_created' => '正常に作成されました',
     'successfully_updated' => '正常に更新されました',
-    'back_to_list' => 'リストに戻る',
+    'back_to_list' => '一覧に戻る',
     'created_by' => '作成者',
     'created_at' => '作成日時',
     'no_status' => 'ステータスなし',
@@ -88,16 +87,10 @@ return [
     'thank_you' => 'ありがとうございます',
     'app_name' => 'DMS - 配送管理システム',
     'approved' => '承認済み',
-    'no_feedback' => 'フィードバックがありません',
     'please_take_action' => '確認して、必要に応じて対応してください。',
     'automated_message' => 'このメールはシステムにより自動的に生成されました',
-    'created_at' => '作成日時',
-    'created_by' => '作成者',
-    'updated_by' => '更新者',
     'status' => 'ステータス',
 
-    'start_date' => '開始日',
-    'feedback' => 'フィードバック',
     'man_hours' => '失われた人員時間',
     'loss_amount' => '損失額',
     'plan_start_date' => '計画開始日',
@@ -121,10 +114,8 @@ return [
 
     //Sidebar
     'projectName' => 'DMS - 納期管理システム',
-    'dashboard' => 'ダッシュボード',
     'users' => 'ユーザー',
     'code' => 'コード',
-    'status' => 'ステータス',
     'active' => 'アクティブ',
     'inactive' => '非アクティブ',
     'update' => '更新',
@@ -153,8 +144,8 @@ return [
     'pages' => 'ページ:',
     'logout' => 'ログアウト',
     'items' => 'アイテム',
-    'quantity' =>   '数量',
-    'image' =>  '画像',
+    'quantity' => '数量',
+    'image' => '画像',
     'noImageSelected' => '画像が選択されていません',
     'chooseImage' => '画像を選択',
 
@@ -177,8 +168,6 @@ return [
     'email' => 'メールアドレス',
     'password' => 'パスワード',
     'generate_password' => 'パスワードを生成',
-    'active' => 'アクティブ',
-    'inactive' => '非アクティブ',
     'create' => '作成',
     'created_successfully' => 'ユーザーが正常に作成されました。',
 
@@ -220,7 +209,6 @@ return [
     'generate' => '生成',
     'edit_role' => 'ロールを編集',
     'role_added_successfully' => 'ロールが正常に追加されました。',
-    'role_deleted_successfully' => 'ロールが正常に削除されました。',
     'you_can_not_delete_this_role' => 'このロールは削除できません。',
     'secured_system' => 'セキュアシステム',
     'saving' => '保存中',
@@ -234,13 +222,11 @@ return [
     'permitted_roles' => '許可された役割',
     'reset_all' => 'すべてをリセット',
 
-
     'total_destinations' => '総目的地数',
     'total_carriers' => '総運送業者数',
     'total_truck_types' => '総トラック種別数',
     'total_freight_rates' => '総運賃数',
-    'total_orders' => '総注文数', 
-
+    'total_orders' => '総注文数',
 
     'destinations' => '目的地',
     'all_destinations' => 'すべての目的地',
@@ -258,9 +244,9 @@ return [
     'carrier_list' => '運送業者リスト',
     'truck_type_list' => 'トラック種別リスト',
     'freight_rate_list' => '運賃リスト',
-    'destination' => '目的地',
+    'destination' => '配送先',
     'carrier' => '運送業者',
-    'truck_type' => 'トラック種別',
+    'truck_type' => 'トラック種類',
     'price' => '価格',
     'tax_excluded' => '税抜価格',
     'prefix' => '接頭辞',
@@ -287,6 +273,7 @@ return [
         'selected_file' => '選択されたファイル',
         'importing_records' => 'レコードをインポート中...',
     ],
+
     'move_to_trash' => 'ゴミ箱に移動',
     'order_can_be_recovered' => 'この注文は後でゴミ箱から復元できます。',
     'force_delete' => '完全に削除',
@@ -295,7 +282,6 @@ return [
     'moved_to_trash_success' => '注文がゴミ箱に正常に移動されました！',
     'order_restore_success' => '注文が正常に復元されました！',
     'order_deleted_permanently' => '注文が完全に削除されました！',
-
 
     'already_exists_freight_rates' => 'この目的地、運送業者、トラック種別の組み合わせはすでに存在しています。',
     'freight_rate_details' => '運送費詳細',
@@ -306,27 +292,23 @@ return [
     'no_activity_logs' => 'アクティビティログが見つかりません。',
     'back' => '戻る',
 
-
-
     // Activity log actions
-    'action_created'        => '作成',
-    'action_updated'        => '更新',
-    'action_deleted'        => '削除',
+    'action_created' => '作成',
+    'action_updated' => '更新',
+    'action_deleted' => '削除',
     'action_status_updated' => 'ステータス更新',
 
     // Activity log statuses
-    'status_success'        => '成功',
-    'status_failed'         => '失敗',
-    'status_warning'        => '警告',
-
-    // Activity log messages
+    'status_success' => '成功',
+    'status_failed' => '失敗',
+    'status_warning' => '警告',
 
     //Freight Rate
-    'freight_rate_created'              => '運送費が正常に作成されました',
-    'freight_rate_updated'              => '運送費が正常に更新されました',
-    'freight_rate_deleted'              => '運送費が削除されました',
-    'freight_rate_status_active'        => '運送費のステータスが有効に変更されました',
-    'freight_rate_status_inactive'      => '運送費のステータスが無効に変更されました',
+    'freight_rate_created' => '運送費が正常に作成されました',
+    'freight_rate_updated' => '運送費が正常に更新されました',
+    'freight_rate_deleted' => '運送費が削除されました',
+    'freight_rate_status_active' => '運送費のステータスが有効に変更されました',
+    'freight_rate_status_inactive' => '運送費のステータスが無効に変更されました',
     'freight_rate_status_updated' => '運送費のステータスが :from から :to に変更されました',
     'cannot_delete_freight_rate_linked' => 'このフレートレートは注文に関連付けられているため、削除できません。',
 
@@ -361,34 +343,29 @@ return [
 
     /////////////////////////////////Orders/////////////////////////////////
 
-    // 'undelivered' => '未配達',      // Undelivered
-    // 'delivered' => '配達済み',      // Delivered
-    // 'not_required' => '不要',      // Not Required
     'order_created' => '注文が正常に作成されました',
     'order_updated' => '注文が正常に更新されました',
     'updated_fields' => '変更されたフィールド',
-    
+
     'na' => '該当なし',
     'reg' => '登録',
     'pending_carrier' => '保留中',
     'tbd' => '未定',
-    'pending' => '保留中',
+    'pending' => '未定',
     'due' => '納期',
 
     'basic_info' => '基本情報',
     'delivery' => '配送',
     'billing' => '請求',
-    'freight' => '運送費',
+    'freight' => '運賃',
     'dates' => '日付',
 
     'e_g_YM1234' => '例：YM1234',
 
-
     // Order - General
     'create_order' => '注文作成',
     'fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information' => '新しい注文を作成するための基本情報を入力してください。必要に応じて次のステップに進んでください。',
-    'please_correct_the_errors_below_toProceed' => '続行するには、以下のエラーを修正してください。',
-    'cancel' => 'キャンセル',
+    'please_correct_the_errors_below_to_proceed' => '続行するには、以下のエラーを修正してください。',
     'previous' => '前へ',
     'next_step' => '次へ',
     'save_order' => '注文を保存',
@@ -398,7 +375,7 @@ return [
     'delivery_shipping' => '配送と出荷',
     'documents_&_billing' => '書類と請求',
     'freight_info' => '運送費情報',
-    'internal_dates' => '内部日付',
+    'internal_dates' => 'その他日程',
     'optional' => '任意',
 
     // Basic Info
@@ -408,19 +385,19 @@ return [
 
     // Delivery
     'due_date' => '納期',
-    'delivery_date' => '配送日',
-    'delivered_on' => '配達日',
-    'due_confidence' => '納期確定度',
+    'delivery_date' => '納品完了日',
+    'delivered_on' => '納品済',
+    'due_confidence' => '納期確定',
     'confirmed' => '確定',
     'unconfirmed' => '未確定',
-    'inspection_date' => '検査日',
+    'inspection_date' => '顧客寸検日',
     'priority' => '優先度',
     'normal' => '通常',
     'high_priority' => '高優先度',
 
     // Shipping
-    'shipping_date' => '出荷日',
-    'shipping_status' => '出荷状況',
+    'shipping_date' => '出荷予定日',
+    'shipping_status' => '運送手配',
     'unarranged' => '運送未手配',
     'not_arranged' => '運送未手配',
     'arranged' => '運送手配済み',
@@ -428,18 +405,18 @@ return [
     'courier' => '宅配便',
 
     // Documents
-    'document_submission' => '配信と書類',
-    'dw_status' => 'DWステータス',
+    'document_submission' => '社内配信と書類',
+    'dw_status' => 'DW配信',
     'shipped' => '提出済み',
     'not_shipped' => '未提出',
     'no_shipping_required' => '出荷不要',
     'not_required' => '不要',
 
-    'quotation_status' => '見積状況',
+    'quotation_status' => '見積提出',
     'submitted' => '提出済み',
     'not_submitted' => '未提出',
 
-    'order_status' => '注文状況',
+    'order_status' => '注文書受領',
     'received' => '受領済み',
     'not_received' => '未受領',
 
@@ -447,57 +424,42 @@ return [
     'client_schedule' => '素材寸検と金型引取日',
     'material_pickup_date' => '素材引取日',
     'inspection_due_date' => '寸検完了予定日',
-    'parts_pickup_date' => '金型引取日',
+    'parts_pickup_date' => '金型引取予定日',
 
     // Billing
     'billing_information' => '請求情報',
-    'inspection_slip_status' => '検査伝票状況',
-    'invoice_status' => '請求書状況',
+    'inspection_slip_status' => '検収伝票',
+    'invoice_status' => '請求書',
     'sent' => '送信済み',
     'not_sent' => '未送信',
-    'order_amount' => '注文金額',
+    'order_amount' => '受注金額',
 
     // Freight
-    'destination' => '目的地',
-    'carrier' => '運送業者',
-    'truck_type' => 'トラック種別',
     'freight_price' => '運送費',
     'freight_master_price' => 'マスタ運送費',
     'freight_note' => '運送費メモ',
     'enter_freight_notes' => 'メモを入力',
 
     // Internal Dates
-    'pickup_transfer_date' => '引取移動日',
-    'sales_transfer_date' => '販売移動日',
-    'shipping_transfer_date' => '出荷移動日',
-
+    'pickup_transfer_date' => '引取転記日',
+    'sales_transfer_date' => '売上転記日',
+    'shipping_transfer_date' => '出荷転記日',
 
     //////// Edit Order //////////
-    // Edit Order
     'edit_order' => '注文編集',
     'update_order' => '注文を更新',
     'back_to_orders' => '注文一覧へ戻る',
     'update_the_details_for_this_order_navigate_through_the_steps_to_modify_optional_information' => 'この注文の詳細を更新してください。必要に応じて各ステップで情報を修正できます。',
-
-    // Stepper Labels
-    'delivery' => '配送',
-    'billing' => '請求',
-    'freight' => '運賃',
-    'dates' => '日付',
 
     // Section Titles
     'delivery_and_shipping' => '配送と出荷',
     'delivery_details' => '配送詳細',
     'shipping_details' => '出荷詳細',
 
-    // Fix duplicate key
-    'please_correct_the_errors_below_to_proceed' => '続行するには、以下のエラーを修正してください。',
-
     // Docs & Billing
     'docs_&_billing' => '書類と請求',
 
     //////// Orders Index Page //////////
-    // Order List Page
     'order.list' => '注文一覧',
     'order.create' => '注文作成',
 
@@ -524,72 +486,18 @@ return [
     'order_details' => '注文詳細',
     'timeline' => 'タイムライン',
     'delivery_info' => '配送情報',
-    'status' => 'ステータス',
-    'actions' => '操作',
-
-
-
 
     //////////// Order View Page ////////////
-    // View Order Page
     'order.view' => '注文詳細',
     'order_details_for' => '注文詳細：',
 
-    'back_to_list' => '一覧に戻る',
-    'edit_order' => '注文編集',
-
-    // General
-    'na' => '該当なし',
-    'pending' => '未定',
-
     // Sections
-    'basic_information' => '基本情報',
     'delivery_information' => '配送情報',
     'shipping_information' => '出荷情報',
-    'document_submission' => '社内配信と書類',
-    'billing_information' => '請求情報',
     'freight_information' => '運送情報',
-    'client_schedule' => '素材寸検と金型引取日',
-    'internal_dates' => 'その他日程',
 
-    // Fields
-    'order_number' => '型番',
-    'order_name' => '型名',
-    'registered_date' => '登録日',
-
-    'due_date' => '納期',
-    'due_confidence' => '納期確定',
-    'confirmed' => '確定',
-    'unconfirmed' => '未確定',
-
-    'inspection_date' => '顧客寸検日',
-    'priority' => '優先度',
     'high' => '高',
-    'normal' => '通常',
 
-    'shipping_date' => '出荷予定日',
-    'shipping_status' => '運送手配',
-
-    'dw_status' => 'DW配信',
-    'quotation_status' => '見積提出',
-    'order_status' => '注文書受領',
-
-    'inspection_slip_status' => '検収伝票',
-    'invoice_status' => '請求書',
-    'order_amount' => '受注金額',
-
-    'destination' => '配送先',
-    'carrier' => '運送業者',
-    'truck_type' => 'トラック種類',
-    'freight_price' => '運送費',
-
-    'material_pickup_date' => '素材引取日',
-    'inspection_due_date' => '寸検完了予定日',
-    'parts_pickup_date' => '金型引取予定日',
-
-    'pickup_transfer_date' => '引取転記日',
-    'sales_transfer_date' => '売上転記日',
-    'shipping_transfer_date' => '出荷転記日',
     'unrecognized_prefix' => '認識できないプレフィックス',
     'unrecognized_prefix_description' => 'この型番の最初の2文字に一致する宛先がありません。この２文字で新しい宛先を作成するか、型番を確認してください。',
     'days_overdue' => '期限超過日数',

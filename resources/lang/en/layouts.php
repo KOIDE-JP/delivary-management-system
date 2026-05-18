@@ -5,6 +5,7 @@ return [
     'add_user' => 'Add User',
     'all_users' => 'All Users',
     'total_users' => 'Total Users',
+
     //Breadcumbs
     'segment' => [
         'Dashboard' => 'Dashboard',
@@ -53,7 +54,6 @@ return [
     'choose_files' => 'Choose Files',
     'description' => 'Description',
     'choose' => 'Choose',
-    'added_by' => 'Added By',
     'feedback' => 'Feedback',
     'closed' => 'Closed',
 
@@ -61,7 +61,7 @@ return [
     'successfully_updated' => 'Successfully updated',
     'back_to_list' => 'Back to List',
     'created_by' => 'Created By',
-    'created_at' => 'Created At',
+    'created_at' => 'Created',
     'no_status' => 'No Status',
     'start_date' => 'Start Date',
     'updated_by' => 'Updated By',
@@ -88,16 +88,10 @@ return [
     'thank_you' => 'Thank you',
     'app_name' => 'DMS - Delivery Management System',
     'approved' => 'Approved',
-    'no_feedback' => 'No feedback provided',
     'please_take_action' => 'Please review and take necessary action if needed.',
     'automated_message' => 'This email was generated automatically by the system',
-    'created_at' => 'Created At',
-    'created_by' => 'Created By',
-    'updated_by' => 'Updated By',
     'status' => 'Status',
 
-    'start_date' => 'Start Date',
-    'feedback' => 'Feedback',
     'man_hours' => 'Lost Man Hours',
     'loss_amount' => 'Loss Amount',
     'plan_start_date' => 'Plan Start Date',
@@ -121,10 +115,8 @@ return [
 
     //Sidebar
     'projectName' => 'DMS - Delivery Deadline Management System',
-    'dashboard' => 'Dashboard',
     'users' => 'Users',
     'code' => 'Code',
-    'status' => 'Status',
     'active' => 'Active',
     'inactive' => 'Inactive',
     'update' => 'Update',
@@ -149,23 +141,17 @@ return [
     'IN' => 'Stock In',
     'OUT' => 'Stock Out',
     'new' => 'New',
-    'cancel' => 'Cancel',
-    'export_csv' => 'Export CSV',
     'stock_report' => 'Stock Report',
     'pages' => 'Pages:',
     'logout' => 'Log Out',
     'items' => 'Items',
-    'description' => 'Description',
-    'quantity' =>   'Quantity',
-    'image' =>  'Image',
+    'quantity' => 'Quantity',
+    'image' => 'Image',
     'noImageSelected' => 'No image selected',
     'chooseImage' => 'Choose Image',
 
     //List
     'user_list' => 'User List',
-    'status' => 'Status',
-    'created_by' => 'Created By',
-    'created_at' => 'Created',
     'actions' => 'Actions',
     'edit' => 'Edit',
     'delete' => 'Delete',
@@ -183,8 +169,6 @@ return [
     'email' => 'Email',
     'password' => 'Password',
     'generate_password' => 'Generate Password',
-    'active' => 'Active',
-    'inactive' => 'Inactive',
     'create' => 'Create',
     'created_successfully' => 'Successfully Created .',
 
@@ -226,7 +210,6 @@ return [
     'generate' => 'Generate',
     'edit_role' => 'Edit Role',
     'role_added_successfully' => 'Role added successfully.',
-    'role_deleted_successfully' => 'Role deleted successfully.',
     'you_can_not_delete_this_role' => 'You can not delete this role.',
     'secured_system' => 'Secured System',
     'saving' => 'Saving',
@@ -239,6 +222,7 @@ return [
     'filters' => 'Filters',
     'permitted_roles' => 'Permitted Roles',
     'reset_all' => 'Reset All',
+
     'order' => [
         'orders' => 'Orders',
         'list' => 'Order List',
@@ -257,6 +241,7 @@ return [
         'selected_file' => 'Selected File',
         'importing_records' => 'Importing records...',
     ],
+
     'move_to_trash' => 'Move to Trash',
     'order_can_be_recovered' => 'You can recover this order from trash later.',
     'force_delete' => 'Force Delete',
@@ -266,31 +251,28 @@ return [
     'order_restore_success' => 'Order restored successfully!',
     'order_deleted_permanently' => 'Order permanently deleted!',
 
-    //
-
-    'total_destinations'  => 'Total Destinations',
-    'total_carriers'      => 'Total Carriers',
-    'total_truck_types'   => 'Total Truck Types',
+    'total_destinations' => 'Total Destinations',
+    'total_carriers' => 'Total Carriers',
+    'total_truck_types' => 'Total Truck Types',
     'total_freight_rates' => 'Total Freight Rates',
-    'total_orders'        => 'Total Orders',
+    'total_orders' => 'Total Orders',
 
-
-    'destinations'      => 'Destinations',
-    'all_destinations'  => 'All Destinations',
-    'add_destination'   => 'Add Destination',
-    'carriers'          => 'Carriers',
-    'all_carriers'      => 'All Carriers',
-    'add_carrier'       => 'Add Carrier',
-    'truck_types'       => 'Truck Types',
-    'all_truck_types'   => 'All Truck Types',
-    'add_truck_type'    => 'Add Truck Type',
-    'freight_rates'     => 'Freight Rates',
+    'destinations' => 'Destinations',
+    'all_destinations' => 'All Destinations',
+    'add_destination' => 'Add Destination',
+    'carriers' => 'Carriers',
+    'all_carriers' => 'All Carriers',
+    'add_carrier' => 'Add Carrier',
+    'truck_types' => 'Truck Types',
+    'all_truck_types' => 'All Truck Types',
+    'add_truck_type' => 'Add Truck Type',
+    'freight_rates' => 'Freight Rates',
     'all_freight_rates' => 'All Freight Rates',
-    'add_freight_rate'  => 'Add Freight Rate',
-    'destination_list'   => 'Destination List',
-    'carrier_list'       => 'Carrier List',
-    'truck_type_list'    => 'Truck Type List',
-    'freight_rate_list'  => 'Freight Rate List',
+    'add_freight_rate' => 'Add Freight Rate',
+    'destination_list' => 'Destination List',
+    'carrier_list' => 'Carrier List',
+    'truck_type_list' => 'Truck Type List',
+    'freight_rate_list' => 'Freight Rate List',
     'destination' => 'Destination',
     'carrier' => 'Carrier',
     'truck_type' => 'Truck Type',
@@ -311,29 +293,27 @@ return [
     'back' => 'Back',
 
     // Activity log actions
-    'action_created'        => 'Created',
-    'action_updated'        => 'Updated',
-    'action_deleted'        => 'Deleted',
+    'action_created' => 'Created',
+    'action_updated' => 'Updated',
+    'action_deleted' => 'Deleted',
     'action_status_updated' => 'Status Updated',
 
     // Activity log statuses
-    'status_success'        => 'Success',
-    'status_failed'         => 'Failed',
-    'status_warning'        => 'Warning',
-
-    // Activity log messages:
+    'status_success' => 'Success',
+    'status_failed' => 'Failed',
+    'status_warning' => 'Warning',
 
     // Freight Rate
-    'freight_rate_created'              => 'Freight rate created successfully',
-    'freight_rate_updated'              => 'Freight rate updated successfully',
-    'freight_rate_deleted'              => 'Freight rate deleted successfully',
-    'freight_rate_status_active'        => 'Freight rate status changed to Active',
-    'freight_rate_status_inactive'      => 'Freight rate status changed to Inactive',
+    'freight_rate_created' => 'Freight rate created successfully',
+    'freight_rate_updated' => 'Freight rate updated successfully',
+    'freight_rate_deleted' => 'Freight rate deleted successfully',
+    'freight_rate_status_active' => 'Freight rate status changed to Active',
+    'freight_rate_status_inactive' => 'Freight rate status changed to Inactive',
     'freight_rate_status_updated' => 'Freight rate status changed from :from to :to',
     'cannot_delete_freight_rate_linked' => 'This freight rate cannot be deleted because it is associated with order.',
 
     //Destination
-    'destination_details'     => 'Destination Details',
+    'destination_details' => 'Destination Details',
     'destination_information' => 'Destination Information',
     'destination_created' => 'Destination created successfully',
     'destination_updated' => 'Destination updated successfully',
@@ -342,7 +322,7 @@ return [
     'cannot_delete_destination_linked' => 'This destination cannot be deleted because it is associated with Freight Rate.',
 
     //Carrier
-    'carrier_details'     => 'Carrier Details',
+    'carrier_details' => 'Carrier Details',
     'edit_carrier' => 'Edit Carrier',
     'carrier_information' => 'Carrier Information',
     'carrier_created' => 'Carrier created successfully',
@@ -351,9 +331,8 @@ return [
     'carrier_status_updated' => 'Carrier status changed from :from to :to',
     'cannot_delete_carrier_linked' => 'This carrier cannot be deleted because it is associated with freight rates.',
 
-
-    //Truck Type    
-    'truck_type_details'     => 'Truck Type Details',
+    //Truck Type
+    'truck_type_details' => 'Truck Type Details',
     'truck_type_information' => 'Truck Type Information',
     'truck_type_created' => 'Truck type created successfully',
     'truck_type_updated' => 'Truck type updated successfully',
@@ -367,7 +346,7 @@ return [
     'delivered' => 'Delivered',
     'not_required' => 'Not Required',
     'na' => 'N/A',
-    
+
     'reg' => 'REG',
     'pending_carrier' => 'Pending Carrier',
     'tbd' => 'TBD',
@@ -385,8 +364,7 @@ return [
     // Order - General
     'create_order' => 'Create Order',
     'fill_in_basic_details_to_generate_a_new_order_proceed_to_the_next_steps_for_optional_information' => 'Fill in basic details to generate a new order. Proceed to the next steps for optional information.',
-    'please_correct_the_errors_below_toProceed' => 'Please correct the errors below to proceed.',
-    'cancel' => 'Cancel',
+    'please_correct_the_errors_below_to_proceed' => 'Please correct the errors below to proceed.',
     'previous' => 'Previous',
     'next_step' => 'Next Step',
     'save_order' => 'Save Order',
@@ -431,7 +409,6 @@ return [
     'shipped' => 'Shipped',
     'not_shipped' => 'Not Shipped',
     'no_shipping_required' => 'No Shipping Required',
-    'not_required' => 'Not Required',
 
     'quotation_status' => 'Quotation Status',
     'submitted' => 'Submitted',
@@ -456,9 +433,6 @@ return [
     'order_amount' => 'Order Amount',
 
     // Freight
-    'destination' => 'Destination',
-    'carrier' => 'Carrier',
-    'truck_type' => 'Truck Type',
     'freight_price' => 'Freight Price',
     'freight_master_price' => 'Master Freight Price',
     'freight_note' => 'Freight Note',
@@ -469,33 +443,21 @@ return [
     'sales_transfer_date' => 'Sales Transfer Date',
     'shipping_transfer_date' => 'Shipping Transfer Date',
 
-
-    ///////////// Edit Order ///////////////////////
     // Edit Order
     'edit_order' => 'Edit Order',
     'update_order' => 'Update Order',
     'back_to_orders' => 'Back to Orders',
     'update_the_details_for_this_order_navigate_through_the_steps_to_modify_optional_information' => 'Update the details for this order. Navigate through the steps to modify optional information.',
 
-    // Stepper Labels (NEW missing)
-    'delivery' => 'Delivery',
-    'billing' => 'Billing',
-    'freight' => 'Freight',
-    'dates' => 'Dates',
-
     // Section Titles
     'delivery_and_shipping' => 'Delivery & Shipping',
     'delivery_details' => 'Delivery Details',
     'shipping_details' => 'Shipping Details',
 
-    // Fix duplicate key (IMPORTANT)
-    'please_correct_the_errors_below_to_proceed' => 'Please correct the errors below to proceed.',
-
-    // Docs & Billing (fix key name mismatch)
+    // Docs & Billing
     'docs_&_billing' => 'Documents & Billing',
 
     /////////////////////////// Orders Index Page ///////////////////////
-    // Order List Page
     'order.list' => 'Orders',
     'order.create' => 'Create Order',
 
@@ -522,74 +484,22 @@ return [
     'order_details' => 'Order Details',
     'timeline' => 'Timeline',
     'delivery_info' => 'Delivery Info',
-    'status' => 'Status',
-    'actions' => 'Actions',
     'max_2_chars' => 'Max 2 chars',
 
-
-    ///////////////// View Order Page ///////////////////////
-    // View Order Page
+    /////////////////// View Order Page ///////////////////////
     'order.view' => 'View Order',
     'order_details_for' => 'Order details for',
     'order_created' => 'Order created successfully',
     'order_updated' => 'Order updated successfully',
     'updated_fields' => 'Changed fields',
 
-    'back_to_list' => 'Back to List',
-    'edit_order' => 'Edit Order',
-
-    // General
-    'na' => 'N/A',
-    'pending' => 'Pending',
-
     // Sections
-    'basic_information' => 'Basic Information',
     'delivery_information' => 'Delivery Information',
     'shipping_information' => 'Shipping Information',
-    'document_submission' => 'Document Submission',
-    'billing_information' => 'Billing Information',
     'freight_information' => 'Freight Information',
-    'client_schedule' => 'Client Schedule',
-    'internal_dates' => 'Internal Dates',
 
-    // Fields
-    'order_number' => 'Order Number',
-    'order_name' => 'Order Name',
-    'registered_date' => 'Registered Date',
-
-    'due_date' => 'Due Date',
-    'due_confidence' => 'Due Confidence',
-    'confirmed' => 'Confirmed',
-    'unconfirmed' => 'Unconfirmed',
-
-    'inspection_date' => 'Inspection Date',
-    'priority' => 'Priority',
     'high' => 'High',
-    'normal' => 'Normal',
 
-    'shipping_date' => 'Shipping Date',
-    'shipping_status' => 'Shipping Status',
-
-    'dw_status' => 'DW Status',
-    'quotation_status' => 'Quotation Status',
-    'order_status' => 'Order Status',
-
-    'inspection_slip_status' => 'Inspection Slip Status',
-    'invoice_status' => 'Invoice Status',
-    'order_amount' => 'Order Amount',
-
-    'destination' => 'Destination',
-    'carrier' => 'Carrier',
-    'truck_type' => 'Truck Type',
-    'freight_price' => 'Freight Price',
-
-    'material_pickup_date' => 'Material Pickup Date',
-    'inspection_due_date' => 'Inspection Due Date',
-    'parts_pickup_date' => 'Parts Pickup Date',
-
-    'pickup_transfer_date' => 'Pickup Transfer Date',
-    'sales_transfer_date' => 'Sales Transfer Date',
-    'shipping_transfer_date' => 'Shipping Transfer Date',
     'unrecognized_prefix' => 'Unrecognized Prefix',
     'unrecognized_prefix_description' => 'No destination matches the first two characters of this order number. You can either create a new destination with this prefix, or adjust the order number.',
     'days_overdue' => 'Days Overdue',
@@ -597,6 +507,4 @@ return [
     'days_left' => 'Days Left',
     'no_access_to_this_route' => 'You don\'t have access on this route',
     'select_an_option' => 'Select an option',
-
-
 ];
