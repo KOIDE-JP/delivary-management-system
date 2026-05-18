@@ -420,6 +420,7 @@ return [
     'shipping_date' => 'Shipping Date',
     'shipping_status' => 'Shipping Status',
     'unarranged' => 'Unarranged',
+    'not_arranged' => 'Not Arranged',
     'arranged' => 'Arranged',
     'direct_delivery' => 'Direct Delivery',
     'courier' => 'Courier',
