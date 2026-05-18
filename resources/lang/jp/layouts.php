@@ -422,6 +422,7 @@ return [
     'shipping_date' => '出荷日',
     'shipping_status' => '出荷状況',
     'unarranged' => '運送未手配',
+    'not_arranged' => '運送未手配',
     'arranged' => '運送手配済み',
     'direct_delivery' => '直送',
     'courier' => '宅配便',

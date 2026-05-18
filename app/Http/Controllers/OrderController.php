@@ -142,11 +142,12 @@ class OrderController extends Controller
                 ';
                 })
                 ->addColumn('status', function ($row) {
+                    $statusText = ($row->destination || $row->carrier || $row->truck_type) ? null : __('layouts.not_arranged');
                     $priorityHtml = $row->priority === 'yes'
                         ? '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-red-700 bg-red-100 rounded-md mb-1"> ' . __('layouts.priority') . '</span>'
                         : '<span class="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-gray-600 bg-gray-100 rounded-md mb-1">' . __('layouts.normal') . '</span>';
 
-                    $statusText = $row->shipping_status ? __('layouts.' . $row->shipping_status) : __('layouts.pending');
+                    $statusText = $statusText ? $statusText : ($row->shipping_status ? __('layouts.' . $row->shipping_status) : __('layouts.pending'));
                     $statusColor = $row->shipping_status === 'arranged' ? 'text-blue-700 bg-blue-100' : 'text-yellow-800 bg-yellow-100';
 
                     return '
@@ -656,7 +657,7 @@ class OrderController extends Controller
                             'shipping_date'          => $shippingDate,
                             'inspection_slip_status' => $this->mapStatus($row[12] ?? null, 'inspection'),
                             'invoice_status'         => $this->mapStatus($row[13] ?? null, 'invoice'),
-                            // Schema doesn't have 'confirmed', mapping to 'arranged' when date exists
+                   
                             'shipping_status'        => $shippingDate ? 'arranged' : 'unconfirmed',
 
                             'order_amount'           => $this->parseAmount($row[15] ?? null),
@@ -674,7 +675,7 @@ class OrderController extends Controller
                     );
                 }
             } catch (\Exception $e) {
-                // Log the error and continue to the next row
+               
                 Log::error("processImportChunk: Failed to import order row.", [
                     'order_number' => trim($row[2] ?? 'UNKNOWN'),
                     'error_message' => $e->getMessage(),
